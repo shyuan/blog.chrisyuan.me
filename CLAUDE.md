@@ -32,9 +32,7 @@
 │   ├── components/             # Astro 元件
 │   ├── data/
 │   │   └── blog/               # Markdown 文章（主要寫作位置）
-│   │       ├── _releases/      # 底線開頭的子目錄不會被收錄
-│   │       ├── examples/
-│   │       └── *.md
+│   │       └── *.md            # 底線開頭的子目錄不會被收錄
 │   ├── layouts/
 │   │   ├── Layout.astro        # 全站 HTML 骨架、Font 載入、主題切換
 │   │   ├── Main.astro
@@ -61,14 +59,13 @@
 │   │   ├── getSortedPosts.ts
 │   │   ├── og-templates/
 │   │   └── transformers/       # Shiki 自訂 transformer
-│   ├── config.ts               # 網站設定（TODO: 需自訂）
+│   ├── config.ts               # 網站設定
 │   ├── constants.ts
 │   └── content.config.ts       # Astro Content Collections 定義
 ├── astro.config.ts
 ├── tsconfig.json
 ├── package.json
 ├── bun.lock
-├── wrangler.toml
 └── CLAUDE.md
 ```
 
@@ -199,7 +196,11 @@ tags:
 description: "文章描述"
 ogImage: ""                   # 選用，社群分享圖片
 ---
+
+## Table of contents
 ```
+
+文章 frontmatter 結束後須加上 `## Table of contents`，`remark-toc` 會自動產生目錄，`remark-collapse` 會將其包成可收合區塊。
 
 ## 部署設定
 
@@ -212,22 +213,12 @@ ogImage: ""                   # 選用，社群分享圖片
 
 ### Cloudflare 設定
 
-1. 在 Cloudflare Dashboard 建立 Pages 專案
-2. 取得 Account ID（帳戶首頁右側）
-3. 建立 API Token（需要 Cloudflare Pages 編輯權限）
-4. 在 GitHub repo Settings → Secrets 加入：
-   - `CLOUDFLARE_API_TOKEN`
-   - `CLOUDFLARE_ACCOUNT_ID`
-
-### wrangler.toml
-
-```toml
-name = "shyuan-blog"
-compatibility_date = "2024-01-01"
-
-[site]
-bucket = "./dist"
-```
+- **Pages 專案名稱**: `blog-chrisyuan-me`
+- **自訂網域**: `blog.chrisyuan.me`
+- **GitHub Repo**: https://github.com/shyuan/blog.chrisyuan.me
+- **GitHub Secrets**:
+  - `CLOUDFLARE_API_TOKEN`（需要 Cloudflare Pages 編輯權限）
+  - `CLOUDFLARE_ACCOUNT_ID`
 
 ## 開發指令
 
@@ -253,12 +244,6 @@ bun run lint
 # 新增文章
 # 在 src/data/blog/ 建立 .md 檔案
 ```
-
-## TODO（待自訂）
-
-- [ ] 更新 `src/config.ts` 中的 `website`、`author`、`profile`、`title`、`desc`、`timezone`、`editPost.url`
-- [ ] 在 GitHub Secrets 設定 `CLOUDFLARE_API_TOKEN` 和 `CLOUDFLARE_ACCOUNT_ID`
-- [ ] 確認 `wrangler.toml` 和 `deploy.yml` 中的專案名稱 `shyuan-blog` 是否正確
 
 ## 注意事項
 
