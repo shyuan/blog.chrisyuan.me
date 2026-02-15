@@ -227,6 +227,7 @@ Streamable HTTP 設計中的 stateless 選項是一項重要的架構改進，�
 - **Session ID是可選的**：在 Streamable HTTP 規範中，服務器**可以**（MAY）在初始化時分配 Session ID，但這不是必需的。規範明確使用「MAY」而非「MUST」，表明這是一個選擇性而非強製性的。
 - **單一 request-response 模式**：Streamable HTTP 允許 server 端以純粹的 request-response 模式工作，不需要在請求之間保持任何狀態。每次 client 端發送 JSON-RPC 請求，服務器可以處理請求並返回結果，無需 trace 之前的交互。
 - **即使長時間操作也能保持無狀態**：對於需要發送進度通知或多個響應的長時間操作，server 端可以在單一 HTTP request 的 context 中使用 SSE streaming 完成所有通信，不需要跨 request 維護狀態。
+
   ```mermaid
   sequenceDiagram
       participant Client as Client
