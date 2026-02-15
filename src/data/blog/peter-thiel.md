@@ -7,6 +7,8 @@ tags:
   - peter-thiel
 ---
 
+## Table of contents
+
 # 九堂課：
 
 ## 1\. 將推理分成不同部分，並清楚識別最重要的因素

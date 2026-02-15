@@ -9,6 +9,8 @@ tags:
   - swap
 ---
 
+## Table of contents
+
 # 虛擬記憶體的基本概念
 
 在現代作業系統中，[虛擬記憶體](https://zh.wikipedia.org/zh-tw/%E8%99%9A%E6%8B%9F%E5%86%85%E5%AD%98)（[Virtual Memory](https://en.wikipedia.org/wiki/Virtual_memory)）是一項重要的記憶體管理技術。它的主要用途是讓系統能夠執行超過實體記憶體（RAM）容量的程式。當實體記憶體不足時，作業系統會將暫時不使用的資料從記憶體移到硬碟上的特定區域，需要時再載入回來，這個過程稱為「記憶體交換」（Memory Swapping）。

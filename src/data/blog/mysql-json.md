@@ -5,6 +5,8 @@ slug: "mysql-json"
 description: "有時候會需要把 MySQL 的查詢結果輸出成 JSON 格式，如果不想寫程式做這件事，可以利用 mysql 指令，配合 MySQL 內建的 json_object() 功能，再加上 jq 完成。 有一個 table Person 結構如下： mysql> DESC Person; +-------+---------------------+------+-----+--------+------"
 ---
 
+## Table of contents
+
 有時候會需要把 MySQL 的查詢結果輸出成 JSON 格式，如果不想寫程式做這件事，可以利用 mysql 指令，配合 MySQL 內建的 json_object() 功能，再加上 jq 完成。
 
 有一個 table Person 結構如下：

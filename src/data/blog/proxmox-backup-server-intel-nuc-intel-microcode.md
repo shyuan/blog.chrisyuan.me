@@ -9,6 +9,8 @@ tags:
   - nuc
 ---
 
+## Table of contents
+
 # 前言
 
 最近撿到一台 2016 年推出的 MSI Cubi 2 NUC（內部代號 MS-B142），搭載第七代 Intel® Core™ i5-7200U 處理器、DDR4 16GB 記憶體、128GB M.2 2242 SSD 和 1TB 7200 轉傳統硬碟（皆為 SATA 介面）。原本打算將它作為 Proxmox Backup Server (PBS) 4.0 來備份 PVE 環境的 VM 和 LXC，卻在安裝後遇到無法正常開機的問題。

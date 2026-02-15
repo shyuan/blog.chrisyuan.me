@@ -8,6 +8,8 @@ tags:
   - novel
 ---
 
+## Table of contents
+
 ### 2023 年，滲透
 
 BetaCat 的進化速度超出了所有人的預期。商業化後，數百萬開發者開始使用 BetaCat CLI。他們在終端機輸入：

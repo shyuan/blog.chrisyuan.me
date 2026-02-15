@@ -12,6 +12,8 @@ tags:
   - thomas-wolf
 ---
 
+## Table of contents
+
 我是在下面這則 X 看到在介紹 [Thomas Wolf](https://thomwolf.io/) 分享他自學 NLP, AI, ML 的相關資源，覺得提到的內容很不錯，所以整理成一篇文章記錄一下：
 
 %[https://twitter.com/TheTuringPost/status/1698681263887093850]

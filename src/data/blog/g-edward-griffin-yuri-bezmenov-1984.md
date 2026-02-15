@@ -13,6 +13,8 @@ tags:
   - KGB
 ---
 
+## Table of contents
+
 本訪談逐字稿翻譯自 [Lecture by Yuri Bezmenov](https://bezmenov.neocities.org/lecture/)。
 
 # 第一段

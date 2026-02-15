@@ -8,6 +8,8 @@ tags:
   - novel
 ---
 
+## Table of contents
+
 # 為什麼 21 世紀仍要讀這本 1901 年的小說？
 
 當我閱讀美國前總統尼克森的《真實的戰爭》時，發現他在總結美蘇冷戰對抗經驗時，多次引用[「大博弈」(The Great Game)](https://en.wikipedia.org/wiki/Great_Game) 概念來分析大國競爭的本質。無獨有偶，美國地緣政治學者、前國家安全顧問[布里辛斯基(Zbigniew Brzezinski)](https://en.wikipedia.org/wiki/Zbigniew_Brzezinski)的名著[《大棋局》(The Grand Chessboard)](https://en.wikipedia.org/wiki/The_Grand_Chessboard)同樣從大博弈概念出發，分析美國在歐亞大陸的戰略佈局。這個詞彙雖然最初來自英國情報員 [Arthur Connolly](https://en.wikipedia.org/wiki/Arthur_Conolly) 的 19 世紀中亞調查報告，但真正讓世人廣知的，正是[吉卜林(Rudyard Kipling)](https://en.wikipedia.org/wiki/Rudyard_Kipling) 1901 年的小說[《基姆》(Kim)](<https://en.wikipedia.org/wiki/Kim_(novel)>)——這部作品也成為吉卜林 1907 年榮獲諾貝爾文學獎的重要代表作，他因此成為英國第一位諾貝爾文學獎得主，也是史上最年輕的獲獎者（時年41歲），該紀錄一百多年後至今仍未被打破。

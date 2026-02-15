@@ -8,6 +8,8 @@ tags:
   - title
 ---
 
+## Table of contents
+
 1. 創刊號：男子程序員的日常
 2. There is no cloud, just other people's computers.
 3. 如何產生一個隨機字串？讓新手退出 vim

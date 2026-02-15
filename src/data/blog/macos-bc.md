@@ -11,6 +11,8 @@ tags:
   - calculator
 ---
 
+## Table of contents
+
 # bc 的歷史背景
 
 [bc](<https://en.wikipedia.org/wiki/Bc_(programming_language)>) 的全名是「basic calculator」或「bench calculator」，是一個支援任意精度運算的計算器語言。它的歷史可以追溯到 1975 年，首次出現在 [Version 6 Unix](https://en.wikipedia.org/wiki/Version_6_Unix) 中。當時由貝爾實驗室的 Lorinda Cherry 開發，作為另一個計算器程式 [dc(desk calculator)](<https://en.wikipedia.org/wiki/Dc_(computer_program)>) 的前端介面。

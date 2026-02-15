@@ -13,6 +13,8 @@ tags:
   - environment-variables
 ---
 
+## Table of contents
+
 %[https://github.com/JetBrains/mcp-jetbrains]
 
 [JetBrains](https://www.jetbrains.com/) 有提供 [MCP Server plugin](https://plugins.jetbrains.com/plugin/26071-mcp-server) 可以讓 MCP client 使用，照 [JetBrains/mcp-jetbrains](https://github.com/JetBrains/mcp-jetbrains) 的說明文件在 [Claude Desktop](https://claude.ai/download) 設定會出現以下錯誤：

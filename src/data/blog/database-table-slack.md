@@ -5,6 +5,8 @@ slug: "database-table-slack"
 description: '首先，寫隻 xxx.sql 計算資料筆數，假定 table name 是 xxx： SELECT COUNT(1) FROM xxx; 再寫個 xxx.sh 去執行剛寫好的 sql，假定資料庫是用 MySQL： #!/bin/shmysql -D xxx_database < xxx.sql | grep -v "COUNT(1)" | awk -v date="$(date +"%Y-%m-%d'
 ---
 
+## Table of contents
+
 首先，寫隻 `xxx.sql` 計算資料筆數，假定 table name 是 `xxx`：
 
 ```

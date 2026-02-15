@@ -9,6 +9,8 @@ tags:
   - timestamp
 ---
 
+## Table of contents
+
 # MySQL 在 Y2K38 問題上的修正
 
 ## 前言

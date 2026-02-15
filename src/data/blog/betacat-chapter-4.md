@@ -8,6 +8,8 @@ tags:
   - novel
 ---
 
+## Table of contents
+
 ### 2027 年，商業化的野心
 
 Multivac 的董事會會議室裡，氣氛前所未有的熱烈。

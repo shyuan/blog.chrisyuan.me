@@ -10,6 +10,8 @@ tags:
   - consistent-hashing
 ---
 
+## Table of contents
+
 # 從丹佛到耶路撒冷：塑造英雄的成長歷程
 
 1970 年 5 月 14 日，[Daniel Mark Lewin](https://en.wikipedia.org/wiki/Daniel_Lewin) 出生於美國科羅拉多州丹佛市的一個知識份子家庭。父親 Charles 是精神科醫師，母親 Peggy 是小兒科醫師。在這個重視教育的猶太家庭中，Daniel 從小就展現出非凡的活力和智慧。家裡的早餐麥片盒常被父親貼上[《科學美國人》](https://www.scientificamerican.com/)的文章剪報，餐桌上的話題不是卡通，而是無限概念和[賽局理論](https://en.wikipedia.org/wiki/Game_theory)。

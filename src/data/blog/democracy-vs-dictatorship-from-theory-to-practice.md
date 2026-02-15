@@ -8,6 +8,8 @@ tags:
   - democracy
 ---
 
+## Table of contents
+
 # 一、獨裁者的定義
 
 ## 核心特徵

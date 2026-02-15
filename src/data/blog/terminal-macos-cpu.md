@@ -9,6 +9,8 @@ tags:
   - cli
 ---
 
+## Table of contents
+
 ```bash
 % sysctl -n machdep.cpu.brand_string
 

@@ -9,6 +9,8 @@ tags:
   - mcp-client
 ---
 
+## Table of contents
+
 在 [2025-03-26 Key Changes](https://modelcontextprotocol.io/specification/2025-03-26/changelog) 的 [Major changes](https://modelcontextprotocol.io/specification/2025-03-26/changelog#major-changes) 第二項明確指出：
 
 > Replaced the previous HTTP+SSE transport with a more flexible [**Streamable HTTP transport**](https://modelcontextprotocol.io/specification/2025-03-26/basic/transports#streamable-http) (PR [#206](https://github.com/modelcontextprotocol/specification/pull/206))

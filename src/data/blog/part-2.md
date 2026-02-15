@@ -5,6 +5,8 @@ slug: "part-2"
 description: "孫子說：「上兵伐謀」，在現代戰爭中，認知戰已成為最重要的戰場。1984年，一位前蘇聯 KGB 特務貝茲梅諾夫的訪談揭露了認知戰的真實樣貌 - 這不是靠間諜或情報收集，而是一個緩慢且系統性的「意識形態顛覆」過程。 認知戰的四個階段 根據貝茲梅諾夫的說法，意識形態顛覆可分為四個階段: 1. 道德瓦解 (Demoralization) - 15-20年 透過教育體系植入特定意識形態 削弱目標國家的核"
 ---
 
+## Table of contents
+
 孫子說：「_上兵伐謀_」，在現代戰爭中，認知戰已成為最重要的戰場。1984年，[一位前蘇聯 KGB 特務貝茲梅諾夫的訪談](https://blog.chrisyuan.me/g-edward-griffin-yuri-bezmenov-1984)揭露了認知戰的真實樣貌 - 這不是靠間諜或情報收集，而是一個緩慢且系統性的「[意識形態顛覆](https://en.wikipedia.org/wiki/Ideological_diversionism)」過程。
 
 # 認知戰的四個階段

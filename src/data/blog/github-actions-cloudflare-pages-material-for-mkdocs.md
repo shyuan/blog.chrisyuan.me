@@ -12,6 +12,8 @@ tags:
   - static-site
 ---
 
+## Table of contents
+
 # 為什麼選擇 Cloudflare Pages？
 
 [Cloudflare Pages](https://pages.cloudflare.com/) 提供了以下優勢：
