@@ -41,6 +41,7 @@ tags:
 ### 問題發現（2005年）
 
 早在 MySQL 4.1 時代，就有使用者回報 [Bug #12654](https://bugs.mysql.com/bug.php?id=12654)：
+
 - `UNIX_TIMESTAMP()` 輸入大於 `'2038-01-01'` 的日期會回傳 `0`
 - `FROM_UNIXTIME()` 輸入大於 `2,147,483,647` 的整數會回傳 `NULL`
 

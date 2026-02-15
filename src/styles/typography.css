@@ -42,7 +42,7 @@
     }
 
     a {
-      @apply wrap-break-word border-b-2 border-foreground/50 text-foreground no-underline hover:border-accent hover:text-accent focus-visible:no-underline;
+      @apply border-b-2 border-foreground/50 wrap-break-word text-foreground no-underline hover:border-accent hover:text-accent focus-visible:no-underline;
     }
 
     ul {
@@ -89,7 +89,7 @@
     }
 
     blockquote {
-      @apply border-s-accent/80 italic wrap-break-word opacity-80;
+      @apply border-s-accent/80 wrap-break-word italic opacity-80;
     }
 
     details {

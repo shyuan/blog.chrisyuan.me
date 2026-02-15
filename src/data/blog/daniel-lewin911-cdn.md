@@ -60,7 +60,7 @@ Akamai 的使命是讓 Internet 變得快速、可靠且安全。公司開發的
 
 2017 年，Daniel Lewin 和 Thomson Leighton 因其在CDN技術上的開創性貢獻，[被列入美國國家發明家名人堂](https://news.mit.edu/2017/leighton-lewin-named-national-inventors-hall-of-fame-0202)。如今，Akamai 已成為全球 CDN 和雲端安全服務的領導者，擁有超過 6,100 名員工，為包括 Airbnb、Apple、BMW、eBay在內的世界頂級品牌提供服務。
 
-%[https://www.youtube.com/watch?v=5wOGj2kVMuY] 
+%[https://www.youtube.com/watch?v=5wOGj2kVMuY]
 
 Akamai 現任 CEO Tom Leighton 在談到與 Uniqlo 合作推出「Peace for All」慈善T恤時，特別提到了對和平理念的深刻理解。這件T恤上印著Akamai 網路安全解決方案的部分程式碼，象徵著科技力量對和平的貢獻。對於 Leighton 來說，這份對和平的追求顯然與他失去摯友和合作夥伴 Daniel 的經歷密不可分。
 
@@ -70,9 +70,10 @@ Akamai 現任 CEO Tom Leighton 在談到與 Uniqlo 合作推出「Peace for All�
 
 Daniel 的朋友們常常思考著那些「假如」：假如他活著，可能會完成困擾他的博士學位；假如他活著，可能會進入以色列政壇；假如他活著，可能會成為像 Bill Gates 或 Steve Jobs 一樣的科技界家喻戶曉的名字。
 
-%[https://twitter.com/TomLeightonAKAM/status/1304393537971261441] 
+%[https://twitter.com/TomLeightonAKAM/status/1304393537971261441]
 
 儘管 Daniel 的生命只有短短 31 年，但他留下的遺產卻是永恆的。他不僅是網路革命的先驅，更是一個將智慧、勇氣和奉獻精神完美結合的典範。正如他的好友所說
+
 > 那些認識他的人都覺得，世界失去了一個真正的天才。
 
 Daniel Lewin 的一生，是天才與英雄的完美結合。從以色列特種部隊的精英戰士，到 MIT 的傑出學者，再到改變網路發展的科技企業家，他的每一個身份都體現了追求卓越的精神。而在生命的最後時刻，他再次展現了軍人的本色，成為第一個試圖阻止 911 恐怖攻擊的英雄。
@@ -81,7 +82,7 @@ Daniel Lewin 的一生，是天才與英雄的完美結合。從以色列特種�
 
 # 參考文章
 
-* [The Genius Who Perished on Flight 11](https://www.psychologytoday.com/us/articles/201309/the-genius-who-perished-flight-11)
-* [Professor Tom Leighton and Danny Lewin SM ’98 named to National Inventors Hall of Fame](https://news.mit.edu/2017/leighton-lewin-named-national-inventors-hall-of-fame-0202)
-* [No Better Time: The Brief, Remarkable Life of Danny Lewin, the Genius Who Transformed the Internet](https://world.hey.com/davidsenra/no-better-time-the-brief-remarkable-life-of-danny-lewin-the-genius-who-transformed-the-internet-8bfdd0af)
-* [The legacy of Danny Lewin, the first man to die on 9/11](https://edition.cnn.com/2013/09/09/tech/innovation/danny-lewin-9-11-akamai/)
+- [The Genius Who Perished on Flight 11](https://www.psychologytoday.com/us/articles/201309/the-genius-who-perished-flight-11)
+- [Professor Tom Leighton and Danny Lewin SM ’98 named to National Inventors Hall of Fame](https://news.mit.edu/2017/leighton-lewin-named-national-inventors-hall-of-fame-0202)
+- [No Better Time: The Brief, Remarkable Life of Danny Lewin, the Genius Who Transformed the Internet](https://world.hey.com/davidsenra/no-better-time-the-brief-remarkable-life-of-danny-lewin-the-genius-who-transformed-the-internet-8bfdd0af)
+- [The legacy of Danny Lewin, the first man to die on 9/11](https://edition.cnn.com/2013/09/09/tech/innovation/danny-lewin-9-11-akamai/)

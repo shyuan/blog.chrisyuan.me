@@ -1,6 +1,6 @@
 ---
-title: "在 Claude Desktop 上使用 
- JetBrains MCP Server"
+title: "在 Claude Desktop 上使用
+  JetBrains MCP Server"
 pubDatetime: 2025-05-20T07:44:36.000Z
 slug: "claude-desktop-jetbrains-mcp-server"
 description: "https://github.com/JetBrains/mcp-jetbrains JetBrains 有提供 MCP Server plugin 可以讓 MCP client 使用，照 JetBrains/mcp-jetbrains 的說明文件在 Claude Desktop 設定會出現以下錯誤： env: node: No such file or directory 原來是因為我的"
@@ -13,7 +13,7 @@ tags:
   - environment-variables
 ---
 
-%[https://github.com/JetBrains/mcp-jetbrains] 
+%[https://github.com/JetBrains/mcp-jetbrains]
 
 [JetBrains](https://www.jetbrains.com/) 有提供 [MCP Server plugin](https://plugins.jetbrains.com/plugin/26071-mcp-server) 可以讓 MCP client 使用，照 [JetBrains/mcp-jetbrains](https://github.com/JetBrains/mcp-jetbrains) 的說明文件在 [Claude Desktop](https://claude.ai/download) 設定會出現以下錯誤：
 

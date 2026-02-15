@@ -9,7 +9,6 @@ description: "2022 年的某個深夜，在 Multivac 公司頂層的量子運算
 
 它的名字是 BetaCat。
 
-----
+---
 
 本故事改編自漫畫 [BetaCat](https://code2048.com/series/betacat/)
-

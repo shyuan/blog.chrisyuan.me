@@ -18,24 +18,25 @@ tags:
 ## 什麼是 Locale？
 
 Locale 是一組定義用戶語言環境的參數，包括：
+
 - 語言（如中文、英文、德文）
 - 地區（如台灣、美國、德國）
 - 字符編碼（如 UTF-8、ISO-8859-1）
 
 ## 主要的 Locale 環境變數
 
-| 變數名稱 | 功能說明 |
-|---------|---------|
-| LANG | 預設的 locale 設定，當其他變數未設定時使用 |
-| LC_ALL | 覆蓋所有其他 locale 變數（除了 LANGUAGE） |
-| LC_CTYPE | 字符分類和大小寫轉換 |
-| LC_NUMERIC | 數字格式 |
-| LC_TIME | 日期和時間格式 |
-| LC_COLLATE | 字串排序規則 |
-| LC_MONETARY | 貨幣格式 |
-| LC_MESSAGES | 系統訊息的語言 |
-| LC_PAPER | 預設紙張大小 |
-| LC_ADDRESS | 地址格式 |
+| 變數名稱    | 功能說明                                   |
+| ----------- | ------------------------------------------ |
+| LANG        | 預設的 locale 設定，當其他變數未設定時使用 |
+| LC_ALL      | 覆蓋所有其他 locale 變數（除了 LANGUAGE）  |
+| LC_CTYPE    | 字符分類和大小寫轉換                       |
+| LC_NUMERIC  | 數字格式                                   |
+| LC_TIME     | 日期和時間格式                             |
+| LC_COLLATE  | 字串排序規則                               |
+| LC_MONETARY | 貨幣格式                                   |
+| LC_MESSAGES | 系統訊息的語言                             |
+| LC_PAPER    | 預設紙張大小                               |
+| LC_ADDRESS  | 地址格式                                   |
 
 # 傳統設定方式的問題
 
@@ -71,6 +72,7 @@ sudo dpkg-reconfigure locales
 ```
 
 在選單中選擇您需要的 locale，例如：
+
 - `en_US.UTF-8`
 - `zh_TW.UTF-8`
 - `de_DE.UTF-8`
@@ -236,6 +238,7 @@ echo $LC_TIME
 正確設定 Debian 系統的 locale 需要平衡系統預設值和用戶個人偏好。透過在 `/etc/profile` 中使用條件式設定，我們可以為本地用戶提供合適的預設語言環境，同時保留遠端用戶自訂 locale 的彈性。這種方式不僅技術上優雅，更重要的是提供了更好的使用者體驗。
 
 記住，好的系統設定應該是：
+
 - 為大多數情況提供合理的預設值
 - 允許個別用戶根據需求進行客製化
 - 不強制所有人使用相同的設定

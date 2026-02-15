@@ -5,8 +5,6 @@ slug: "app"
 description: " Spotify Connect Amazon Alexa Cast Tidal Connect"
 ---
 
-
--  [Spotify Connect](https://www.spotify.com/tw/connect/)
--  [Amazon Alexa Cast](https://www.amazon.com/b?ie=UTF8&node=17910796011)
--  [Tidal Connect](https://tidal.com/Connect)
-
+- [Spotify Connect](https://www.spotify.com/tw/connect/)
+- [Amazon Alexa Cast](https://www.amazon.com/b?ie=UTF8&node=17910796011)
+- [Tidal Connect](https://tidal.com/Connect)

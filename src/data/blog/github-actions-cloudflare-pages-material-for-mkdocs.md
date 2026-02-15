@@ -75,10 +75,11 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
 
 :::tip[建議]
 對於企業或團隊使用，建議使用 Account-Owned Token。這樣可以：
+
 - 避免 Token 與個人帳號綁定
 - 便於團隊共同管理
 - 減少人員異動時的影響
-:::
+  :::
 
 ### 1.2 取得 Account ID
 
@@ -141,9 +142,9 @@ on:
       - main
 
 env:
-  PYTHON_VERSION: '3.13.2'
-  MKDOCS_MATERIAL_VERSION: '9.6.5'
-  CLOUDFLARE_PROJECT_NAME: 'my-docs-site'  # 改為您的專案名稱
+  PYTHON_VERSION: "3.13.2"
+  MKDOCS_MATERIAL_VERSION: "9.6.5"
+  CLOUDFLARE_PROJECT_NAME: "my-docs-site" # 改為您的專案名稱
 
 permissions:
   contents: write
@@ -244,9 +245,9 @@ git push origin main
 
 ```yaml
 env:
-  PYTHON_VERSION: '3.13.2'
-  MKDOCS_MATERIAL_VERSION: '9.6.5'
-  CLOUDFLARE_PROJECT_NAME: 'my-docs-site'
+  PYTHON_VERSION: "3.13.2"
+  MKDOCS_MATERIAL_VERSION: "9.6.5"
+  CLOUDFLARE_PROJECT_NAME: "my-docs-site"
 ```
 
 這些變數的用途：
@@ -296,6 +297,7 @@ env:
 ```
 
 Wrangler 會：
+
 1. 驗證 API Token 和 Account ID
 2. 上傳 `public` 目錄中的靜態檔案
 3. 部署到 Cloudflare Pages
@@ -315,12 +317,12 @@ on:
     branches:
       - main
       - staging
-      - 'feature/**'
+      - "feature/**"
 
 env:
-  PYTHON_VERSION: '3.13.2'
-  MKDOCS_MATERIAL_VERSION: '9.6.5'
-  CLOUDFLARE_PROJECT_NAME: 'my-docs-site'
+  PYTHON_VERSION: "3.13.2"
+  MKDOCS_MATERIAL_VERSION: "9.6.5"
+  CLOUDFLARE_PROJECT_NAME: "my-docs-site"
 
 jobs:
   deploy:
@@ -343,9 +345,9 @@ on:
     branches:
       - main
     paths:
-      - 'docs/**'
-      - 'mkdocs.yml'
-      - '.github/workflows/deploy-to-cloudflare-pages.yml'
+      - "docs/**"
+      - "mkdocs.yml"
+      - ".github/workflows/deploy-to-cloudflare-pages.yml"
 ```
 
 ## 3. 部署通知
@@ -371,6 +373,7 @@ on:
 ## 1. 專案不存在錯誤
 
 如果在首次部署時遇到錯誤：
+
 ```
 Error: Project "my-docs-site" does not exist
 ```
@@ -380,34 +383,40 @@ Error: Project "my-docs-site" does not exist
 ## 2. API Token 權限不足
 
 錯誤訊息：
+
 ```
 Error: Failed to create deployment
 ```
 
 解決方案：
+
 - 確認 API Token 具有正確的權限（Account → Cloudflare Pages → Edit）
 - 重新生成 Token 並更新 GitHub Secrets
 
 ## 3. 快取失效問題
 
 如果遇到快取相關問題，可以：
+
 1. 手動刪除 GitHub Actions 的快取
 2. 修改 cache key 來強制更新
 
 ## 4. 專案名稱不一致
 
 如果出現以下錯誤：
+
 ```
 Error: Project not found
 ```
 
 確保：
+
 - GitHub Actions 中的 `CLOUDFLARE_PROJECT_NAME` 與實際在 Cloudflare 建立的專案名稱完全一致
 - 專案已經在 Cloudflare Pages 中成功建立
 
 ## 5. 部署目錄錯誤
 
 確保：
+
 - MkDocs 建構輸出目錄設定正確（`--site-dir public`）
 - Wrangler 部署指定的目錄相符（`pages deploy public`）
 
@@ -416,6 +425,7 @@ Error: Project not found
 透過本文的設定，您的靜態網站現在可以自動化部署到 Cloudflare Pages。這個流程不僅節省了手動部署的時間，還確保了每次更新都能即時上線。雖然本文以 MkDocs Material 為範例，但同樣的流程可以套用到任何靜態網頁生成工具。
 
 主要優勢：
+
 - 推送即部署，完全自動化
 - 快取機制提升建構速度
 - 版本控制集中管理，升級維護更方便
@@ -423,6 +433,7 @@ Error: Project not found
 - Cloudflare 全球 CDN 加速
 
 如果您在設定過程中遇到問題，可以參考：
+
 - [Cloudflare Pages 官方文件](https://developers.cloudflare.com/pages/)
 - [GitHub Actions 文件](https://docs.github.com/en/actions)
 - [MkDocs Material 指南](https://squidfunk.github.io/mkdocs-material/)
@@ -434,6 +445,7 @@ Error: Project not found
 ### 常見的靜態網站生成器設定範例
 
 1. **Hugo**：
+
 ```yaml
 - name: Install dependencies and build site
   run: |
@@ -445,6 +457,7 @@ Error: Project not found
 ```
 
 2. **Jekyll**：
+
 ```yaml
 - name: Install dependencies and build site
   run: |
@@ -454,6 +467,7 @@ Error: Project not found
 ```
 
 3. **Next.js (靜態輸出)**：
+
 ```yaml
 - name: Install dependencies and build site
   run: |
@@ -464,6 +478,7 @@ Error: Project not found
 ```
 
 4. **Hexo**：
+
 ```yaml
 - name: Install dependencies and build site
   run: |

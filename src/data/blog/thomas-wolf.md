@@ -14,7 +14,7 @@ tags:
 
 我是在下面這則 X 看到在介紹 [Thomas Wolf](https://thomwolf.io/) 分享他自學 NLP, AI, ML 的相關資源，覺得提到的內容很不錯，所以整理成一篇文章記錄一下：
 
-%[https://twitter.com/TheTuringPost/status/1698681263887093850] 
+%[https://twitter.com/TheTuringPost/status/1698681263887093850]
 
 基本上 X thread 是整理自他記錄於個人網站的 [My self-educational approach is usually to get a few rather exhaustive books and read them for cover to cover.](https://thomwolf.io/data/Thom_wolf_reading_list.txt) 這個檔案
 
@@ -23,9 +23,9 @@ tags:
 1. 由人工智慧領域的知名教授 [Ian Goodfellow](https://twitter.com/goodfellow_ian), [Yoshua Bengio](https://en.wikipedia.org/wiki/Yoshua_Bengio) 和 [Aaron Courville](https://mila.quebec/en/person/aaron-courville/) 三人合著的 [Deep Learning](https://www.deeplearningbook.org/)，這本書對當代深度學習領域的技巧與工具給出很不錯的概述。
 2. 由 [Stuart Russel](https://people.eecs.berkeley.edu/~russell/) 和 [Peter Norvig](https://www.norvig.com/) 合著的 [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/)(簡稱 [AIMA](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach))，是 AI 專業領域的學院權威教科書已有將近三十年歷史，第一版出版於 1995 年，2009 年的第三版包含了神經網路問世之前，所有用來處理 AI 的工具與方法，2020 年的第四版補充近年神經網路發展相關知識進來。
 3. 由 [Kevin Murphy](https://x.com/sirbayes) 撰寫的 [Probabilistic Machine Learning(PML)](https://probml.github.io/pml-book/) 系列，介紹機率方法及貝氏推論工具，該系列分成以下三冊：
-    * [Book 0: “Machine Learning: A Probabilistic Perspective” (2012)](https://probml.github.io/pml-book/book0.html)
-    * [Book 1: “Probabilistic Machine Learning: An Introduction” (2022)](https://probml.github.io/pml-book/book1.html)
-    * [Book 2: “Probabilistic Machine Learning: Advanced Topics” (2023)](https://probml.github.io/pml-book/book2.html)
+   - [Book 0: “Machine Learning: A Probabilistic Perspective” (2012)](https://probml.github.io/pml-book/book0.html)
+   - [Book 1: “Probabilistic Machine Learning: An Introduction” (2022)](https://probml.github.io/pml-book/book1.html)
+   - [Book 2: “Probabilistic Machine Learning: Advanced Topics” (2023)](https://probml.github.io/pml-book/book2.html)
 4. 由 David MacKay 撰寫 [Information Theory, Inference, and Learning Algorithms](https://www.inference.org.uk/mackay/itila/book.html) 以再淺顯易懂不過的方式介紹機率論及資訊理論。
 5. 由 [Judea Pearl](https://x.com/yudapearl) 撰寫的 [The Book of Why: The New Science of Cause and Effect](http://bayes.cs.ucla.edu/WHY/) 清楚解說因果推斷的概念。
 6. 由 [Richard S. Sutton](http://incompleteideas.net/index.html) 和 Andrew G. Barto 合著的 [Reinforcement Learning: An Introduction](http://incompleteideas.net/book/the-book.html) 是一本能幫助你初步了解「強化學習」概念的好書。

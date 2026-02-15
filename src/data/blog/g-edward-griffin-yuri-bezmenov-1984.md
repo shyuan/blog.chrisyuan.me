@@ -18,7 +18,8 @@ tags:
 # 第一段
 
 ## 影片
-%[https://www.youtube.com/watch?v=lCBAhuiy1U4] 
+
+%[https://www.youtube.com/watch?v=lCBAhuiy1U4]
 
 ## 逐字稿
 
@@ -150,7 +151,7 @@ apparatchik 是什麼？
 
 ## 影片
 
-%[https://www.youtube.com/watch?v=Th7c_-qwhyM] 
+%[https://www.youtube.com/watch?v=Th7c_-qwhyM]
 
 ## 逐字稿
 
@@ -216,7 +217,7 @@ apparatchik 是什麼？
 
 ## 影片
 
-%[https://www.youtube.com/watch?v=85WwEh59hAY] 
+%[https://www.youtube.com/watch?v=85WwEh59hAY]
 
 ## 逐字稿
 

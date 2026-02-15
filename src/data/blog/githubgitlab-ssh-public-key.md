@@ -7,5 +7,5 @@ description: "SSH Public Key 算是公開資訊，將下面的連結置換為某
 
 SSH Public Key 算是公開資訊，將下面的連結置換為某位使用者的 GitHub/GitLab 帳號，就能取得他放上去的 SSH public key
 
-* GitLab: https://gitlab.com/{username}.keys
-* GitHub: https://github.com/{username}.keys
+- GitLab: https://gitlab.com/{username}.keys
+- GitHub: https://github.com/{username}.keys

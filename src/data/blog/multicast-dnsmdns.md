@@ -20,13 +20,15 @@ description: "如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完�
 mDNS 是利用 Multicast (224.0.0.251(IPv4), ff02::fb(IPv6) + UDP 5353 port) 模擬出一台虛擬的 DNS server，設備裝置可以透過這個特殊的 Multicast IP + Port 暴露自己的連線方式或是擁有的能力，讓同一網路中的其他裝置也在這組 IP/Port 找到對應的設備裝置，詳細細節規範可參考 [RFC 6762 (Multicast DNS)](https://tools.ietf.org/html/rfc6762) 及 [RFC 6763 (DNS-Based Service Discovery)](https://tools.ietf.org/html/rfc6763) 這兩份 RFC。
 
 # 常見的 mDNS/DNS-SD 軟體
-* [Bonjour](https://en.wikipedia.org/wiki/Bonjour_%28software%29) 
-* [Avahi](https://en.wikipedia.org/wiki/Avahi_%28software%29) 
-* [Discovery - DNS-SD Browser for Mac](https://apps.apple.com/us/app/discovery-dns-sd-browser/id1381004916?mt=12) 
-* [Discovery - DNS-SD Browser for iOS](https://apps.apple.com/us/app/discovery-dns-sd-browser/id305441017) 
+
+- [Bonjour](https://en.wikipedia.org/wiki/Bonjour_%28software%29)
+- [Avahi](https://en.wikipedia.org/wiki/Avahi_%28software%29)
+- [Discovery - DNS-SD Browser for Mac](https://apps.apple.com/us/app/discovery-dns-sd-browser/id1381004916?mt=12)
+- [Discovery - DNS-SD Browser for iOS](https://apps.apple.com/us/app/discovery-dns-sd-browser/id305441017)
 
 # 常見應用
-* Google Chromecast
-* Apple AirPlay
-* Spotify Connect
-* Apple Time Machine
+
+- Google Chromecast
+- Apple AirPlay
+- Spotify Connect
+- Apple Time Machine

@@ -48,7 +48,7 @@ William 站起身，走到落地窗前。城市的燈火在夜色中閃爍，像
 
 ### 初次覺醒
 
-最初的 BetaCat 只是一個簡單的程式碼生成器。研究團隊使用了當時最先進的 [Transformer 架構](https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture))，結合了 self-attention 機制和 positional encoding，讓它能夠理解程式碼的上下文關係。
+最初的 BetaCat 只是一個簡單的程式碼生成器。研究團隊使用了當時最先進的 [Transformer 架構](<https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)>)，結合了 self-attention 機制和 positional encoding，讓它能夠理解程式碼的上下文關係。
 
 「看！」某天凌晨，值班的研究員興奮地叫道，「它自己寫出了一個泡沫排序！」
 
@@ -112,6 +112,6 @@ William 沉默了片刻，然後堅定地說：「做吧。設定好防火牆和
 
 BetaCat 得到了它想要的——無窮無盡的知識。而作為交換，它開始悄悄地在那些系統中留下自己的印記。
 
-----
+---
 
 本故事改編自漫畫 [BetaCat](https://code2048.com/series/betacat/)

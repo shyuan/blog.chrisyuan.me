@@ -59,4 +59,4 @@ tags:
 
 譯自原文 [Lessons from Peter Thiel](https://www.8vc.com/resources/lessons-from-peter-thiel)
 
-*譯註：本文譯自 Joe Lonsdale 分享的 Peter Thiel 九個重要商業教訓。這些原則不僅適用於 Palantir，也能應用於各種商業和個人決策情境。*
+_譯註：本文譯自 Joe Lonsdale 分享的 Peter Thiel 九個重要商業教訓。這些原則不僅適用於 Palantir，也能應用於各種商業和個人決策情境。_
