@@ -73,7 +73,7 @@
 
 `astro.config.ts` 主要設定：
 
-- **Integrations**: `sitemap`, `mdx`
+- **Integrations**: `sitemap`, `mdx`, `partytown`（Google Analytics）
 - **Tailwind**: 透過 `@tailwindcss/vite` 作為 Vite plugin 載入（非 `@astrojs/tailwind`）
 - **Shiki**: 雙主題 `github-light` / `github-dark`，搭配 `@shikijs/transformers` 提供 diff、highlight、fileName 等功能
 - **字型**: 使用 Astro experimental fonts API，透過 `fontProviders.google()` 載入 Fira Code
@@ -219,6 +219,16 @@ ogImage: ""                   # 選用，社群分享圖片
 - **GitHub Secrets**:
   - `CLOUDFLARE_API_TOKEN`（需要 Cloudflare Pages 編輯權限）
   - `CLOUDFLARE_ACCOUNT_ID`
+- **GitHub Variables**:
+  - `PUBLIC_GA_MEASUREMENT_ID`（Google Analytics GA4 Measurement ID，格式 `G-XXXXXXXXXX`）
+
+### Google Analytics
+
+- 使用 `@astrojs/partytown` 將 GA4 script 移至 Web Worker 執行，避免影響主執行緒效能
+- GA script 在 `src/layouts/Layout.astro` 中透過 `type="text/partytown"` 載入
+- 環境變數 `PUBLIC_GA_MEASUREMENT_ID` 定義在 `astro.config.ts` 的 `env.schema` 中
+- 條件渲染：未設定環境變數時不會注入 GA script
+- `deploy.yml` 的 build step 透過 `${{ vars.PUBLIC_GA_MEASUREMENT_ID }}` 注入環境變數
 
 ## 開發指令
 
