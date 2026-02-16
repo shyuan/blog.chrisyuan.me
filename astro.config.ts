@@ -2,6 +2,7 @@ import { defineConfig, envField, fontProviders } from "astro/config";
 import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
+import partytown from "@astrojs/partytown";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import {
@@ -20,6 +21,11 @@ export default defineConfig({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
     mdx(),
+    partytown({
+      config: {
+        forward: ["dataLayer.push"],
+      },
+    }),
   ],
   markdown: {
     remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
@@ -53,6 +59,11 @@ export default defineConfig({
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
+        access: "public",
+        context: "client",
+        optional: true,
+      }),
+      PUBLIC_GA_MEASUREMENT_ID: envField.string({
         access: "public",
         context: "client",
         optional: true,
