@@ -1,7 +1,10 @@
 ---
 import { Font } from "astro:assets";
 import { ClientRouter } from "astro:transitions";
-import { PUBLIC_GOOGLE_SITE_VERIFICATION, PUBLIC_GA_MEASUREMENT_ID } from "astro:env/client";
+import {
+  PUBLIC_GOOGLE_SITE_VERIFICATION,
+  PUBLIC_GA_MEASUREMENT_ID,
+} from "astro:env/client";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
@@ -145,12 +148,15 @@ const structuredData = {
             type="text/partytown"
             src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA_MEASUREMENT_ID}`}
           />
-          <script type="text/partytown" set:html={`
+          <script
+            type="text/partytown"
+            set:html={`
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${PUBLIC_GA_MEASUREMENT_ID}');
-          `} />
+          `}
+          />
         </>
       )
     }
