@@ -211,8 +211,9 @@ ogImage: ""                   # 選用，社群分享圖片
    - `title`：文章標題（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
    - `tags`：至少一個標籤
    - `description`：1-2 句摘要，用於 SEO 與社群分享卡片
+   - `slug`：英文 URL 路徑（如 `taiwan-stock-odd-lot-trading-reform`），中文檔名時必填，避免 URL 出現中文
    - `draft: false`：設為 false 才會發布
-   - 選填：`featured`、`ogImage`、`slug`、`canonicalURL`
+   - 選填：`featured`、`ogImage`、`canonicalURL`
 
 2. **加 `## Table of contents`**：frontmatter `---` 結束後、內文開始前，加上 `## Table of contents`
 
