@@ -202,6 +202,29 @@ ogImage: ""                   # 選用，社群分享圖片
 
 文章 frontmatter 結束後須加上 `## Table of contents`，`remark-toc` 會自動產生目錄，`remark-collapse` 會將其包成可收合區塊。
 
+### 新增文章 Checklist（從原始 Markdown 到可發布狀態）
+
+當收到一份只有內容、沒有 frontmatter 的原始 Markdown 檔案時，依照以下步驟處理：
+
+1. **補 frontmatter**：在檔案最上方加入 `---` 區塊，必填欄位：
+   - `pubDatetime`：發布日期（ISO 8601 格式，如 `2026-02-19T00:00:00Z`）
+   - `title`：文章標題（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
+   - `tags`：至少一個標籤
+   - `description`：1-2 句摘要，用於 SEO 與社群分享卡片
+   - `draft: false`：設為 false 才會發布
+   - 選填：`featured`、`ogImage`、`slug`、`canonicalURL`
+
+2. **加 `## Table of contents`**：frontmatter `---` 結束後、內文開始前，加上 `## Table of contents`
+
+3. **移除內文 h1 標題**：frontmatter 的 `title` 會自動渲染為 h1，內文不應重複寫 h1（`#`），否則頁面會出現兩個標題
+
+4. **整理標題層級**：
+   - 內文最高層級使用 h2（`##`），不使用 h1
+   - 檢查 h2/h3 結構是否合理——相關段落應收納為同一 h2 下的 h3，避免過多扁平 h2 導致目錄冗長
+   - 理想的 ToC 頂層項目控制在 4-6 個
+
+5. **驗證建置**：執行 `bun run build` 確認無錯誤
+
 ## 部署設定
 
 ### GitHub Actions
