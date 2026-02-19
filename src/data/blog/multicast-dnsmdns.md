@@ -7,6 +7,8 @@ description: "如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完�
 
 ## Table of contents
 
+## 前言
+
 如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完成，OpenSSH server 啟動後，就可以在同網段下，用下面指令 ssh 進去：
 
 `ssh pi@raspberrypi.local`

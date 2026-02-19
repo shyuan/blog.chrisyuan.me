@@ -7,6 +7,8 @@ description: "由於每個 pod 上都會被 assign 一個 VPC subnet IP，所以
 
 ## Table of contents
 
+## 說明
+
 由於每個 pod 上都會被 assign 一個 VPC subnet IP，所以每個 instance node 上的 pod 數量上限，取決於該 instance type 最多能接上的 network interface 張數及每張 network interface 上能 bind 的 IP 數量，可參考 [IP addresses per network interface per instance type](https://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI) 上的列表。
 
 實際上還需要扣除 instance 本身運作要用到的 IP，實際上能用的數量是 (ENI 張數) x (每張 ENI 最多的 IPv4 數量 - 1) + 2，AWS 有一份每種 instance type 在 EKS 中最多能使用 pod 數的文件，可參考

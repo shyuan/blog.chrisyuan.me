@@ -7,6 +7,8 @@ description: "只需用 homebrew 安裝 libpq formula brew installl libpq 安裝
 
 ## Table of contents
 
+## 安裝步驟
+
 只需用 homebrew 安裝 [libpq](https://formulae.brew.sh/formula/libpq) formula
 
 ```

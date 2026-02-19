@@ -11,6 +11,8 @@ tags:
 
 ## Table of contents
 
+## 查詢指令
+
 ```bash
 % sysctl -n machdep.cpu.brand_string
 

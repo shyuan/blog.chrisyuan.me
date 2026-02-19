@@ -7,6 +7,8 @@ description: "在 ssh-keygen 的 man page 說明中有一個 -t 參數，可以�
 
 ## Table of contents
 
+## 前言
+
 在 [ssh-keygen](https://www.ssh.com/ssh/keygen/) 的 [man page](https://linux.die.net/man/1/ssh-keygen) 說明中有一個 `-t` 參數，可以設定要產生的 ssh key type。有以下五種不同 key type 可以選擇：
 
 - [dsa](https://en.wikipedia.org/wiki/Digital_Signature_Algorithm)

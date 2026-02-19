@@ -10,6 +10,8 @@ tags:
 
 ## Table of contents
 
+## 設定方式
+
 在 `/etc/profile.d/` 下建立 `fastfetch.sh` ，填入以下內容：
 
 ```bash

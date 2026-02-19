@@ -11,6 +11,8 @@ tags:
 
 ## Table of contents
 
+## 說明
+
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1746680197940/35d3414f-afe5-43ef-b35a-06851ac75199.png align="center")
 
 由於某些原因，系統中產生了一批以 `-` 開頭的檔案。在 shell 環境下使用各種指令處理這些檔案相當麻煩，因為檔名開頭的 `-` 會與指令工具的參數選項解析機制產生衝突。同事提供了一個解決方案：在指令和檔名之間加入雙[短橫線](https://en.wikipedia.org/wiki/Dash)（`--`）。

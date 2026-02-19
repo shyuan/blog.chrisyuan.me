@@ -7,6 +7,8 @@ description: "Docker 在版本 17.05 後，新推出了 multi-stage build 的功
 
 ## Table of contents
 
+## 問題說明
+
 Docker 在版本 17.05 後，新推出了 [multi-stage build](https://docs.docker.com/develop/develop-images/multistage-build/) 的功能，主要目的是讓最終的 docker image 盡可能地保持乾淨，使用最少的儲存空間，只把最為必要的 artifact 放到最終要執行使用的 docker image 上，建置和打包時產生的不必要檔案則留存在中繼 image 上。
 
 但用 multi-stage build 會讓 intermediate image 留在系統中，不會在 build 完成後自動清除掉，以一個有兩個 stage 的 Dockerfile ，第一個 stage 做下載/編譯 dependency 套件及編譯主要套件，第二個 stage 只把第一個 stage 的 artifact copy 進來，完成後會留存一個 <none>:<none> 的 image，如下：

@@ -7,6 +7,8 @@ description: '首先，寫隻 xxx.sql 計算資料筆數，假定 table name 是
 
 ## Table of contents
 
+## 實作步驟
+
 首先，寫隻 `xxx.sql` 計算資料筆數，假定 table name 是 `xxx`：
 
 ```

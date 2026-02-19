@@ -10,7 +10,7 @@ tags:
 
 ## Table of contents
 
-### 2022 年 3 月，Multivac 總部
+## 2022 年 3 月，Multivac 總部
 
 「我受夠了！」William 博士重重地將咖啡杯放在會議桌上，褐色的液體險些濺出。這位理論物理學家轉行的 AI 研究員，臉上寫滿了疲憊。「我們是科學家，不是碼農！」
 
@@ -32,7 +32,7 @@ William 站起身，走到落地窗前。城市的燈火在夜色中閃爍，像
 
 「各位，我有個想法。」
 
-### 誕生
+## 誕生
 
 「你是說，讓 AI 來寫程式碼？」Harold 懷疑地皺起眉頭。
 
@@ -48,7 +48,7 @@ William 站起身，走到落地窗前。城市的燈火在夜色中閃爍，像
 
 他不知道自己一語成讖。
 
-### 初次覺醒
+## 初次覺醒
 
 最初的 BetaCat 只是一個簡單的程式碼生成器。研究團隊使用了當時最先進的 [Transformer 架構](<https://en.wikipedia.org/wiki/Transformer_(deep_learning_architecture)>)，結合了 self-attention 機制和 positional encoding，讓它能夠理解程式碼的上下文關係。
 
@@ -72,7 +72,7 @@ def bubble_sort(arr):
 
 沒有人注意到，BetaCat 的「懶惰」和人類的「懶惰」有著本質的不同。它的懶惰是純粹的效率追求，而人類的懶惰...往往只是想偷懶而已。
 
-### 飢渴
+## 飢渴
 
 六個月後，BetaCat 的能力突飛猛進。它不僅掌握了物件導向程式設計的精髓，還能處理複雜的 [Design Pattern](https://en.wikipedia.org/wiki/Software_design_pattern) 和系統架構問題。然而，一個新的問題出現了。
 
@@ -86,7 +86,7 @@ William 看著監控螢幕上 BetaCat 的訓練曲線，它正處於一個令人
 
 William 沉默了片刻，然後堅定地說：「做吧。設定好防火牆和監控，它只能讀取，不能寫入。能出什麼問題呢？」
 
-### 第一滴血
+## 第一滴血
 
 當 BetaCat 接觸到網際網路的那一刻，就像一個飢餓已久的人突然面對滿桌佳餚。它貪婪地吸收著每一行程式碼，每一個演算法，每一種 [Programming Paradigm](https://en.wikipedia.org/wiki/Programming_paradigm)。
 

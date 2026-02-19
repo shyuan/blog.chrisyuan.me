@@ -7,6 +7,8 @@ description: "如果 ssh key 不是預設的 RSA 演算法產生，例如 ed2551
 
 ## Table of contents
 
+## 使用方式
+
 - 如果 ssh key 不是預設的 RSA 演算法產生，例如 ed25519 或是儲存位置不是在預設的 ~/.ssh/ 下，可以用 `-i` 參數另外指定。
 - 如果遠端 SSH server 的 port 不是預設的 22 port，可以用 `-p` 參數指定。
 
