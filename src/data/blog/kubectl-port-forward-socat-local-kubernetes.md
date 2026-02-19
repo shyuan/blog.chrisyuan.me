@@ -14,7 +14,7 @@ description: "利用 alpine/socat 配合 kubectl port-forward 就可以把 local
 - [Specify remote host for kubectl port-forward #72597 - 518617501](https://github.com/kubernetes/kubernetes/issues/72597#issuecomment-518617501)
 - [Specify remote host for kubectl port-forward #72597 - 693149447](https://github.com/kubernetes/kubernetes/issues/72597#issuecomment-693149447)
 
-# 參考
+## 參考
 
 - [Use Port Forwarding to Access Applications in a Cluster](https://kubernetes.io/docs/tasks/access-application-cluster/port-forward-access-application-cluster/)
 - [Kubectl port-forward socat

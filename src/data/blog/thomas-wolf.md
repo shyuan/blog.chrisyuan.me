@@ -20,7 +20,7 @@ tags:
 
 基本上 X thread 是整理自他記錄於個人網站的 [My self-educational approach is usually to get a few rather exhaustive books and read them for cover to cover.](https://thomwolf.io/data/Thom_wolf_reading_list.txt) 這個檔案
 
-# 書籍
+## 書籍
 
 1. 由人工智慧領域的知名教授 [Ian Goodfellow](https://twitter.com/goodfellow_ian), [Yoshua Bengio](https://en.wikipedia.org/wiki/Yoshua_Bengio) 和 [Aaron Courville](https://mila.quebec/en/person/aaron-courville/) 三人合著的 [Deep Learning](https://www.deeplearningbook.org/)，這本書對當代深度學習領域的技巧與工具給出很不錯的概述。
 2. 由 [Stuart Russel](https://people.eecs.berkeley.edu/~russell/) 和 [Peter Norvig](https://www.norvig.com/) 合著的 [Artificial Intelligence: A Modern Approach](https://aima.cs.berkeley.edu/)(簡稱 [AIMA](https://en.wikipedia.org/wiki/Artificial_Intelligence:_A_Modern_Approach))，是 AI 專業領域的學院權威教科書已有將近三十年歷史，第一版出版於 1995 年，2009 年的第三版包含了神經網路問世之前，所有用來處理 AI 的工具與方法，2020 年的第四版補充近年神經網路發展相關知識進來。
@@ -35,14 +35,14 @@ tags:
 8. 由 Yoav Goldberg 所寫的 [Neural Network Methods in Natural Language Processing](https://www.amazon.com/Language-Processing-Synthesis-Lectures-Technologies/dp/1627052984) 也是學習「自然語言處理」概念很不錯的一本書，[舊版本](https://arxiv.org/abs/1510.00726)是一篇論文，如果不想買書的話看論文就好。
 9. [Jacob Eisenstein](https://jacobeisenstein.github.io/) 的 [Natural Language Processing](https://github.com/jacobeisenstein/gt-nlp-class/blob/master/notes/eisenstein-nlp-notes.pdf) 也是一本相當詳盡，值得一讀的教科書。
 
-# 課程
+## 課程
 
 如果想要更深入研究相關領域，補充以下兩門線上課程也會很有幫助：
 
 1. 由 MIT 整理，放在 [edX](https://edx.org/) 上的 [Computational Probability and Inference](https://www.edx.org/learn/computer-programming/massachusetts-institute-of-technology-computational-probability-and-inference)
 2. 由 Stanford 整理，放在 [Coursera](https://www.coursera.org/) 上的 [Probabilistic Graphical Models(PGM) Specialization](https://www.coursera.org/specializations/probabilistic-graphical-models)
 
-# Thomas Wolf 介紹
+## Thomas Wolf 介紹
 
 他在個人網站自述其學經歷蠻有趣的，從很年輕時就有用 C/C++ 和組合語言寫過軟體和遊戲，但在求學和初入職場時都不是電腦資訊相關，而是物理領域。在巴黎高等師範學院畢業後先去勞倫斯柏克萊國家實驗室做雷射電漿交互作用研究。先被 MIT 錄取攻讀博士，最後選擇在巴黎索邦大學和 ESPCI 取得統計與量子物理博士學位，期間也替法國國防部及 Thales 做超導材料研究。
 

@@ -14,7 +14,7 @@ tags:
 
 ## Table of contents
 
-# 為什麼選擇 Cloudflare Pages？
+## 為什麼選擇 Cloudflare Pages？
 
 [Cloudflare Pages](https://pages.cloudflare.com/) 提供了以下優勢：
 
@@ -24,7 +24,7 @@ tags:
 - 每月高達 500 次建構和無限頻寬
 - 整合 Cloudflare 的生態系統
 
-# 準備工作
+## 準備工作
 
 在開始之前，請確保您已經：
 
@@ -33,13 +33,13 @@ tags:
 3. 了解基本的 [GitHub Actions](https://github.com/features/actions) 概念
 4. 安裝 Status 為 [Current, Active 或 Maintenance] 的 (https://nodejs.org/en/about/previous-releases#looking-for-the-latest-release-of-a-version-branch) [Node.js](https://nodejs.org/) 版本（用於執行 [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)）
 
-## 步驟一：取得 Cloudflare 憑證
+### 步驟一：取得 Cloudflare 憑證
 
-### 1.1 生成 Cloudflare API Token
+#### 1.1 生成 Cloudflare API Token
 
 Cloudflare 提供兩種類型的 API Token：[User-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) 和 [Account-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/)。選擇適合您需求的方式：
 
-#### 方式一：User-Owned Token（個人使用）
+##### 方式一：User-Owned Token（個人使用）
 
 1. 登入 [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. 點擊右上角的使用者圖示，選擇「My Profile」
@@ -56,7 +56,7 @@ Cloudflare 提供兩種類型的 API Token：[User-Owned Token](https://develope
 8. 檢查設定後點擊「Create Token」
 9. 複製並安全保存生成的 API Token
 
-#### 方式二：Account-Owned Token（團隊協作/企業使用）
+##### 方式二：Account-Owned Token（團隊協作/企業使用）
 
 Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，不會因為人員異動而受影響。
 
@@ -83,13 +83,13 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
 - 減少人員異動時的影響
   :::
 
-### 1.2 取得 Account ID
+#### 1.2 取得 Account ID
 
 1. 在 Cloudflare Dashboard 中選擇「Account Home」
 2. 在右側的「API」區塊找到「Account ID」
 3. 複製該 ID 備用
 
-## 步驟二：設定 GitHub Secrets
+### 步驟二：設定 GitHub Secrets
 
 1. 前往您的 GitHub repository
 2. 點擊「Settings」
@@ -101,11 +101,11 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
    - **Name**: `CLOUDFLARE_ACCOUNT_ID`
      **Secret**: 貼上步驟 1.2 的 Account ID
 
-## 步驟三：建立 Cloudflare Pages 專案
+### 步驟三：建立 Cloudflare Pages 專案
 
 在設定 GitHub Actions 之前，我們需要先在 Cloudflare 建立專案。您可以選擇以下兩種方式之一：
 
-### 方式一：使用 Wrangler CLI（推薦）
+#### 方式一：使用 Wrangler CLI（推薦）
 
 在本地終端機執行：
 
@@ -122,7 +122,7 @@ npx wrangler pages project create my-docs-site
 
 建立專案時會詢問您是否要設定生產分支，建議選擇 `main`。
 
-### 方式二：使用 Cloudflare Dashboard
+#### 方式二：使用 Cloudflare Dashboard
 
 1. 登入 [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. 選擇「Pages」
@@ -131,7 +131,7 @@ npx wrangler pages project create my-docs-site
 5. 輸入專案名稱（例如：`my-docs-site`）
 6. 點擊「Create project」
 
-## 步驟四：建立 GitHub Actions Workflow
+### 步驟四：建立 GitHub Actions Workflow
 
 在專案根目錄建立 `.github/workflows/deploy-to-cloudflare-pages.yml`：
 
@@ -196,7 +196,7 @@ jobs:
         run: echo "$CMD_OUTPUT"
 ```
 
-### 設定說明
+#### 設定說明
 
 在 `env` 區塊中，您需要設定：
 
@@ -204,9 +204,9 @@ jobs:
 
 這個名稱將會成為您的網站 URL 的一部分：`https://<project-name>.pages.dev`
 
-## 步驟五：首次部署與後續設定
+### 步驟五：首次部署與後續設定
 
-### 5.1 首次部署
+#### 5.1 首次部署
 
 推送 workflow 文件到您的 repository：
 
@@ -216,7 +216,7 @@ git commit -m "Add GitHub Actions workflow for Cloudflare Pages deployment"
 git push origin main
 ```
 
-### 5.2 Cloudflare Pages 專案設定
+#### 5.2 Cloudflare Pages 專案設定
 
 部署成功後，您可以在 Cloudflare Dashboard 進行進一步設定：
 
@@ -230,7 +230,7 @@ git push origin main
 
 專案部署後會獲得一個預設網址：`https://<project-name>.pages.dev`
 
-### 5.3 驗證部署
+#### 5.3 驗證部署
 
 您可以透過以下方式驗證部署是否成功：
 
@@ -239,9 +239,9 @@ git push origin main
 3. 訪問您的網站：`https://my-docs-site.pages.dev`
 4. 在 Cloudflare Dashboard 中查看部署詳情
 
-## 工作流程詳解
+### 工作流程詳解
 
-### 環境變數設定
+#### 環境變數設定
 
 我們在 workflow 中定義了幾個環境變數，方便統一管理：
 
@@ -260,7 +260,7 @@ env:
 
 這樣的設計讓版本和專案設定更加集中和便利，當需要修改時，只需要在一個地方調整。
 
-### Cache 機制解析
+#### Cache 機制解析
 
 我們的工作流程實現了高效的快取機制：
 
@@ -285,7 +285,7 @@ env:
 2. **快取範圍**：同時快取 pip 套件和 MkDocs 建構結果
 3. **還原機制**：如果當週快取不存在，會使用最近的快取
 
-### Wrangler CLI 部署
+#### Wrangler CLI 部署
 
 工作流程使用 Cloudflare 官方的 `wrangler-action` 進行部署：
 
@@ -307,9 +307,9 @@ Wrangler 會：
 
 部署完成後，您的網站會在 `https://<project-name>.pages.dev` 上線。例如，如果專案名稱設為 `my-docs-site`，網址就會是 `https://my-docs-site.pages.dev`。
 
-# 進階設定
+## 進階設定
 
-## 1. 不同分支的部署策略
+### 1. 不同分支的部署策略
 
 如果您想要為不同分支設定不同的部署策略：
 
@@ -337,7 +337,7 @@ jobs:
           command: pages deploy public --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.ref_name }}
 ```
 
-## 2. 條件式部署
+### 2. 條件式部署
 
 只在特定檔案變更時觸發部署：
 
@@ -352,7 +352,7 @@ on:
       - ".github/workflows/deploy-to-cloudflare-pages.yml"
 ```
 
-## 3. 部署通知
+### 3. 部署通知
 
 加入部署成功或失敗的通知：
 
@@ -370,9 +370,9 @@ on:
     # 可以在這裡加入錯誤通知
 ```
 
-## 常見問題排除
+### 常見問題排除
 
-## 1. 專案不存在錯誤
+### 1. 專案不存在錯誤
 
 如果在首次部署時遇到錯誤：
 
@@ -382,7 +382,7 @@ Error: Project "my-docs-site" does not exist
 
 這表示您尚未在 Cloudflare 建立專案。請回到步驟三，使用 Wrangler CLI 或 Dashboard 建立專案。
 
-## 2. API Token 權限不足
+### 2. API Token 權限不足
 
 錯誤訊息：
 
@@ -395,14 +395,14 @@ Error: Failed to create deployment
 - 確認 API Token 具有正確的權限（Account → Cloudflare Pages → Edit）
 - 重新生成 Token 並更新 GitHub Secrets
 
-## 3. 快取失效問題
+### 3. 快取失效問題
 
 如果遇到快取相關問題，可以：
 
 1. 手動刪除 GitHub Actions 的快取
 2. 修改 cache key 來強制更新
 
-## 4. 專案名稱不一致
+### 4. 專案名稱不一致
 
 如果出現以下錯誤：
 
@@ -415,14 +415,14 @@ Error: Project not found
 - GitHub Actions 中的 `CLOUDFLARE_PROJECT_NAME` 與實際在 Cloudflare 建立的專案名稱完全一致
 - 專案已經在 Cloudflare Pages 中成功建立
 
-## 5. 部署目錄錯誤
+### 5. 部署目錄錯誤
 
 確保：
 
 - MkDocs 建構輸出目錄設定正確（`--site-dir public`）
 - Wrangler 部署指定的目錄相符（`pages deploy public`）
 
-# 結語
+## 結語
 
 透過本文的設定，您的靜態網站現在可以自動化部署到 Cloudflare Pages。這個流程不僅節省了手動部署的時間，還確保了每次更新都能即時上線。雖然本文以 MkDocs Material 為範例，但同樣的流程可以套用到任何靜態網頁生成工具。
 
@@ -440,11 +440,11 @@ Error: Project not found
 - [GitHub Actions 文件](https://docs.github.com/en/actions)
 - [MkDocs Material 指南](https://squidfunk.github.io/mkdocs-material/)
 
-# 適用於其他靜態網站生成器
+## 適用於其他靜態網站生成器
 
 這套部署流程的優點在於它的通用性，您可以將其應用到任何靜態網站生成器（Static Site Generator, SSG）。只需要調整以下部分：
 
-### 常見的靜態網站生成器設定範例
+#### 常見的靜態網站生成器設定範例
 
 1. **Hugo**：
 
@@ -489,7 +489,7 @@ Error: Project not found
     hexo generate
 ```
 
-## 通用原則
+### 通用原則
 
 無論使用哪種靜態網站生成器，只要遵循以下原則即可：
 

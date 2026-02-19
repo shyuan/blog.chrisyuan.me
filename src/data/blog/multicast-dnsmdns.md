@@ -13,7 +13,7 @@ description: "如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完�
 
 為什麼可以直接用 raspberrypi.local 這個名稱找到 Raspberry Pi 裝置的 IP 呢?
 
-# 起源
+## 起源
 
 進入網路時代後，各種裝置都有聯網需求，既然要聯網，就少不了網路設定的步驟，雖然有 DHCP 協定，可以省去在設備裝置上設定 IP/子網路遮罩/DNS server 的流程，但如果需要連上某台設備，還是得先知道該台設備的 IP/Port 等資料才能連上，而且透過 DHCP 拿到的 IP 是有可能變動的，可能某台設備剛設定好時 IP 是 192.168.5.100，過一陣子重開機後就變成 192.168.5.200，使用這台設備的人就必須要重新設定到新的 IP 上才能繼續使用，這個步驟有沒有辦法讓他自動化呢?
 
@@ -21,14 +21,14 @@ description: "如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完�
 
 mDNS 是利用 Multicast (224.0.0.251(IPv4), ff02::fb(IPv6) + UDP 5353 port) 模擬出一台虛擬的 DNS server，設備裝置可以透過這個特殊的 Multicast IP + Port 暴露自己的連線方式或是擁有的能力，讓同一網路中的其他裝置也在這組 IP/Port 找到對應的設備裝置，詳細細節規範可參考 [RFC 6762 (Multicast DNS)](https://tools.ietf.org/html/rfc6762) 及 [RFC 6763 (DNS-Based Service Discovery)](https://tools.ietf.org/html/rfc6763) 這兩份 RFC。
 
-# 常見的 mDNS/DNS-SD 軟體
+## 常見的 mDNS/DNS-SD 軟體
 
 - [Bonjour](https://en.wikipedia.org/wiki/Bonjour_%28software%29)
 - [Avahi](https://en.wikipedia.org/wiki/Avahi_%28software%29)
 - [Discovery - DNS-SD Browser for Mac](https://apps.apple.com/us/app/discovery-dns-sd-browser/id1381004916?mt=12)
 - [Discovery - DNS-SD Browser for iOS](https://apps.apple.com/us/app/discovery-dns-sd-browser/id305441017)
 
-# 常見應用
+## 常見應用
 
 - Google Chromecast
 - Apple AirPlay
