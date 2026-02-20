@@ -2,6 +2,9 @@
 title: "MySQL 查詢結果以 JSON 格式輸出"
 pubDatetime: 2020-01-06T07:08:01.000Z
 slug: "mysql-json"
+tags:
+  - mysql
+  - cli
 description: "有時候會需要把 MySQL 的查詢結果輸出成 JSON 格式，如果不想寫程式做這件事，可以利用 mysql 指令，配合 MySQL 內建的 json_object() 功能，再加上 jq 完成。 有一個 table Person 結構如下： mysql> DESC Person; +-------+---------------------+------+-----+--------+------"
 ---
 

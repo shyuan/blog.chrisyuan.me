@@ -2,6 +2,8 @@
 title: "選擇 SSH key 的加密演算法"
 pubDatetime: 2020-01-06T08:08:25.000Z
 slug: "ssh-key"
+tags:
+  - ssh
 description: "在 ssh-keygen 的 man page 說明中有一個 -t 參數，可以設定要產生的 ssh key type。有以下五種不同 key type 可以選擇： dsa 已被認為是一個不安全的演算法，不再建議使用，由於存在安全性缺陷，OpenSSH 7.0 已停止支援 DSA 演算法。 ecdsa 在 OpenSSH 5.7 開始支援 ECDSA key type，有 256"
 ---
 

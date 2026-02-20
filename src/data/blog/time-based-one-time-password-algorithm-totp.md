@@ -2,6 +2,8 @@
 title: "Time-based One-time Password algorithm (TOTP)"
 pubDatetime: 2020-10-21T17:10:34.000Z
 slug: "time-based-one-time-password-algorithm-totp"
+tags:
+  - others
 description: "Basic Time-based One-time Password algorithm TOTP: Time-Based One-Time Password Algorithm, RFC 6238 Authenticator FreeOTP Google Authenticator Authy Microsoft Authenticator Article 為什麼我拋棄 Google Au"
 ---
 

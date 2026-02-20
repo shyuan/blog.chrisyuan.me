@@ -2,6 +2,8 @@
 title: "利用 kubectl port-forward 和 socat 轉導 local 流量至 Kubernetes 內部"
 pubDatetime: 2020-12-22T01:43:49.000Z
 slug: "kubectl-port-forward-socat-local-kubernetes"
+tags:
+  - cli
 description: "利用 alpine/socat 配合 kubectl port-forward 就可以把 local 機器的 port 和遠端 Kubernetes 內部的 port 串起來，可以開一個 pod 向只開放內部 VPC 存取的 Database 或 API server 連線。 可以參考這個 GitHub issue 的兩個 comment： Specify remote host for kub"
 ---
 

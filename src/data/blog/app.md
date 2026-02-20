@@ -2,6 +2,8 @@
 title: "App 遙控裝置播放音樂技術"
 pubDatetime: 2020-10-21T18:19:00.000Z
 slug: "app"
+tags:
+  - others
 description: " Spotify Connect Amazon Alexa Cast Tidal Connect"
 ---
 

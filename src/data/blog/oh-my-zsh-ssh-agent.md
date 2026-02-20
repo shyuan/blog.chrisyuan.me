@@ -2,6 +2,9 @@
 title: "透過 oh-my-zsh 使用 ssh-agent"
 pubDatetime: 2020-01-06T07:06:36.000Z
 slug: "oh-my-zsh-ssh-agent"
+tags:
+  - ssh
+  - shell
 description: "如果你的 ssh key 有設定 passphrase，要用 git 拉資料會很麻煩，每次都要重新輸入一次 key 的 passphrase 證明你是該把 key 的擁有者。 可以參考 Arch Linux Wiki 的 SSH Keys 條目設定 ssh-agent ，讓 agent 幫你把 passphrase 記住一段時間。 如果 shell 是用 zsh ，而且也有用 oh-m"
 ---
 

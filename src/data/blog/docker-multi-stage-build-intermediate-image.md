@@ -2,6 +2,8 @@
 title: "Docker Multi-Stage build 的 intermediate image 留存問題"
 pubDatetime: 2020-10-07T03:01:13.000Z
 slug: "docker-multi-stage-build-intermediate-image"
+tags:
+  - cli
 description: "Docker 在版本 17.05 後，新推出了 multi-stage build 的功能，主要目的是讓最終的 docker image 盡可能地保持乾淨，使用最少的儲存空間，只把最為必要的 artifact 放到最終要執行使用的 docker image 上，建置和打包時產生的不必要檔案則留存在中繼 image 上。 但用 multi-stage build 會讓 intermediate i"
 ---
 

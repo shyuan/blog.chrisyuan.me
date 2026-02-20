@@ -2,6 +2,8 @@
 title: "聊聊 Multicast DNS(mDNS)"
 pubDatetime: 2020-01-03T10:51:27.000Z
 slug: "multicast-dnsmdns"
+tags:
+  - linux
 description: "如果有在 Raspberry Pi 上安裝過 Raspbian，網路設定完成，OpenSSH server 啟動後，就可以在同網段下，用下面指令 ssh 進去： ssh pi@raspberrypi.local 為什麼可以直接用 raspberrypi.local 這個名稱找到 Raspberry Pi 裝置的 IP 呢? 起源 進入網路時代後，各種裝置都有聯網需求，既然要聯網，就少不了網路設定的"
 ---
 
