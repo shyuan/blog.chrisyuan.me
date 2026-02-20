@@ -44,7 +44,7 @@ total 20971520
 -rw-------  1 root  wheel   1.0G  6 11 15:54 swapfile9
 ```
 
-![macOS swap files](/images/macos-swap-files.png)
+![macOS swap files](../../assets/images/macos-swap-files.png)
 
 這種動態管理機制相當智慧——當您開啟較多應用程式，實體記憶體不敷使用時，macOS 會自動增加 swap file 的數量；反之，當記憶體壓力減輕後，系統也會適時清理不需要的 swap file，釋放硬碟空間。
 
