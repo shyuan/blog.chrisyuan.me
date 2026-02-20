@@ -1,8 +1,9 @@
 ---
-title: "聊聊 Multicast DNS(mDNS)"
+title: "mDNS 全解析：從 .local 到 Matter 智慧家庭"
 pubDatetime: 2020-01-03T10:51:27.000Z
 modDatetime: 2026-02-20T00:00:00Z
-slug: "multicast-dnsmdns"
+slug: "mdns"
+canonicalURL: "https://blog.chrisyuan.me/posts/mdns/"
 tags:
   - linux
   - networking
