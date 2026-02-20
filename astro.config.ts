@@ -91,7 +91,6 @@ export default defineConfig({
         cssVariable: "--font-fira-code",
         provider: fontProviders.google(),
         fallbacks: [
-          "Noto Sans Mono",
           "JetBrains Mono",
           "SF Mono",
           "Cascadia Code",
