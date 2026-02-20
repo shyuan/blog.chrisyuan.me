@@ -260,8 +260,11 @@ ogImage: ""                   # 選用，社群分享圖片
 # 開發伺服器
 bun dev
 
-# 建置（含 astro check + pagefind 索引）
+# 建置（含 astro check + OG 圖片 + pagefind 索引）
 bun run build
+
+# 快速建置（跳過 OG 圖片生成，~14s vs ~185s）
+bun run build:fast
 
 # 預覽建置結果
 bun run preview
