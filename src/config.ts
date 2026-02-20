@@ -16,7 +16,7 @@ export const SITE = {
     text: "Edit page",
     url: "https://github.com/shyuan/blog.chrisyuan.me/edit/main/",
   },
-  dynamicOgImage: true,
+  dynamicOgImage: process.env.FAST_BUILD !== "true",
   dir: "ltr", // "rtl" | "auto"
   lang: "zh-TW", // html lang code. Set this empty and default will be "en"
   timezone: "Asia/Taipei", // Default global timezone (IANA format) https://en.wikipedia.org/wiki/List_of_tz_database_time_zones
