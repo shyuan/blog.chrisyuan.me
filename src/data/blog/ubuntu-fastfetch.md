@@ -29,4 +29,4 @@ chmod +x /etc/profile.d/fastfetch.sh
 
 下次登入 Ubuntu 就會出現如下畫面：
 
-![](https://cdn.hashnode.com/res/hashnode/image/upload/v1739242902228/a2ea6571-fb47-4b26-8a8b-be0f303f37e3.png align="center")
+![ubuntu fastfetch](../../assets/images/ubuntu-fastfetch.png)
