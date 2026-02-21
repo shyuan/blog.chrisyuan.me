@@ -1,6 +1,6 @@
 ---
 title: "用自然語言設定 Ghostty — 開發 Claude Code Plugin 的經過"
-pubDatetime: 2026-02-21T16:00:00Z
+pubDatetime: 2026-02-21T00:00:00Z
 slug: ghostty-config-claude-code-plugin
 tags:
   - ghostty
