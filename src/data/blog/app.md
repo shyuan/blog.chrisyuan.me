@@ -5,6 +5,7 @@ slug: "app"
 tags:
   - others
 description: " Spotify Connect Amazon Alexa Cast Tidal Connect"
+draft: true
 ---
 
 ## Table of contents
