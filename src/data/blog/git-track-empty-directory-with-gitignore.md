@@ -72,6 +72,27 @@ printf '*\n!.gitignore\n' > build/.gitignore
 - **目錄改名時自動跟著走**——規則寫在目錄內部，不受外部路徑影響
 - **使用標準的 Git 機制**——`.gitignore` 是 Git 規格內的標準功能，不是自創的慣例
 
+## 話說回來，`.gitkeep` 真的那麼差嗎？
+
+這個技巧確實巧妙，但公平地說，`.gitkeep` 也沒那麼糟：
+
+- `.gitkeep` 雖然不在 Git 規格內，但已經是廣泛被理解的慣例，GitHub 上大量專案都在用
+- 如果目錄裡本來就不需要忽略任何東西（純粹是個空的 placeholder 目錄），`.gitkeep` 的意圖反而更直覺——一看就知道「這個檔案只是為了讓 Git 追蹤這個目錄」
+- `.gitignore` 方式需要打開檔案才能理解它的用途，乍看會以為目錄裡有東西需要被忽略
+
+另外，現代框架和工具大多會在啟動時自動建立需要的目錄（`mkdir -p`），CI/CD pipeline 通常也會在 build 前自己建目錄，很多時候根本不需要 Git 來保留空目錄。
+
+### 什麼時候該用哪個？
+
+| 場景 | 建議做法 |
+| --- | --- |
+| 需要保留目錄且忽略內容（`uploads/`、`tmp/`） | `.gitignore` 方式 |
+| 目錄可能會改名 | `.gitignore` 方式 |
+| 純粹保留一個空目錄當 placeholder | `.gitkeep` 也行 |
+| 框架或工具會自動建立目錄 | 兩個都不需要 |
+
+總結來說，`.gitignore` 方式在需要同時「追蹤目錄」又「忽略內容」的場景下明顯更優雅。但如果只是單純保留空目錄，`.gitkeep` 的可讀性其實更好。這個技巧值得知道，但不需要把專案裡所有的 `.gitkeep` 都換掉。
+
 ## 參考資料
 
 - [Git: Don't use .gitkeep](https://adamj.eu/tech/2023/09/18/git-dont-create-gitkeep/) — Adam Johnson
