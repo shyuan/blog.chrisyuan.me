@@ -3,61 +3,107 @@ import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
 
 export default async () => {
+  const allText =
+    SITE.title +
+    SITE.desc +
+    new URL(SITE.website).hostname +
+    "$ cat ~/blog> █chris-yuan@blog:~";
+
   return satori(
     {
       type: "div",
       props: {
         style: {
-          background: "#fefbfb",
+          background: "#1a1a1d",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: "40px",
         },
-        children: [
-          {
-            type: "div",
-            props: {
-              style: {
-                position: "absolute",
-                top: "-1px",
-                right: "-1px",
-                border: "4px solid #000",
-                background: "#ecebeb",
-                opacity: "0.9",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2.5rem",
-                width: "88%",
-                height: "80%",
-              },
+        children: {
+          type: "div",
+          props: {
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100%",
+              border: "1px solid #3c3c41",
+              borderRadius: "8px",
+              overflow: "hidden",
             },
-          },
-          {
-            type: "div",
-            props: {
-              style: {
-                border: "4px solid #000",
-                background: "#fefbfb",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2rem",
-                width: "88%",
-                height: "80%",
+            children: [
+              // Title bar
+              {
+                type: "div",
+                props: {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "14px 20px",
+                    background: "#2d2d32",
+                    gap: "8px",
+                  },
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#ff5f56",
+                        },
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#ffbd2e",
+                        },
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#27c93f",
+                        },
+                      },
+                    },
+                    {
+                      type: "span",
+                      props: {
+                        style: {
+                          color: "#808080",
+                          fontSize: 14,
+                          marginLeft: "8px",
+                        },
+                        children: "chris-yuan@blog:~",
+                      },
+                    },
+                  ],
+                },
               },
-              children: {
+              // Terminal content
+              {
                 type: "div",
                 props: {
                   style: {
                     display: "flex",
                     flexDirection: "column",
+                    padding: "36px 44px",
+                    flex: 1,
                     justifyContent: "space-between",
-                    margin: "20px",
-                    width: "90%",
-                    height: "90%",
                   },
                   children: [
                     {
@@ -66,63 +112,110 @@ export default async () => {
                         style: {
                           display: "flex",
                           flexDirection: "column",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          height: "90%",
-                          maxHeight: "90%",
-                          overflow: "hidden",
-                          textAlign: "center",
                         },
                         children: [
+                          // Prompt: $ cat ~/blog
                           {
-                            type: "p",
+                            type: "div",
                             props: {
-                              style: { fontSize: 72, fontWeight: "bold" },
+                              style: {
+                                display: "flex",
+                                fontSize: 22,
+                                marginBottom: "20px",
+                              },
+                              children: [
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: { color: "#27c93f" },
+                                    children: "$ ",
+                                  },
+                                },
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: { color: "#808080" },
+                                    children: "cat ~/blog",
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                          // Title
+                          {
+                            type: "div",
+                            props: {
+                              style: {
+                                fontSize: 60,
+                                fontWeight: "bold",
+                                color: "#c9cacc",
+                                lineHeight: 1.2,
+                              },
                               children: SITE.title,
                             },
                           },
+                          // Description
                           {
-                            type: "p",
+                            type: "div",
                             props: {
-                              style: { fontSize: 28 },
+                              style: {
+                                fontSize: 24,
+                                color: "#ff6b6b",
+                                marginTop: "20px",
+                                lineHeight: 1.6,
+                              },
                               children: SITE.desc,
                             },
                           },
                         ],
                       },
                     },
+                    // Bottom prompt with domain
                     {
                       type: "div",
                       props: {
                         style: {
                           display: "flex",
-                          justifyContent: "flex-end",
-                          width: "100%",
-                          marginBottom: "8px",
-                          fontSize: 28,
+                          fontSize: 20,
                         },
-                        children: {
-                          type: "span",
-                          props: {
-                            style: { overflow: "hidden", fontWeight: "bold" },
-                            children: new URL(SITE.website).hostname,
+                        children: [
+                          {
+                            type: "span",
+                            props: {
+                              style: { color: "#27c93f" },
+                              children: "> ",
+                            },
                           },
-                        },
+                          {
+                            type: "span",
+                            props: {
+                              style: { color: "#808080" },
+                              children: new URL(SITE.website).hostname,
+                            },
+                          },
+                          {
+                            type: "span",
+                            props: {
+                              style: { color: "#c9cacc", marginLeft: "2px" },
+                              children: "█",
+                            },
+                          },
+                        ],
                       },
                     },
                   ],
                 },
               },
-            },
+            ],
           },
-        ],
+        },
       },
     },
     {
       width: 1200,
       height: 630,
       embedFont: true,
-      fonts: await loadGoogleFonts(SITE.title + SITE.desc + SITE.website),
+      fonts: await loadGoogleFonts(allText),
     }
   );
 };

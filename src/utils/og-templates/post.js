@@ -1,168 +1,166 @@
 import satori from "satori";
-// import { html } from "satori-html";
 import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
 
-// const markup = html`<div
-//       style={{
-//         background: "#fefbfb",
-//         width: "100%",
-//         height: "100%",
-//         display: "flex",
-//         alignItems: "center",
-//         justifyContent: "center",
-//       }}
-//     >
-//       <div
-//         style={{
-//           position: "absolute",
-//           top: "-1px",
-//           right: "-1px",
-//           border: "4px solid #000",
-//           background: "#ecebeb",
-//           opacity: "0.9",
-//           borderRadius: "4px",
-//           display: "flex",
-//           justifyContent: "center",
-//           margin: "2.5rem",
-//           width: "88%",
-//           height: "80%",
-//         }}
-//       />
-
-//       <div
-//         style={{
-//           border: "4px solid #000",
-//           background: "#fefbfb",
-//           borderRadius: "4px",
-//           display: "flex",
-//           justifyContent: "center",
-//           margin: "2rem",
-//           width: "88%",
-//           height: "80%",
-//         }}
-//       >
-//         <div
-//           style={{
-//             display: "flex",
-//             flexDirection: "column",
-//             justifyContent: "space-between",
-//             margin: "20px",
-//             width: "90%",
-//             height: "90%",
-//           }}
-//         >
-//           <p
-//             style={{
-//               fontSize: 72,
-//               fontWeight: "bold",
-//               maxHeight: "84%",
-//               overflow: "hidden",
-//             }}
-//           >
-//             {post.data.title}
-//           </p>
-//           <div
-//             style={{
-//               display: "flex",
-//               justifyContent: "space-between",
-//               width: "100%",
-//               marginBottom: "8px",
-//               fontSize: 28,
-//             }}
-//           >
-//             <span>
-//               by{" "}
-//               <span
-//                 style={{
-//                   color: "transparent",
-//                 }}
-//               >
-//                 "
-//               </span>
-//               <span style={{ overflow: "hidden", fontWeight: "bold" }}>
-//                 {post.data.author}
-//               </span>
-//             </span>
-
-//             <span style={{ overflow: "hidden", fontWeight: "bold" }}>
-//               {SITE.title}
-//             </span>
-//           </div>
-//         </div>
-//       </div>
-//     </div>`;
-
 export default async post => {
+  const allText =
+    post.data.title +
+    post.data.author +
+    SITE.title +
+    new URL(SITE.website).hostname +
+    "$ cat ~/blog/post █chris-yuan@blog:~by>";
+
   return satori(
     {
       type: "div",
       props: {
         style: {
-          background: "#fefbfb",
+          background: "#1a1a1d",
           width: "100%",
           height: "100%",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
+          padding: "40px",
         },
-        children: [
-          {
-            type: "div",
-            props: {
-              style: {
-                position: "absolute",
-                top: "-1px",
-                right: "-1px",
-                border: "4px solid #000",
-                background: "#ecebeb",
-                opacity: "0.9",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2.5rem",
-                width: "88%",
-                height: "80%",
-              },
+        children: {
+          type: "div",
+          props: {
+            style: {
+              display: "flex",
+              flexDirection: "column",
+              width: "100%",
+              height: "100%",
+              border: "1px solid #3c3c41",
+              borderRadius: "8px",
+              overflow: "hidden",
             },
-          },
-          {
-            type: "div",
-            props: {
-              style: {
-                border: "4px solid #000",
-                background: "#fefbfb",
-                borderRadius: "4px",
-                display: "flex",
-                justifyContent: "center",
-                margin: "2rem",
-                width: "88%",
-                height: "80%",
+            children: [
+              // Title bar
+              {
+                type: "div",
+                props: {
+                  style: {
+                    display: "flex",
+                    alignItems: "center",
+                    padding: "14px 20px",
+                    background: "#2d2d32",
+                    gap: "8px",
+                  },
+                  children: [
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#ff5f56",
+                        },
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#ffbd2e",
+                        },
+                      },
+                    },
+                    {
+                      type: "div",
+                      props: {
+                        style: {
+                          width: "14px",
+                          height: "14px",
+                          borderRadius: "50%",
+                          background: "#27c93f",
+                        },
+                      },
+                    },
+                    {
+                      type: "span",
+                      props: {
+                        style: {
+                          color: "#808080",
+                          fontSize: 14,
+                          marginLeft: "8px",
+                        },
+                        children: "chris-yuan@blog:~",
+                      },
+                    },
+                  ],
+                },
               },
-              children: {
+              // Terminal content
+              {
                 type: "div",
                 props: {
                   style: {
                     display: "flex",
                     flexDirection: "column",
+                    padding: "36px 44px",
+                    flex: 1,
                     justifyContent: "space-between",
-                    margin: "20px",
-                    width: "90%",
-                    height: "90%",
                   },
                   children: [
                     {
-                      type: "p",
+                      type: "div",
                       props: {
                         style: {
-                          fontSize: 72,
-                          fontWeight: "bold",
-                          maxHeight: "84%",
-                          overflow: "hidden",
+                          display: "flex",
+                          flexDirection: "column",
                         },
-                        children: post.data.title,
+                        children: [
+                          // Prompt: $ cat post.title
+                          {
+                            type: "div",
+                            props: {
+                              style: {
+                                display: "flex",
+                                fontSize: 22,
+                                marginBottom: "20px",
+                              },
+                              children: [
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: { color: "#27c93f" },
+                                    children: "$ ",
+                                  },
+                                },
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: { color: "#808080" },
+                                    children: "cat ~/blog/post",
+                                  },
+                                },
+                              ],
+                            },
+                          },
+                          // Post title
+                          {
+                            type: "div",
+                            props: {
+                              style: {
+                                fontSize: 52,
+                                fontWeight: "bold",
+                                color: "#c9cacc",
+                                lineHeight: 1.3,
+                                maxHeight: "280px",
+                                overflow: "hidden",
+                              },
+                              children: post.data.title,
+                            },
+                          },
+                        ],
                       },
                     },
+                    // Bottom: author + site title
                     {
                       type: "div",
                       props: {
@@ -170,27 +168,20 @@ export default async post => {
                           display: "flex",
                           justifyContent: "space-between",
                           width: "100%",
-                          marginBottom: "8px",
-                          fontSize: 28,
+                          fontSize: 20,
                         },
                         children: [
                           {
                             type: "span",
                             props: {
+                              style: { color: "#808080" },
                               children: [
                                 "by ",
                                 {
                                   type: "span",
                                   props: {
-                                    style: { color: "transparent" },
-                                    children: '"',
-                                  },
-                                },
-                                {
-                                  type: "span",
-                                  props: {
                                     style: {
-                                      overflow: "hidden",
+                                      color: "#ff6b6b",
                                       fontWeight: "bold",
                                     },
                                     children: post.data.author,
@@ -202,8 +193,29 @@ export default async post => {
                           {
                             type: "span",
                             props: {
-                              style: { overflow: "hidden", fontWeight: "bold" },
-                              children: SITE.title,
+                              style: {
+                                color: "#808080",
+                              },
+                              children: [
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: { color: "#27c93f" },
+                                    children: "> ",
+                                  },
+                                },
+                                new URL(SITE.website).hostname,
+                                {
+                                  type: "span",
+                                  props: {
+                                    style: {
+                                      color: "#c9cacc",
+                                      marginLeft: "2px",
+                                    },
+                                    children: "█",
+                                  },
+                                },
+                              ],
                             },
                           },
                         ],
@@ -212,18 +224,16 @@ export default async post => {
                   ],
                 },
               },
-            },
+            ],
           },
-        ],
+        },
       },
     },
     {
       width: 1200,
       height: 630,
       embedFont: true,
-      fonts: await loadGoogleFonts(
-        post.data.title + post.data.author + SITE.title + "by"
-      ),
+      fonts: await loadGoogleFonts(allText),
     }
   );
 };
