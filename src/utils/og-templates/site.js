@@ -160,7 +160,7 @@ export default async () => {
                             props: {
                               style: {
                                 fontSize: 24,
-                                color: "#ff6b6b",
+                                color: "#05ce91",
                                 marginTop: "20px",
                                 lineHeight: 1.6,
                               },

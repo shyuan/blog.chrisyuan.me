@@ -181,7 +181,7 @@ export default async post => {
                                   type: "span",
                                   props: {
                                     style: {
-                                      color: "#ff6b6b",
+                                      color: "#05ce91",
                                       fontWeight: "bold",
                                     },
                                     children: post.data.author,
