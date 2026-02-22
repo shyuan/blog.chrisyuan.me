@@ -3,6 +3,7 @@ import tailwindcss from "@tailwindcss/vite";
 import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
+import embeds from "astro-embed/integration";
 import astroLlmsTxt from "@4hse/astro-llms-txt";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
@@ -21,6 +22,7 @@ export default defineConfig({
     sitemap({
       filter: page => SITE.showArchives || !page.endsWith("/archives"),
     }),
+    embeds({ services: { LinkPreview: false } }),
     mdx(),
     partytown({
       config: {
