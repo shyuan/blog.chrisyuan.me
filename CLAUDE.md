@@ -119,7 +119,7 @@ Tailwind CSS 4.x 使用 CSS-based 配置，不使用 `tailwind.config.cjs`。所
 html[data-theme="light"] {
   --background: #fafafa;
   --foreground: #282828;
-  --accent: #c85050;
+  --accent: #059669;
   --muted: #e6e6e6;
   --border: #c8c8c8;
 }
@@ -128,7 +128,7 @@ html[data-theme="light"] {
 html[data-theme="dark"] {
   --background: #1a1a1d;
   --foreground: #c9cacc;
-  --accent: #ff6b6b;
+  --accent: #05ce91;
   --muted: #2d2d32;
   --border: #3c3c41;
 }
