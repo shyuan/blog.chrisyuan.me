@@ -12,6 +12,19 @@
   src: url("/fonts/noto-sans-mono-poj.woff2") format("woff2");
 }
 
+/* Noto Sans Mono CJK TC subset for CJK punctuation (「」『』（）etc.).
+   Fira Code lacks these glyphs, causing fallback to proportional system fonts. */
+@font-face {
+  font-family: "Noto Sans Mono CJK TC";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("/fonts/noto-sans-mono-cjk-tc-punct.woff2") format("woff2");
+  unicode-range:
+    U+3001-3002, U+3008-3011, U+3014-3015, U+300C-300F, U+FF01, U+FF08-FF09,
+    U+FF0C, U+FF1A-FF1B, U+FF1F, U+FF5C, U+2014, U+2026, U+2500, U+FF5E, U+00B7;
+}
+
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 /* Terminal CSS - Light */
@@ -34,7 +47,7 @@ html[data-theme="dark"] {
 }
 
 @theme inline {
-  --font-app: var(--font-fira-code);
+  --font-app: "Noto Sans Mono CJK TC", var(--font-fira-code);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
