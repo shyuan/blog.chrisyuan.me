@@ -24,7 +24,7 @@ description: "Ghostty 純文字設定檔的不便催生了一個想法：把 Gho
 
 設定語法長這樣：
 
-```ini
+```ini file="config"
 font-family = JetBrains Mono
 font-size = 14
 theme = catppuccin-mocha
@@ -79,7 +79,7 @@ ghostty +show-config --changes-only      # 只顯示使用者修改過的值
 
 MCP Server 用 TypeScript 寫，跑在 Node.js 上（也相容 bun）。入口長這樣：
 
-```typescript
+```typescript file="src/index.ts"
 import { McpServer } from "@modelcontextprotocol/sdk/server/mcp.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 
@@ -108,7 +108,7 @@ await server.connect(transport);
 
 每個 tool 是一個獨立模組。以 `ghostty_list_themes` 為例——接收篩選參數、執行 CLI 命令、parse 輸出、回傳結構化結果：
 
-```typescript
+```typescript file="src/tools/listThemes.ts"
 import { z } from "zod";
 import { exec } from "../lib/exec.ts";
 import { parseThemeList } from "../lib/parsers.ts";
@@ -164,7 +164,7 @@ export function registerListThemes(server: McpServer) {
 
 底層的 CLI 執行器用 `node:child_process`，這是為了同時相容 bun 和 Node.js。MCP 使用 stdio transport，所以有一個鐵律：**絕對不能寫入 `process.stdout`**，debug 訊息全部走 `console.error`。
 
-```typescript
+```typescript file="src/lib/exec.ts"
 import { execFile } from "node:child_process";
 
 export function exec(args: string[], timeoutMs = 10_000): Promise<ExecResult> {
@@ -197,7 +197,7 @@ export function exec(args: string[], timeoutMs = 10_000): Promise<ExecResult> {
 
 Plugin 用一個 `plugin.json` 宣告它包含什麼：
 
-```json
+```json file="plugin.json"
 {
   "name": "ghostty-config",
   "version": "1.0.0",
@@ -225,7 +225,7 @@ MCP Server 給了 AI 11 個工具，但工具本身不會告訴 AI「什麼時�
 
 Skill 的核心是一個 `SKILL.md` 檔案。我的設計哲學借鑑了一個概念：**The Iron Law**——用一句話定義 AI 絕對不能違反的規則：
 
-```markdown
+```markdown file="SKILL.md"
 ## The Iron Law
 
 ALWAYS CHECK DOCS VIA MCP TOOL BEFORE GIVING CONFIG ADVICE.
@@ -236,7 +236,7 @@ NEVER ASSUME A VALUE'S TYPE, UNIT, OR BEHAVIOR FROM ITS NAME.
 
 Skill 裡還定義了具體的工作流程。例如改任何設定的標準步驟：
 
-```markdown
+```markdown file="SKILL.md"
 ## Core Workflow: Changing Any Config Option
 
 1. `ghostty_get_config_option` → 讀取該選項的完整文件
