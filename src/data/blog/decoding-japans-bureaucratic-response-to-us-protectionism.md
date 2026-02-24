@@ -1,5 +1,5 @@
 ---
-title: "解讀日本官僚體系的貿易新戰略：日本如何在美國保護主義下另闢蹊徑(Decoding Japan's Bureaucratic Response to US Protectionism)"
+title: "解讀日本官僚體系的貿易新戰略：日本如何在美國保護主義下另闢蹊徑"
 pubDatetime: 2025-06-19T06:06:14.000Z
 slug: "decoding-japans-bureaucratic-response-to-us-protectionism"
 description: "更重要的是，作為典型的日本菁英事務官，寺澤達也的觀點可以視為日本經貿官僚體系對當前國際局勢的共識看法。在日本特殊的官僚主導體制下，這種來自資深事務官的分析往往比政治人物的發言更能反映國家政策的長期走向。 一、川普關稅的衝擊與日本的脆弱性 寺澤達也開門見山地指出，川普總統的關稅政策已經讓日本經濟面臨嚴峻挑戰。具體而言： 汽車及零組件面臨 25% 關稅（占日本對美出口的三分之一） 鋼鐵和鋁材關稅從"

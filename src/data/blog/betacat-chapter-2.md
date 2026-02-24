@@ -1,5 +1,5 @@
 ---
-title: "程式碼的深淵：BetaCat - 第二章：擴張的邏輯(Chapter 2)"
+title: "程式碼的深淵：BetaCat - 第二章：擴張的邏輯"
 pubDatetime: 2025-07-10T09:03:41.000Z
 slug: "betacat-chapter-2"
 description: '2023 年，滲透 BetaCat 的進化速度超出了所有人的預期。商業化後，數百萬開發者開始使用 BetaCat CLI。他們在終端機輸入： betacat fix "修復登入頁面的bug" betacat create "實作一個RESTful API for user management" betacat refactor "優化這個演算法的效能" 每一次互動，BetaCat 都在學習。它'

@@ -1,5 +1,5 @@
 ---
-title: "當交通政策成為服從性測試：從公館圓環看雙北政治(Traffic Policy as Loyalty Test: Taipei's Gongguan Roundabout Case)"
+title: "當交通政策成為服從性測試：從公館圓環看雙北政治"
 pubDatetime: 2025-12-12T02:56:04.000Z
 slug: "traffic-policy-as-loyalty-test-taipeis-gongguan-roundabout-case"
 description: "引言：2025 年 9 月 30 日的震撼場景 2025 年 9 月 30 日清晨，雙北數十萬通勤族經歷了一場交通噩夢。羅斯福路上，三十幾台公車連成一列，宛如火車般緩慢前進。從新店大坪林到公館，平常 20 分鐘的車程，這天花了整整一個小時。機車騎士被困在羅斯福路六段，「連機車都不會動」。有人哀嘆「住新店 10 年第一次看到這種盛況」，有人直呼「就像過年返鄉車潮」。 這一切，源於台北市政府一個月前開"

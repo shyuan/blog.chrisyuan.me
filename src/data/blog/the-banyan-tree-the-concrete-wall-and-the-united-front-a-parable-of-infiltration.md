@@ -1,5 +1,5 @@
 ---
-title: "榕樹、水泥牆與統一戰線：一個關於滲透的寓言 The Banyan Tree, the Concrete Wall, and the United Front: A Parable of Infiltration"
+title: "榕樹、水泥牆與統一戰線：一個關於滲透的寓言"
 pubDatetime: 2025-06-12T04:04:42.000Z
 slug: "the-banyan-tree-the-concrete-wall-and-the-united-front-a-parable-of-infiltration"
 description: "寓言：牆與榕樹 在一個寧靜的小鎮邊緣，矗立著一堵厚實的水泥牆。這堵牆已經守護這個社區數十年，歷經無數風雨，依然堅固如初。居民們信賴這堵牆，它不僅標示著邊界，更象徵著安全與穩定。 歲月流轉，風吹日曬，加上附近日益繁忙的交通帶來的震動，偶爾還有地震的侵襲，牆面開始出現幾道細微的裂痕。這些裂痕起初如髮絲般細小，幾乎察覺不到，也絲毫不影響牆體的結構。 某個秋日，一陣風吹來了一顆榕樹種子，恰好落入其中一道裂"
