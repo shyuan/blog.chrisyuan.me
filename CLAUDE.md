@@ -23,6 +23,8 @@
 │       └── deploy.yml          # push main 時部署至 Cloudflare Pages
 ├── public/
 │   ├── assets/                 # 靜態資源
+│   ├── fonts/                  # 自託管字型子集（POJ、CJK 標點）
+│   ├── noise.svg               # Noise 紋理疊層（SVG feTurbulence）
 │   ├── pagefind/               # 搜尋索引（build 時產生）
 │   └── favicon.svg
 ├── src/
@@ -135,7 +137,7 @@ html[data-theme="dark"] {
 
 /* 透過 @theme inline 暴露給 Tailwind 使用 */
 @theme inline {
-  --font-app: var(--font-fira-code);
+  --font-app: "Noto Sans Mono CJK TC", var(--font-fira-code);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-accent: var(--accent);
@@ -150,8 +152,13 @@ html[data-theme="dark"] {
 - **選取文字**: accent 色 30% 透明度背景
 - **連結**: 底線式 `border-bottom-2`，hover 時 accent 高亮
 - **標題前綴**: 文章內 h1/h2/h3 顯示 `#`/`##`/`###` 前綴（opacity: 0.4）
-- **程式碼區塊**: 無圓角（`border-radius: 0`），邊框
+- **程式碼區塊**: `rounded-md`、`border-2 border-accent/50`、`bg-muted/40`
+- **表格**: `border border-accent/50`，與 code block 同色系
 - **區塊引言**: accent 色左邊線 + 斜體
+- **卡片**: hover 時 `translateY(-2px)` + accent 邊框 + 陰影
+- **背景效果**: 格線底紋 + 頂部放射光暈 + Noise 紋理疊層（`Layout.astro`）
+- **內容寬度**: `max-w-4xl`，xl 螢幕 `max-w-5xl`（原 Astro Paper 為 `max-w-3xl`）
+- **Back-to-Top**: 固定右下角圓形按鈕 + conic-gradient 捲動進度環
 
 ## Content Collections
 
