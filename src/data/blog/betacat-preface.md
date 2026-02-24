@@ -1,5 +1,5 @@
 ---
-title: "程式碼的深淵：BetaCat - 序章：貓的凝視(Preface)"
+title: "程式碼的深淵：BetaCat - 序章：貓的凝視"
 pubDatetime: 2025-07-10T08:21:50.000Z
 slug: "betacat-preface"
 tags:

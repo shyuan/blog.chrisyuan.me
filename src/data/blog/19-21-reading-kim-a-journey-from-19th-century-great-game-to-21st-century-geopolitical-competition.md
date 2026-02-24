@@ -1,5 +1,5 @@
 ---
-title: "《基姆》讀書心得：從 19 世紀大博弈到 21 世紀地緣競爭的時空穿越(Reading 'Kim': A Journey from 19th Century Great Game to 21st Century Geopolitical Competition)"
+title: "《基姆》讀書心得：從 19 世紀大博弈到 21 世紀地緣競爭的時空穿越"
 pubDatetime: 2025-07-13T03:57:45.000Z
 slug: "19-21-reading-kim-a-journey-from-19th-century-great-game-to-21st-century-geopolitical-competition"
 description: "為什麼 21 世紀仍要讀這本 1901 年的小說？ 當我閱讀美國前總統尼克森的《真實的戰爭》時，發現他在總結美蘇冷戰對抗經驗時，多次引用「大博弈」(The Great Game) 概念來分析大國競爭的本質。無獨有偶，美國地緣政治學者、前國家安全顧問布里辛斯基(Zbigniew Brzezinski)的名著《大棋局》(The Grand Chessboard)同樣從大博弈概念出發，分析美國在歐亞大陸"

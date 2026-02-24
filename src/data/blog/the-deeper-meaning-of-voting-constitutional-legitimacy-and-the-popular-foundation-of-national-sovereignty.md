@@ -1,5 +1,5 @@
 ---
-title: "投票的深層意義：憲法正當性與國家主權的民意基礎(The Deeper Meaning of Voting: Constitutional Legitimacy and the Popular Foundation of National Sovereignty)"
+title: "投票的深層意義：憲法正當性與國家主權的民意基礎"
 pubDatetime: 2025-06-24T03:48:28.000Z
 slug: "the-deeper-meaning-of-voting-constitutional-legitimacy-and-the-popular-foundation-of-national-sovereignty"
 description: "前言 每逢台灣舉行選舉投票，投票日前一天總會看到政治人物在社交網站或電視媒體上提醒民眾：「不管你支持的是哪個政黨哪位候選人，都記得要去投票，做出你的選擇。」這種跨越政治立場的一致呼籲，背後究竟蘊含著什麼深層意涵？ 許多人年輕時熱衷政治，但隨著歲月流逝，開始認為「不管哪個人哪個黨當選都沒差，日子還不是一樣過，不會變的還是都不會變」，與其為了投票調整行程，還不如照原計劃出遊旅行。或是覺得我偏好投的政黨"

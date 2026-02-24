@@ -1,8 +1,8 @@
 ---
-title: "碼天狗週刊(CodeTengu Weekly) 的每期標題"
+title: "碼天狗週刊 CodeTengu Weekly 標題全紀錄"
 pubDatetime: 2025-05-07T01:23:25.000Z
-slug: "codetengu-weekly"
-description: "創刊號：男子程序員的日常 There is no cloud, just other people's computers. 如何產生一個隨機字串？讓新手退出 vim 新來的 Designer 趁特價的時候幫自己買了一本 GoF Design Patterns 遇到了一個問題，決定用 thread 來解決，嗯，在現有我兩個問了題 要殺一個程式設計師不需要刀，改三次規格就好 準備幫 gi"
+slug: "codetengu-weekly-issue-titles"
+description: "碼天狗週刊是多年前由多位台灣開發者合作撰寫的技術評論週報，每期標題皆以流傳於資訊技術工作者間的笑話或時事梗為題，風格獨樹一幟。週刊經營一段時間後已停刊，這裡收錄了從創刊號到第 146 期的所有標題，作為紀念。"
 tags:
   - codetengu
   - title

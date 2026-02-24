@@ -1,8 +1,8 @@
 ---
-title: "常識(Common Sense)"
+title: "Thomas Paine《常識》Common Sense 維基百科條目中譯"
 pubDatetime: 2025-01-21T13:18:08.000Z
-slug: "common-sense"
-description: "潘恩以清晰且具說服力的文筆，彙整了各種道德與政治論點，以鼓勵殖民地的平民百姓為了爭取平等的政府而奮鬥。這本小冊子於 1776 年 1 月 10 日美國革命初期以匿名方式出版，立即引起轟動。這本小冊子廣受歡迎，在各地廣泛流通，並在酒館和集會場所被大聲朗讀。以當時殖民地的人口（250萬）而言，這是美國歷史上發行量和流通量最大的出版品。截至 2006 年為止，它仍然保持著美國史上最暢銷著作的紀錄，至今仍"
+slug: "thomas-paine-common-sense-wikipedia-zh-translation"
+description: "Thomas Paine 的《Common Sense》是美國革命時期最具影響力的小冊子，本文將其英文維基百科條目翻譯為中文，補充中文版條目內容的不足。"
 tags:
   - history
   - constitution
