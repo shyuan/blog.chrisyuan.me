@@ -8,6 +8,7 @@ tags:
   - geopolitics
   - taiwan
 description: "用《教父》的權力運作框架，解讀川普政府的關稅策略與臺美對等貿易協定談判——先製造恐懼，再販售安全，一份你無法拒絕的條件。"
+ogImage: ../../assets/images/godfather-trade-analysis-cover.png
 ---
 
 ## Table of contents
