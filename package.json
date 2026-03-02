@@ -12,6 +12,8 @@
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
+    "lint:text": "autocorrect --lint src/data/blog/",
+    "fix:text": "autocorrect --fix src/data/blog/",
     "prepare": "husky"
   },
   "dependencies": {
@@ -40,6 +42,7 @@
     "@tailwindcss/typography": "^0.5.19",
     "@types/lodash.kebabcase": "^4.1.9",
     "@typescript-eslint/parser": "^8.51.0",
+    "autocorrect-node": "^2.14.0",
     "eslint": "^9.39.2",
     "eslint-plugin-astro": "^1.5.0",
     "globals": "^16.5.0",
@@ -57,6 +60,10 @@
       "eslint",
       "prettier --write"
     ],
-    "*.{css,md,mdx,json,yaml,yml}": "prettier --write"
+    "*.md": [
+      "autocorrect --fix",
+      "prettier --write"
+    ],
+    "*.{css,mdx,json,yaml,yml}": "prettier --write"
   }
 }

@@ -67,6 +67,7 @@ html[data-theme="dark"] {
   body {
     @apply flex min-h-svh flex-col bg-background font-app text-foreground selection:bg-accent/30 selection:text-foreground;
     letter-spacing: -0.01em;
+    text-autospace: no-autospace;
     background-image:
       linear-gradient(
         color-mix(in srgb, var(--color-border) 8%, transparent) 1px,
