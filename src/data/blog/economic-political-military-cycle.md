@@ -85,7 +85,7 @@ graph TD
     linkStyle 4 stroke:#4CAF50,stroke-width:3px
 ```
 
-[保羅·甘迺迪](<https://zh.wikipedia.org/zh-tw/%E4%BF%9D%E7%BD%97%C2%B7%E8%82%AF%E5%B0%BC%E8%BF%AA_(%E5%8E%86%E5%8F%B2%E5%AD%A6%E5%AE%B6)>)在《[霸權興衰史：1500至2000年的經濟變遷與軍事衝突(The Rise and Fall of the Great Powers: Economic Change and Military Conflict From 1500 to 2000)](https://en.wikipedia.org/wiki/The_Rise_and_Fall_of_the_Great_Powers)》中也探討了經濟實力與軍事力量之間的關係，以及它們如何影響國家的政治地位。這些現實主義理論家的觀點為理解國家權力的循環動力學提供了重要的理論支撐。
+[保羅·甘迺迪](<https://zh.wikipedia.org/zh-tw/%E4%BF%9D%E7%BD%97%C2%B7%E8%82%AF%E5%B0%BC%E8%BF%AA_(%E5%8E%86%E5%8F%B2%E5%AD%A6%E5%AE%B6)>)在《[霸權興衰史：1500 至 2000 年的經濟變遷與軍事衝突(The Rise and Fall of the Great Powers: Economic Change and Military Conflict From 1500 to 2000)](https://en.wikipedia.org/wiki/The_Rise_and_Fall_of_the_Great_Powers)》中也探討了經濟實力與軍事力量之間的關係，以及它們如何影響國家的政治地位。這些現實主義理論家的觀點為理解國家權力的循環動力學提供了重要的理論支撐。
 
 ## 循環動力學的核心機制
 

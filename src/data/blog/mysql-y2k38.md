@@ -2,7 +2,7 @@
 title: "MySQL 在 Y2K38 問題上的修正"
 pubDatetime: 2023-02-10T05:09:50.000Z
 slug: "mysql-y2k38"
-description: "MySQL 在 Y2K38 問題上的修正 前言 最近瀏覽 Year 2038 problem 維基百科條目時，發現其中列出了各種作業系統和軟體的解決方案。特別注意到 MySQL 8.0.28（2022年1月釋出）終於修正了 FROM_UNIXTIME()、UNIX_TIMESTAMP()、CONVERT_TZ() 三個函式處理 64 位元數值的問題。 什麼是 Y2K38 問題？ 背景說明 在 32"
+description: "MySQL 在 Y2K38 問題上的修正 前言 最近瀏覽 Year 2038 problem 維基百科條目時，發現其中列出了各種作業系統和軟體的解決方案。特別注意到 MySQL 8.0.28（2022 年 1 月釋出）終於修正了 FROM_UNIXTIME()、UNIX_TIMESTAMP()、CONVERT_TZ() 三個函式處理 64 位元數值的問題。 什麼是 Y2K38 問題？ 背景說明 在 32"
 tags:
   - MySQL
   - unix
@@ -15,7 +15,7 @@ tags:
 
 ### 前言
 
-最近瀏覽 [Year 2038 problem 維基百科條目](https://en.wikipedia.org/wiki/Year_2038_problem)時，發現其中列出了各種作業系統和軟體的解決方案。特別注意到 [MySQL 8.0.28](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-28.html)（2022年1月釋出）終於修正了 [`FROM_UNIXTIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_from-unixtime)、[`UNIX_TIMESTAMP()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_unix-timestamp)、[`CONVERT_TZ()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_convert-tz) 三個函式處理 64 位元數值的問題。
+最近瀏覽 [Year 2038 problem 維基百科條目](https://en.wikipedia.org/wiki/Year_2038_problem)時，發現其中列出了各種作業系統和軟體的解決方案。特別注意到 [MySQL 8.0.28](https://dev.mysql.com/doc/relnotes/mysql/8.0/en/news-8-0-28.html)（2022 年 1 月釋出）終於修正了 [`FROM_UNIXTIME()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_from-unixtime)、[`UNIX_TIMESTAMP()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_unix-timestamp)、[`CONVERT_TZ()`](https://dev.mysql.com/doc/refman/8.0/en/date-and-time-functions.html#function_convert-tz) 三個函式處理 64 位元數值的問題。
 
 ### 什麼是 Y2K38 問題？
 
@@ -40,7 +40,7 @@ tags:
 
 ### MySQL 的處理歷程
 
-#### 問題發現（2005年）
+#### 問題發現（2005 年）
 
 早在 MySQL 4.1 時代，就有使用者回報 [Bug #12654](https://bugs.mysql.com/bug.php?id=12654)：
 
@@ -53,10 +53,10 @@ tags:
 
 #### 修正時程
 
-- **2005年**：問題首次回報
-- **2022年1月**：MySQL 8.0.28 終於修正相關函式
+- **2005 年**：問題首次回報
+- **2022 年 1 月**：MySQL 8.0.28 終於修正相關函式
 - **總計耗時**：超過 16 年
 
 ### 結語
 
-從現在（2023年）到 Y2K38 問題爆發只剩不到 15 年。對比 MySQL 花了 16 年才修正這個問題，提醒我們必須及早準備系統升級和資料遷移計畫。
+從現在（2023 年）到 Y2K38 問題爆發只剩不到 15 年。對比 MySQL 花了 16 年才修正這個問題，提醒我們必須及早準備系統升級和資料遷移計畫。

@@ -12,7 +12,7 @@ tags:
 
 ## 為什麼 21 世紀仍要讀這本 1901 年的小說？
 
-當我閱讀美國前總統尼克森的《真實的戰爭》時，發現他在總結美蘇冷戰對抗經驗時，多次引用[「大博弈」(The Great Game)](https://en.wikipedia.org/wiki/Great_Game) 概念來分析大國競爭的本質。無獨有偶，美國地緣政治學者、前國家安全顧問[布里辛斯基(Zbigniew Brzezinski)](https://en.wikipedia.org/wiki/Zbigniew_Brzezinski)的名著[《大棋局》(The Grand Chessboard)](https://en.wikipedia.org/wiki/The_Grand_Chessboard)同樣從大博弈概念出發，分析美國在歐亞大陸的戰略佈局。這個詞彙雖然最初來自英國情報員 [Arthur Connolly](https://en.wikipedia.org/wiki/Arthur_Conolly) 的 19 世紀中亞調查報告，但真正讓世人廣知的，正是[吉卜林(Rudyard Kipling)](https://en.wikipedia.org/wiki/Rudyard_Kipling) 1901 年的小說[《基姆》(Kim)](<https://en.wikipedia.org/wiki/Kim_(novel)>)——這部作品也成為吉卜林 1907 年榮獲諾貝爾文學獎的重要代表作，他因此成為英國第一位諾貝爾文學獎得主，也是史上最年輕的獲獎者（時年41歲），該紀錄一百多年後至今仍未被打破。
+當我閱讀美國前總統尼克森的《真實的戰爭》時，發現他在總結美蘇冷戰對抗經驗時，多次引用[「大博弈」(The Great Game)](https://en.wikipedia.org/wiki/Great_Game) 概念來分析大國競爭的本質。無獨有偶，美國地緣政治學者、前國家安全顧問[布里辛斯基(Zbigniew Brzezinski)](https://en.wikipedia.org/wiki/Zbigniew_Brzezinski)的名著[《大棋局》(The Grand Chessboard)](https://en.wikipedia.org/wiki/The_Grand_Chessboard)同樣從大博弈概念出發，分析美國在歐亞大陸的戰略佈局。這個詞彙雖然最初來自英國情報員 [Arthur Connolly](https://en.wikipedia.org/wiki/Arthur_Conolly) 的 19 世紀中亞調查報告，但真正讓世人廣知的，正是[吉卜林(Rudyard Kipling)](https://en.wikipedia.org/wiki/Rudyard_Kipling) 1901 年的小說[《基姆》(Kim)](<https://en.wikipedia.org/wiki/Kim_(novel)>)——這部作品也成為吉卜林 1907 年榮獲諾貝爾文學獎的重要代表作，他因此成為英國第一位諾貝爾文學獎得主，也是史上最年輕的獲獎者（時年 41 歲），該紀錄一百多年後至今仍未被打破。
 
 而近年的重大軍事衝突，恰好都發生在《基姆》描繪的同一片土地上：[2020 年 6 月中印軍隊在拉達克加勒萬河谷爆發 1962 年以來最嚴重的邊境衝突](https://zh.wikipedia.org/zh-tw/2020%E5%B9%B4%E4%B8%AD%E5%8D%B0%E9%82%8A%E5%A2%83%E8%A1%9D%E7%AA%81)，導致雙方士兵死亡，隨後雙方在東拉達克部署超過 10 萬軍隊，對峙長達 4 年直到 2024 年 10 月才達成撤軍協議；[2025 年 5 月印巴又在克什米爾爆發半個世紀來最嚴重的軍事衝突](https://zh.wikipedia.org/zh-tw/2025%E5%B9%B4%E5%8D%B0%E5%B7%B4%E8%A1%9D%E7%AA%81)。一個多世紀後，同樣的山口、河谷仍在上演大國競爭的劇碼，只是玩家從英俄變成了中印、印巴。
 
@@ -22,7 +22,7 @@ tags:
 
 對台灣讀者而言，理解《基姆》的第一個挑戰是地理概念。1901 年的「[英屬印度(British Raj)](https://en.wikipedia.org/wiki/British_Raj)」是一個面積 420 萬平方公里的統一行政區，不只包含今日的印度，還包含了巴基斯坦、孟加拉國、緬甸和斯里蘭卡——相當於中華人民共和國面積的 40%！
 
-小說開場的拉合爾，現在屬於巴基斯坦；基姆與喇嘛行走的大幹道，今天橫跨印巴邊境；而故事高潮的拉達克山區，正是 2020 - 2024 年中印軍事對峙的戰場。當我們跟隨基姆從拉合爾到德里（450 公里，相當於台北到高雄1.5倍），再到喜馬拉雅山麓（總路程超過 1500 公里），實際上是在一個被分裂前的統一政治實體內旅行。
+小說開場的拉合爾，現在屬於巴基斯坦；基姆與喇嘛行走的大幹道，今天橫跨印巴邊境；而故事高潮的拉達克山區，正是 2020 - 2024 年中印軍事對峙的戰場。當我們跟隨基姆從拉合爾到德里（450 公里，相當於台北到高雄 1.5 倍），再到喜馬拉雅山麓（總路程超過 1500 公里），實際上是在一個被分裂前的統一政治實體內旅行。
 
 這種地理想像對理解小說很重要：基姆可以從拉合爾自由行走到西藏邊境，不需要護照、簽證或跨越敵對國界，因為這一切都在「女王陛下的印度」之內。
 

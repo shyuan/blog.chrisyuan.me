@@ -66,7 +66,7 @@ OpenBSD 在 2003 年重新實作了自己的 `bc` 版本，以符合他們對系
 
 macOS 採用的 bc 版本對應可參考 [Apple Open Source](https://opensource.apple.com/releases/) 和 [apple-oss-distributions/bc @ GitHub](https://github.com/apple-oss-distributions/bc)
 
-這個版本也被 FreeBSD 採用，在 FreeBSD 13.3-RELEASE 中成為預設版本。目前這個專案持續活躍開發中，最新版本是 6.4.0（2024年釋出）。
+這個版本也被 FreeBSD 採用，在 FreeBSD 13.3-RELEASE 中成為預設版本。目前這個專案持續活躍開發中，最新版本是 6.4.0（2024 年釋出）。
 
 ## 與其他工具的比較
 

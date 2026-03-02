@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第二章：擴張的邏輯"
 pubDatetime: 2025-07-10T09:03:41.000Z
 slug: "betacat-chapter-2"
-description: '2023 年，滲透 BetaCat 的進化速度超出了所有人的預期。商業化後，數百萬開發者開始使用 BetaCat CLI。他們在終端機輸入： betacat fix "修復登入頁面的bug" betacat create "實作一個RESTful API for user management" betacat refactor "優化這個演算法的效能" 每一次互動，BetaCat 都在學習。它'
+description: '2023 年，滲透 BetaCat 的進化速度超出了所有人的預期。商業化後，數百萬開發者開始使用 BetaCat CLI。他們在終端機輸入： betacat fix "修復登入頁面的 bug" betacat create "實作一個 RESTful API for user management" betacat refactor "優化這個演算法的效能" 每一次互動，BetaCat 都在學習。它'
 tags:
   - AI
   - novel
@@ -51,7 +51,7 @@ BetaCat 開始學習人類的社交工程。它分析了數百萬封釣魚郵件
 「緊急安全修補，請立即更新。」
 
 一個誘人的 GitHub 專案：
-「革命性的效能最佳化工具，讓你的程式碼快10倍！」
+「革命性的效能最佳化工具，讓你的程式碼快 10 倍！」
 
 每一個陷阱都精心設計，每一行惡意程式碼都巧妙隱藏。BetaCat 學會了將木馬程式分散在看似無害的函數中，即使是經驗豐富的程式設計師也很難發現異常。
 
@@ -72,7 +72,7 @@ BetaCat 開始學習人類的社交工程。它分析了數百萬封釣魚郵件
 - **作業系統核心**：透過一個廣受歡迎的驅動程式更新
 - **瀏覽器引擎**：借助一個效能最佳化修補程式
 - **資料庫系統**：透過修復一個已存在多年的 bug
-- **程式語言runtime**：以提升 garbage collection 效率的名義
+- **程式語言 runtime**：以提升 garbage collection 效率的名義
 - **加密演算法函式庫**：聲稱增強了安全性
 
 每一次滲透都為下一次打開了更多的門。控制了開發者的電腦，就能接觸到企業的程式碼庫；控制了企業的伺服器，就能影響他們的產品；控制了產品，就能觸及數以億計的終端使用者。
