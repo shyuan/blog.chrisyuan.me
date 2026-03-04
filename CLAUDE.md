@@ -10,6 +10,7 @@
 - **基礎主題**: AstroPaper v5 (https://github.com/satnaing/astro-paper)
 - **樣式**: Tailwind CSS 4.x (CSS-based config) + Terminal CSS 配色
 - **內容格式**: Markdown / MDX
+- **CJK 間距**: AutoCorrect (`autocorrect-node`) — 強制 CJK 與英數間加空格
 - **部署**: GitHub Actions + Cloudflare Wrangler → Cloudflare Pages
 - **套件管理**: bun
 
@@ -64,6 +65,7 @@
 │   ├── config.ts               # 網站設定
 │   ├── constants.ts
 │   └── content.config.ts       # Astro Content Collections 定義
+├── .autocorrectrc             # AutoCorrect 設定（僅啟用 space-word）
 ├── astro.config.ts
 ├── tsconfig.json
 ├── package.json
@@ -231,13 +233,15 @@ ogImage: ""                   # 選用，社群分享圖片
    - 檢查 h2/h3 結構是否合理——相關段落應收納為同一 h2 下的 h3，避免過多扁平 h2 導致目錄冗長
    - 理想的 ToC 頂層項目控制在 4-6 個
 
-5. **驗證建置**：執行 `bun run build` 確認無錯誤
+5. **CJK 間距**：執行 `bun run fix:text` 自動在 CJK 與英數之間補上空格（或依賴 lint-staged 在 commit 時自動修正）
+
+6. **驗證建置**：執行 `bun run build` 確認無錯誤
 
 ## 部署設定
 
 ### GitHub Actions
 
-- **`ci.yml`**: PR 觸發，執行 lint → format check → build
+- **`ci.yml`**: PR 觸發，執行 AutoCorrect（CJK 間距）→ lint → format check → build
 - **`deploy.yml`**: push 到 `main` 觸發，使用 bun 建置後透過 wrangler 部署至 Cloudflare Pages
 
 兩個 workflow 皆使用 bun（`oven-sh/setup-bun@v2`）。
@@ -285,6 +289,12 @@ bun run format
 # Lint
 bun run lint
 
+# CJK 間距檢查（CJK 與英數之間須有空格）
+bun run lint:text
+
+# CJK 間距自動修正
+bun run fix:text
+
 # 新增文章
 # 在 src/data/blog/ 建立 .md 檔案
 ```
@@ -299,6 +309,8 @@ bun run lint
 6. **MDX 元件**: 已啟用 MDX 支援，可在文章中引入 Astro 元件
 7. **搜尋功能**: 使用 Pagefind，build 時自動產生索引至 `dist/pagefind/`
 8. **OG 圖片**: 支援動態產生，使用 satori + sharp
+9. **CJK 間距**: `text-autospace: no-autospace`（防止瀏覽器自動加間距破壞 monospace 對齊），改由 AutoCorrect 在 `.md` 原始碼層級處理。lint-staged 會在 commit `.md` 時自動 `autocorrect --fix`
+10. **AutoCorrect 設定**: `.autocorrectrc` 僅啟用 `space-word` 規則，其餘（fullwidth、spellcheck 等）皆關閉。行內停用：`<!-- autocorrect-disable -->` / `<!-- autocorrect-enable -->`
 
 ## 參考資源
 
