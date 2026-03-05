@@ -20,8 +20,8 @@
 /
 ├── .github/
 │   └── workflows/
-│       ├── ci.yml              # PR 時執行 lint、format check、build
-│       └── deploy.yml          # push main 時部署至 Cloudflare Pages
+│       ├── ci.yml              # PR 時執行 lint job → build job
+│       └── deploy.yml          # push main 時 lint job → build & deploy job
 ├── public/
 │   ├── assets/                 # 靜態資源
 │   ├── fonts/                  # 自託管字型子集（POJ、CJK 標點）
@@ -243,10 +243,16 @@ ogImage: ""                   # 選用，社群分享圖片
 
 ### GitHub Actions
 
-- **`ci.yml`**: PR 觸發，執行 AutoCorrect（CJK 間距）→ lint → format check → build
-- **`deploy.yml`**: push 到 `main` 觸發，使用 bun 建置後透過 wrangler 部署至 Cloudflare Pages
+兩個 workflow 皆使用 bun（`oven-sh/setup-bun@v2`），各自拆為兩個 job：
 
-兩個 workflow 皆使用 bun（`oven-sh/setup-bun@v2`）。
+- **`ci.yml`**（PR 觸發）：
+  1. **lint** job：AutoCorrect（CJK 間距）→ ESLint → format check
+  2. **build** job：`bun run build`（含 OG 圖片，完整驗證）
+- **`deploy.yml`**（push 到 `main` 觸發）：
+  1. **lint** job：同 ci.yml
+  2. **deploy** job：`bun run build`（含 GA 環境變數）→ wrangler 部署至 Cloudflare Pages
+
+lint 快速失敗時不浪費 build 資源；deploy 只 build 一次（不再透過 `workflow_call` 呼叫 ci.yml 導致雙重 build）。
 
 ### Cloudflare 設定
 
@@ -276,7 +282,7 @@ bun dev
 # 建置（含 astro check + OG 圖片 + pagefind 索引）
 bun run build
 
-# 快速建置（跳過 OG 圖片生成，~14s vs ~185s）
+# 快速建置（跳過 OG 圖片生成，~12s vs ~15s，差異已不大）
 bun run build:fast
 
 # 預覽建置結果
@@ -310,10 +316,24 @@ bun run fix:text
 5. **圖片優化**: 放在 `src/assets/` 的圖片會被 Astro 自動優化
 6. **MDX 元件**: 已啟用 MDX 支援，可在文章中引入 Astro 元件
 7. **搜尋功能**: 使用 Pagefind，build 時自動產生索引至 `dist/pagefind/`
-8. **OG 圖片**: 支援動態產生，使用 satori + sharp
+8. **OG 圖片**: 支援動態產生，使用 satori + @resvg/resvg-js，字型預載至 temp file 避免重複解析（詳見下方 OG 圖片架構）
 9. **CJK 間距**: `text-autospace: no-autospace`（防止瀏覽器自動加間距破壞 monospace 對齊），改由 AutoCorrect 在 `.md` 原始碼層級處理。lint-staged 會在 commit `.md` 時自動 `autocorrect --fix`
 10. **AutoCorrect 設定**: `.autocorrectrc` 僅啟用 `space-word` 規則，其餘（fullwidth、spellcheck 等）皆關閉。行內停用：`<!-- autocorrect-disable -->` / `<!-- autocorrect-enable -->`
 11. **Mermaid 圖表**: 在 Markdown 中使用 `` ```mermaid `` code block，build 時由 `beautiful-mermaid` 渲染為 inline SVG。支援 flowchart、sequence、state、class、ER、XY chart。SVG 使用 CSS 變數（`var(--background)` 等），dark/light 主題自動適配。樣式與 code block 一致（`border-2 border-accent/50`、`bg-muted/40`）
+
+## OG 圖片架構
+
+使用 satori（virtual DOM → SVG）+ @resvg/resvg-js（SVG → PNG）動態生成 OG 圖片：
+
+- **模板位置**：`src/utils/og-templates/site.ts`（全站）、`post.ts`（文章）
+- **字型載入**：`src/utils/loadGoogleFont.ts`，使用 Fira Code + Noto Sans TC
+- **字型預載**：`preloadFonts()` 在 `getStaticPaths` 收集所有文章標題字元，一次下載 4 個字型子集（Fira Code 400/700 + Noto Sans TC 400/700），寫入 `os.tmpdir()` 作為 temp file
+- **resvg fontFiles**：`generateOgImages.ts` 透過 `getFontFilePaths()` 取得 temp file 路徑，傳入 resvg 的 `font.fontFiles` 選項，避免每張圖重新解析嵌入字型（這是原本 ~2.8s/張的瓶頸）
+- **字元累積**：`preloadFonts()` 支援多次呼叫，自動累積字元集，只在發現新字元時才重新 fetch Google Fonts API
+- **全站 OG**：`SITE.ogImage` 設為空字串，fallback 到動態端點 `/og.png`
+- **文章 OG**：`SITE.dynamicOgImage` 控制是否生成，`FAST_BUILD=true` 時跳過
+- **視覺風格**：Terminal 深色主題（#1a1a1d 背景、終端機 title bar 三色圓點、prompt 行、游標）
+- **重要**：`loadGoogleFont` 的 `text` 參數必須涵蓋圖片中所有字元，缺字會顯示方框（⊠）。路徑符號如 `/`、`~`、`>` 容易遺漏
 
 ## 參考資源
 
