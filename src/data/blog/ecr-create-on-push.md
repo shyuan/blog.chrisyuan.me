@@ -73,7 +73,7 @@ graph TD
 
 ### AWS 的神奇操作
 
-2024 年 10 月，AWS 官方發了[一篇部落格](https://aws.amazon.com/blogs/containers/dynamically-create-repositories-upon-image-push-to-amazon-ecr/)，手把手教大家怎麼搭上述 workaround 架構。
+2024 年 10 月，AWS 在官方部落格發了一篇文章 [Dynamically create repositories upon image push to Amazon ECR](https://aws.amazon.com/blogs/containers/dynamically-create-repositories-upon-image-push-to-amazon-ecr/)，手把手教大家怎麼搭上述 workaround 架構。
 
 很微妙吧？知道是痛點，但選擇「教你繞過去」而不是「直接修掉」。社群的反應大致是：
 
