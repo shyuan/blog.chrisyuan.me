@@ -1,3 +1,4 @@
+const unused_variable = "this will fail lint"
 export const SITE = {
   website: "https://blog.chrisyuan.me/",
   author: "Chris Yuan",
