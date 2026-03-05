@@ -60,6 +60,7 @@
 │   ├── utils/
 │   │   ├── generateOgImages.ts
 │   │   ├── getSortedPosts.ts
+│   │   ├── remark-mermaid.ts   # Mermaid → SVG remark plugin
 │   │   ├── og-templates/
 │   │   └── transformers/       # Shiki 自訂 transformer
 │   ├── config.ts               # 網站設定
@@ -79,6 +80,7 @@
 
 - **Integrations**: `sitemap`, `mdx`, `partytown`（Google Analytics）
 - **Tailwind**: 透過 `@tailwindcss/vite` 作為 Vite plugin 載入（非 `@astrojs/tailwind`）
+- **Mermaid**: `beautiful-mermaid` 透過自製 remark plugin（`src/utils/remark-mermaid.ts`）在 build 時將 `` ```mermaid `` code block 渲染為 SVG
 - **Shiki**: 雙主題 `github-light` / `github-dark`，搭配 `@shikijs/transformers` 提供 diff、highlight、fileName 等功能
 - **字型**: 使用 Astro experimental fonts API，透過 `fontProviders.google()` 載入 Fira Code
 - **輸出模式**: `static`（預設）
@@ -311,6 +313,7 @@ bun run fix:text
 8. **OG 圖片**: 支援動態產生，使用 satori + sharp
 9. **CJK 間距**: `text-autospace: no-autospace`（防止瀏覽器自動加間距破壞 monospace 對齊），改由 AutoCorrect 在 `.md` 原始碼層級處理。lint-staged 會在 commit `.md` 時自動 `autocorrect --fix`
 10. **AutoCorrect 設定**: `.autocorrectrc` 僅啟用 `space-word` 規則，其餘（fullwidth、spellcheck 等）皆關閉。行內停用：`<!-- autocorrect-disable -->` / `<!-- autocorrect-enable -->`
+11. **Mermaid 圖表**: 在 Markdown 中使用 `` ```mermaid `` code block，build 時由 `beautiful-mermaid` 渲染為 inline SVG。支援 flowchart、sequence、state、class、ER、XY chart。SVG 使用 CSS 變數（`var(--background)` 等），dark/light 主題自動適配。樣式與 code block 一致（`border-2 border-accent/50`、`bg-muted/40`）
 
 ## 參考資源
 
