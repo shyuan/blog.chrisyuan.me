@@ -5,6 +5,7 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import embeds from "astro-embed/integration";
 import astroLlmsTxt from "@4hse/astro-llms-txt";
+import remarkMermaid from "./src/utils/remark-mermaid";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import {
@@ -43,7 +44,11 @@ export default defineConfig({
     }),
   ],
   markdown: {
-    remarkPlugins: [remarkToc, [remarkCollapse, { test: "Table of contents" }]],
+    remarkPlugins: [
+      remarkMermaid,
+      remarkToc,
+      [remarkCollapse, { test: "Table of contents" }],
+    ],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "github-light", dark: "github-dark" },

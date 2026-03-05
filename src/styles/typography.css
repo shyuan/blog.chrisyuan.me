@@ -105,6 +105,20 @@
     }
   }
 
+  /* ===== Mermaid Diagrams ===== */
+  .mermaid-diagram {
+    @apply my-6 flex justify-center rounded-md border-2 border-accent/50 bg-muted/40 p-4;
+  }
+  .mermaid-diagram svg {
+    @apply h-auto max-w-full;
+  }
+  .mermaid-diagram--error {
+    @apply flex-col border-red-500/50;
+  }
+  .mermaid-diagram__notice {
+    @apply mb-2 text-sm font-medium text-red-500;
+  }
+
   /* ===== Code Blocks & Syntax Highlighting ===== */
   .astro-code {
     @apply flex rounded-md border-2 border-accent/50 bg-muted/40 text-(--shiki-light) outline-accent/75 [&_span]:text-(--shiki-light);
