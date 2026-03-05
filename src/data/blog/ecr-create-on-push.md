@@ -83,7 +83,7 @@ graph TD
 
 ## 終於 Shipped（2025 年 12 月 19 日）
 
-距離 issue 提出整整 **五年八個月** 後，AWS 正式發布 ECR 原生支援 [**Create on Push**](https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ecr-repository-creation-templates-create-on-push/)。
+距離 issue 提出整整 **五年八個月** 後，AWS 正式發布 ECR 原生支援 [**Create on Push**](https://aws.amazon.com/about-aws/whats-new/2025/12/amazon-ecr-creating-repositories-on-push/)。
 
 ### 功能運作方式
 
@@ -133,3 +133,7 @@ resource "aws_ecr_repository_creation_template" "example" {
 | 2025 年 12 月 19 日 | AWS 正式 ship 原生 Create on Push，issue 關閉        |
 
 其他 registry 生來就有的功能，ECR 讓全世界工程師等了將近六年才補上。就這樣。
+
+---
+
+完整文件參閱：[Amazon ECR Repository Creation Templates](https://docs.aws.amazon.com/AmazonECR/latest/userguide/repository-creation-templates.html)
