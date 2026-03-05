@@ -1,8 +1,9 @@
 import satori from "satori";
+import { type CollectionEntry } from "astro:content";
 import { SITE } from "@/config";
 import loadGoogleFonts from "../loadGoogleFont";
 
-export default async post => {
+export default async (post: CollectionEntry<"blog">): Promise<string> => {
   const allText =
     post.data.title +
     post.data.author +
