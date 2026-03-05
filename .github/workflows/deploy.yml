@@ -10,12 +10,35 @@ on:
       - main
 
 jobs:
-  ci:
-    uses: ./.github/workflows/ci.yml
+  lint:
+    name: Code standards
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      - name: "☁️ Checkout repository"
+        uses: actions/checkout@v4
+
+      - name: "📦 Setup bun"
+        uses: oven-sh/setup-bun@v2
+
+      - name: "📦 Install dependencies"
+        run: bun install
+
+      - name: "📝 AutoCorrect (CJK spacing)"
+        uses: huacnlee/autocorrect-action@v2
+        with:
+          args: "src/data/blog/ --lint --no-diff-bg-color"
+
+      - name: "🔎 Lint code"
+        run: bun run lint
+
+      - name: "📝 Checking code format"
+        run: bun run format:check
 
   deploy:
-    name: Deploy
-    needs: ci
+    name: Build & Deploy
+    needs: lint
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
