@@ -11,7 +11,6 @@ import "@/styles/global.css";
 type Props = {
   title?: string;
   author?: string;
-  profile?: string;
   description?: string;
   ogImage?: string;
   canonicalURL?: string;
@@ -23,7 +22,6 @@ type Props = {
 const {
   title = SITE.title,
   author = SITE.author,
-  profile = SITE.profile,
   description = SITE.desc,
   ogImage = SITE.ogImage ? `/${SITE.ogImage}` : "/og.png",
   canonicalURL = new URL(Astro.url.pathname, Astro.url),
@@ -34,21 +32,45 @@ const {
 
 const socialImageURL = new URL(ogImage, Astro.url);
 
-const structuredData = {
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  headline: `${title}`,
-  image: `${socialImageURL}`,
-  datePublished: `${pubDatetime?.toISOString()}`,
-  ...(modDatetime && { dateModified: modDatetime.toISOString() }),
-  author: [
-    {
-      "@type": "Person",
-      name: `${author}`,
-      ...(profile && { url: profile }),
-    },
+const isArticle = !!pubDatetime;
+
+const authorData = {
+  "@type": "Person" as const,
+  name: SITE.author,
+  url: `${SITE.website}about/`,
+  sameAs: [
+    "https://github.com/shyuan",
+    "https://x.com/honglong0420",
+    "https://www.linkedin.com/in/shyuan/",
   ],
 };
+
+const siteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: SITE.title,
+  url: SITE.website,
+  description: SITE.desc,
+  inLanguage: SITE.lang,
+  author: authorData,
+  potentialAction: {
+    "@type": "SearchAction",
+    target: `${SITE.website}search?q={search_term_string}`,
+    "query-input": "required name=search_term_string",
+  },
+};
+
+const articleSchema = isArticle
+  ? {
+      "@context": "https://schema.org",
+      "@type": "BlogPosting",
+      headline: `${title}`,
+      image: `${socialImageURL}`,
+      datePublished: `${pubDatetime?.toISOString()}`,
+      ...(modDatetime && { dateModified: modDatetime.toISOString() }),
+      author: [authorData],
+    }
+  : null;
 ---
 
 <!doctype html>
@@ -78,6 +100,9 @@ const structuredData = {
     <link rel="sitemap" href="/sitemap-index.xml" />
 
     <!-- Open Graph / Facebook -->
+    <meta property="og:type" content={isArticle ? "article" : "website"} />
+    <meta property="og:locale" content="zh_TW" />
+    <meta property="og:site_name" content={SITE.title} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:url" content={canonicalURL} />
@@ -112,8 +137,17 @@ const structuredData = {
     <script
       type="application/ld+json"
       is:inline
-      set:html={JSON.stringify(structuredData)}
+      set:html={JSON.stringify(siteSchema)}
     />
+    {
+      articleSchema && (
+        <script
+          type="application/ld+json"
+          is:inline
+          set:html={JSON.stringify(articleSchema)}
+        />
+      )
+    }
 
     <!-- Enable RSS feed auto-discovery  -->
     <!-- https://docs.astro.build/en/recipes/rss/#enabling-rss-feed-auto-discovery -->
