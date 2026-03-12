@@ -2,6 +2,7 @@
 pubDatetime: 2026-02-27T00:00:00Z
 title: "紀念張俊雄先生——從《鬼滅之刃》看見慈悲的力量"
 slug: memorial-chang-chun-hsiung-demon-slayer-compassion
+featured: true
 draft: false
 tags:
   - 社會

@@ -2,6 +2,7 @@
 pubDatetime: 2026-03-05T00:00:00Z
 title: "AWS ECR Create on Push：一個客戶敲碗敲了六年才有的基本功能"
 slug: ecr-create-on-push
+featured: true
 tags:
   - aws
   - devops

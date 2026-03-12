@@ -2,6 +2,7 @@
 title: "翡翠島的十年風暴（虛構故事）"
 pubDatetime: 2025-07-08T06:38:31.000Z
 slug: "the-ten-year-storm-of-emerald-island"
+featured: true
 description: "如果文化大革命發生在台灣？一則政治寓言小說：十八歲的陳小明加入了革新黨的青年組織，十年後從山區建設營回到城市，父親已經不在了。"
 tags:
   - fiction

@@ -2,6 +2,7 @@
 pubDatetime: 2026-03-01T00:00:00Z
 title: "當數字取代祈禱：現代保險如何從一張死亡統計表開始"
 slug: when-numbers-replaced-prayer-history-of-modern-insurance
+featured: true
 draft: false
 tags:
   - history
