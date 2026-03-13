@@ -19,7 +19,7 @@ macOS 系統自帶 Python 3.9.6，但該版本已於 2025 年 10 月 31 日正�
 
 原本系統上透過 Homebrew 安裝了 Python 3.11 ~ 3.14 多個版本，以及大量 Python CLI 工具，需要整理乾淨。
 
-## Best Practice：用 uv 管理一切
+## 為什麼選 uv
 
 現在大家大致都改用 **uv** 了。uv 是做 Ruff linter 那家 Astral 的產品，用 Rust 寫的，速度很快。一個工具就能處理 Python 版本、虛擬環境、套件安裝、CLI 工具，pyenv、pipx、poetry 那些都不用了。
 
@@ -97,6 +97,8 @@ uv tool upgrade yt-dlp   # 更新特定工具
 
 uv 能做的事情已經完全涵蓋這兩個了，我直接 `brew uninstall` 移掉。真的碰到舊專案需要 poetry 的話，`uvx poetry install` 臨時跑一下就好，不用特別裝。
 
+不過要注意，如果你有在用 poetry 的 plugin 生態（像 `poetry-dynamic-versioning`）或 pdm 的 PEP 582 模式，這些 uv 目前還沒覆蓋到，移除前先評估一下。
+
 ## 留在 Homebrew 的套件
 
 ### 有系統層依賴，uv 管不了
@@ -108,7 +110,7 @@ uv 能做的事情已經完全涵蓋這兩個了，我直接 `brew uninstall` �
 
 ### 雲端 CLI 工具
 
-- **awscli** — 可改用 uv 但留 brew 也行
+- **awscli** — 有 C extension 依賴（`awscrt`），brew 的 bottle 已經編譯好，比 uv 裝起來省事
 - **azure-cli** — 依賴很重，建議留 brew
 - **gcloud-cli** — Google 自己的安裝方式特殊，留 brew 最省事
 
@@ -134,6 +136,8 @@ brew autoremove
 ln -sf ~/.local/share/uv/python/cpython-3.14-macos-aarch64-none/bin/python3.14 ~/.local/bin/python3
 ```
 
+注意這個路徑包含版本號，之後升級到 3.15 時 symlink 不會自動跟著更新，要記得手動重建。
+
 ## 最終狀態
 
 | 來源     | 版本  | 用途                                          |
@@ -148,9 +152,10 @@ Homebrew 和 uv 各自有一份 3.14 是正常的，互不干擾。
 ## 日常維護
 
 ```bash
-brew upgrade uv          # 更新 uv（因為是用 brew 安裝的）
-uv python install 3.xx   # 新版 Python 出來時安裝
-uv tool upgrade --all    # 更新所有 CLI 工具
+brew upgrade uv                        # 更新 uv（因為是用 brew 安裝的）
+uv python install 3.xx                 # 新版 Python 出來時安裝
+uv tool upgrade --all                  # 更新所有 CLI 工具
+ln -sf ~/.local/share/uv/python/cpython-3.xx-macos-aarch64-none/bin/python3.xx ~/.local/bin/python3  # 升級後重建 symlink
 ```
 
 ## 踩過的坑
@@ -174,7 +179,7 @@ uv cache clean
 
 ### `uv cache clean` 要在正確目錄執行
 
-如果 `cd ~/.cache/uv` 後執行，輸出會顯示 `Clearing cache at: .`，行為可能異常。切回 `~` 再執行即可。
+如果 `cd ~/.cache/uv` 後執行，uv 會把 current working directory 當成 cache 路徑，輸出會顯示 `Clearing cache at: .`，等於它在試圖清掉你當前目錄下的東西。切回 `~` 或任何其他目錄再執行就正常了。
 
 ### uv cache 空間管理
 
