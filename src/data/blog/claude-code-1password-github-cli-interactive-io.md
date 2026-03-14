@@ -35,7 +35,7 @@ description: "Claude Code 以 non-interactive 子程序執行 gh，導致 1Passw
 
 寫成 alias 放在 `~/.zshrc`：
 
-```bash
+```bash file="~/.zshrc"
 alias claude='GH_TOKEN=$(op item get "GitHub Personal Access Token" --fields token) claude'
 ```
 
@@ -55,7 +55,7 @@ alias claude='GH_TOKEN=$(op item get "GitHub Personal Access Token" --fields tok
 
 問題在 1Password shell plugin。它在 `~/.config/op/plugins.sh` 裡定義了：
 
-```bash
+```bash file="~/.config/op/plugins.sh"
 alias gh="op plugin run -- gh"
 ```
 
@@ -65,7 +65,7 @@ alias gh="op plugin run -- gh"
 
 我的第一個想法是透過修改 `PATH` 讓 `gh` 指向原生二進位：
 
-```bash
+```bash file="~/.zshrc"
 alias claude='GH_TOKEN=$(op item get "..." --fields token) PATH="$(dirname $(whence -p gh)):$PATH" claude'
 ```
 
@@ -75,7 +75,7 @@ alias claude='GH_TOKEN=$(op item get "..." --fields token) PATH="$(dirname $(whe
 
 想到用環境變數做條件判斷，在 `plugins.sh` 裡有條件地載入 alias。但打開 `~/.config/op/plugins.sh` 一看：
 
-```bash
+```bash file="~/.config/op/plugins.sh"
 export OP_PLUGIN_ALIASES_SOURCED=1
 alias aws="op plugin run -- aws"
 alias gh="op plugin run -- gh"
@@ -101,7 +101,7 @@ alias gh="op plugin run -- gh"
 
 用一個自訂的環境變數 `CLAUDE_CODE_SESSION` 做條件判斷，在 Claude Code 內跳過 `gh` 的 1Password plugin alias：
 
-```bash
+```bash file="~/.config/op/plugins.sh"
 export OP_PLUGIN_ALIASES_SOURCED=1
 alias aws="op plugin run -- aws"
 if [[ -z "$CLAUDE_CODE_SESSION" ]]; then
@@ -111,7 +111,7 @@ fi
 
 ### ~/.zshrc
 
-```bash
+```bash file="~/.zshrc"
 alias claude='GH_TOKEN=$(op read "op://Private/GitHub Personal Access Token - GitHub CLI/token" 2>/dev/null) CLAUDE_CODE_SESSION=1 claude'
 ```
 
@@ -130,7 +130,7 @@ alias claude='GH_TOKEN=$(op read "op://Private/GitHub Personal Access Token - Gi
 
 例如 [octorus](https://github.com/ushironoko/octorus) 這類 GitHub PR review 工具，會在內部啟動 `gh` 來操作 PR。解法一樣——在 alias 裡預先注入 `GH_TOKEN`：
 
-```bash
+```bash file="~/.zshrc"
 alias or='GH_TOKEN=$(op read "op://Private/GitHub Personal Access Token - GitHub CLI/token" 2>/dev/null) or'
 ```
 
