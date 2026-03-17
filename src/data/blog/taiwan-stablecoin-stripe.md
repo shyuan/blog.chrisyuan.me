@@ -31,7 +31,7 @@ description: "從台灣美國商會的穩定幣專題報導出發，分析台灣
 
 ### 美商在台灣有多深
 
-580 家成員企業覆蓋了台灣經濟的每一個關鍵產業。對一般民眾而言，Costco、Apple 和 Tesla 是日常最有感的美商存在。但隱藏在公眾視野之外的影響力同樣深遠——台灣的核電廠用的是 GE 沸水式反應爐（核一、核二）和 Westinghouse 壓水式反應爐（核三），國防武器系統來自 Lockheed Martin 和 Raytheon，半導體製造設備來自 Applied Materials 和 Micron。從發電到國防到晶片製造到你手上的 iPhone，美商的存在幾乎無所不在。
+580 家成員企業覆蓋了台灣經濟的每一個關鍵產業。對一般民眾而言，Costco、Apple 和 Tesla 是日常最有感的美商存在。但隱藏在公眾視野之外的影響力同樣深遠——台灣的核電廠用的是 GE 沸水式反應爐（核一、核二）和 Westinghouse 壓水式反應爐（核三），燃氣複循環機組也大量採用 GE 燃氣渦輪，國防武器系統來自 Lockheed Martin 和 Raytheon，半導體製造設備來自 Applied Materials 和 Micron。從發電到國防到晶片製造到你手上的 iPhone，美商的存在幾乎無所不在。
 
 （完整成員企業列表見[文末附錄](#附錄商會成員企業分類)。）
 
@@ -63,7 +63,7 @@ Stripe 目前在[全球 46 個國家](https://stripe.com/global)提供完整服�
 
 **台灣不在任何一個層級的名單上。**
 
-亞太地區有列入完整服務的包括：澳洲、紐西蘭、日本、香港、新加坡、馬來西亞、泰國。台灣與韓國、菲律賓、越南等地一樣被排除。
+亞太地區有列入完整服務的包括：澳洲、紐西蘭、日本、香港、新加坡、馬來西亞、泰國。**台灣與韓國、菲律賓、越南等地一樣被排除。**
 
 ### 台灣為什麼進不去
 
@@ -83,7 +83,7 @@ Stripe 從未公開說明排除特定國家的理由。綜合各方資訊可歸�
 
 根據 [Stripe 官方文件的完整國家清單](https://docs.stripe.com/financial-accounts/stablecoins)，**台灣（TW）不在穩定幣金融帳戶的支援名單上**。
 
-這份名單排除了幾類地區：已有 Stripe 完整支付服務的國家（美國、英國、歐盟、日本、新加坡等）不在其中，因為它們已有其他管道。而台灣既無完整支付服務、也無穩定幣金融帳戶，兩邊都沒有。
+這份名單排除了幾類地區：已有 Stripe 完整支付服務的國家（美國、英國、歐盟、日本、新加坡等）不在其中，因為它們已有其他管道。而 **台灣既無完整支付服務、也無穩定幣金融帳戶，兩邊都沒有**。
 
 ## 結構性困境：一個台灣 AI 創業者的日常
 
@@ -93,7 +93,7 @@ Stripe 從未公開說明排除特定國家的理由。綜合各方資訊可歸�
 
 ### 付錢沒問題，收錢寸步難行
 
-諷刺的是，你自己每個月都在用信用卡付錢給使用 Stripe 的海外服務——GitHub、Vercel、OpenAI、Anthropic、各種 SaaS 工具都毫無障礙。但反過來，你的台灣公司無法開設 Stripe 帳號來收款。你可以付錢給全世界，全世界卻很難付錢給你。
+諷刺的是，你自己每個月都在用信用卡付錢給使用 Stripe 的海外服務——GitHub、Vercel、Cloudflare、OpenAI、Anthropic、各種 SaaS 工具都毫無障礙。但反過來，你的台灣公司無法開設 Stripe 帳號來收款。你可以付錢給全世界，全世界卻很難付錢給你。
 
 ### 本地金流商撐不起國際市場
 
@@ -139,7 +139,7 @@ Stripe 的案例則說明了落後的具體代價。Stripe 收購的 Bridge 公�
 
 回到那篇台灣美國商會的穩定幣報導。
 
-當一個代表 580 家跨國企業的商會，透過旗下刊物對台灣政府發出訊號，說的不只是「穩定幣很重要」，而是「我們需要更好的金融基礎設施來做生意，而你們的鄰居已經準備好了」。
+當一個代表 580 家跨國企業的商會，透過旗下刊物對台灣政府發出訊號，說的不只是「穩定幣很重要」，而是 **「我們需要更好的金融基礎設施來做生意，而你們的鄰居已經準備好了」**。
 
 Stripe 的案例最直觀：一家處理全球近 2 兆美元支付量的公司，服務範圍涵蓋 46 個國家加上 101 個穩定幣帳戶國家，台灣兩邊都不在。沒有人制裁台灣。是台灣的監管環境、銀行體系結構和市場進入門檻，讓國際支付基礎設施自然地繞過了這座島嶼。
 
@@ -153,19 +153,15 @@ Stripe 的案例最直觀：一家處理全球近 2 兆美元支付量的公司�
 
 以下是台灣美國商會成員企業的產業分類概覽：
 
-**半導體與電子材料**：Micron（美光）、Applied Materials（應用材料）、Corning（康寧）、Qualcomm（高通）、Intel、Texas Instruments（德州儀器）、SEMI
-
-**科技與雲端**：Amazon Web Services（AWS）、IBM、Dell、Google、Microsoft、HP、Cisco
-
-**國防與航太**：L3Harris Technologies（亞洲總部 2022 年從新加坡遷至台北）、Lockheed Martin（洛克希德·馬丁）、Raytheon/RTX（雷神）、Boeing（波音）、Northrop Grumman
-
-**能源與基礎建設**：GE Vernova（奇異電力）、Westinghouse（西屋電氣）、Bechtel（柏克德）
-
-**製藥與醫療器材**：Pfizer（輝瑞）、Eli Lilly（禮來）、Gilead Sciences（吉利德）、AbbVie（艾伯維）、Merck/MSD（默沙東）、Johnson & Johnson（嬌生）、Medtronic（美敦力）、Abbott（亞培）
-
-**金融與資產管理**：BlackRock（貝萊德）、JPMorgan（摩根大通）、Goldman Sachs（高盛）、Citibank（花旗）、MetLife（大都會人壽）
-
-**消費品與零售**：Costco（好市多）、Apple、Tesla、Procter & Gamble（寶僑）、3M、Nike、Estée Lauder（雅詩蘭黛）
+| 產業             | 代表企業                                                                                                                                                            |
+| ---------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| 半導體與電子材料 | Micron（美光）、Applied Materials（應用材料）、Corning（康寧）、Qualcomm（高通）、Intel、Texas Instruments（德州儀器）、SEMI                                        |
+| 科技與雲端       | Amazon Web Services（AWS）、IBM、Dell、Google、Microsoft、HP、Cisco                                                                                                 |
+| 國防與航太       | L3Harris Technologies（亞洲總部 2022 年從新加坡遷至台北）、Lockheed Martin（洛克希德·馬丁）、Raytheon/RTX（雷神）、Boeing（波音）、Northrop Grumman                 |
+| 能源與基礎建設   | GE Vernova（奇異電力）、Westinghouse（西屋電氣）、Bechtel（柏克德）                                                                                                 |
+| 製藥與醫療器材   | Pfizer（輝瑞）、Eli Lilly（禮來）、Gilead Sciences（吉利德）、AbbVie（艾伯維）、Merck/MSD（默沙東）、Johnson & Johnson（嬌生）、Medtronic（美敦力）、Abbott（亞培） |
+| 金融與資產管理   | BlackRock（貝萊德）、JPMorgan（摩根大通）、Goldman Sachs（高盛）、Citibank（花旗）、MetLife（大都會人壽）                                                           |
+| 消費品與零售     | Costco（好市多）、Apple、Tesla、Procter & Gamble（寶僑）、3M、Nike、Estée Lauder（雅詩蘭黛）                                                                        |
 
 ## 附錄：商會產業委員會清單
 
