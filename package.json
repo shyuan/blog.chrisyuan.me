@@ -17,7 +17,6 @@
     "prepare": "husky"
   },
   "dependencies": {
-    "@4hse/astro-llms-txt": "^1.0.4",
     "@astrojs/mdx": "^4.3.13",
     "@astrojs/partytown": "^2.1.4",
     "@astrojs/rss": "^4.0.14",

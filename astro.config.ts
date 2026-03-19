@@ -4,7 +4,6 @@ import sitemap from "@astrojs/sitemap";
 import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import embeds from "astro-embed/integration";
-import astroLlmsTxt from "@4hse/astro-llms-txt";
 import remarkMermaid from "./src/utils/remark-mermaid";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
@@ -29,18 +28,6 @@ export default defineConfig({
       config: {
         forward: ["dataLayer.push"],
       },
-    }),
-    astroLlmsTxt({
-      title: SITE.title,
-      description: SITE.desc,
-      docSet: [
-        {
-          title: "Blog Posts",
-          description: "All blog posts",
-          url: "/llms-full.txt",
-          include: ["posts/**"],
-        },
-      ],
     }),
   ],
   markdown: {
