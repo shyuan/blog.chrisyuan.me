@@ -7,6 +7,8 @@ tags:
   - united-front
 ---
 
+![牆縫中長出的榕樹枝葉](../../assets/images/banyan-tree-wall-crack.jpg)
+
 ## Table of contents
 
 ## 寓言：牆與榕樹
