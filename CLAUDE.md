@@ -6,7 +6,7 @@
 
 ## 技術棧
 
-- **框架**: Astro 5.x (`^5.16.6`)
+- **框架**: Astro 6.x (`^6.0.7`)
 - **基礎主題**: AstroPaper v5 (https://github.com/satnaing/astro-paper)
 - **樣式**: Tailwind CSS 4.x (CSS-based config) + Terminal CSS 配色
 - **內容格式**: Markdown / MDX
@@ -82,12 +82,12 @@
 - **Tailwind**: 透過 `@tailwindcss/vite` 作為 Vite plugin 載入（非 `@astrojs/tailwind`）
 - **Mermaid**: `beautiful-mermaid` 透過自製 remark plugin（`src/utils/remark-mermaid.ts`）在 build 時將 `` ```mermaid `` code block 渲染為 SVG
 - **Shiki**: 雙主題 `github-light` / `github-dark`，搭配 `@shikijs/transformers` 提供 diff、highlight、fileName 等功能
-- **字型**: 使用 Astro experimental fonts API，透過 `fontProviders.google()` 載入 Fira Code
+- **字型**: 使用 Astro fonts API（Astro 6 穩定功能），透過 `fontProviders.google()` 載入 Fira Code
 - **輸出模式**: `static`（預設）
 - **圖片**: responsive styles + constrained layout
 
 ```typescript
-// 字型設定（在 experimental.fonts 中）
+// 字型設定（頂層 fonts 配置）
 {
   name: "Fira Code",
   cssVariable: "--font-fira-code",
