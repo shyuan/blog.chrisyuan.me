@@ -73,21 +73,19 @@ export default defineConfig({
       }),
     },
   },
-  experimental: {
-    fonts: [
-      {
-        name: "Fira Code",
-        cssVariable: "--font-fira-code",
-        provider: fontProviders.google(),
-        fallbacks: [
-          "JetBrains Mono",
-          "SF Mono",
-          "Cascadia Code",
-          "ui-monospace",
-          "monospace",
-        ],
-        weights: [400, 500, 600, 700],
-      },
-    ],
-  },
+  fonts: [
+    {
+      name: "Fira Code",
+      cssVariable: "--font-fira-code",
+      provider: fontProviders.google(),
+      fallbacks: [
+        "JetBrains Mono",
+        "SF Mono",
+        "Cascadia Code",
+        "ui-monospace",
+        "monospace",
+      ],
+      weights: [400, 500, 600, 700],
+    },
+  ],
 });
