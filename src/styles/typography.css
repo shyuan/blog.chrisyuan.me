@@ -1,6 +1,17 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
+  /* KaTeX: hide MathML semantic layer (Tailwind preflight resets position/clip) */
+  .katex-mathml {
+    position: absolute;
+    clip: rect(1px, 1px, 1px, 1px);
+    padding: 0;
+    border: 0;
+    height: 1px;
+    width: 1px;
+    overflow: hidden;
+  }
+
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
     @apply prose;

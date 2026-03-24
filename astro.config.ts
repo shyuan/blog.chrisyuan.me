@@ -5,6 +5,8 @@ import mdx from "@astrojs/mdx";
 import partytown from "@astrojs/partytown";
 import embeds from "astro-embed/integration";
 import remarkMermaid from "./src/utils/remark-mermaid";
+import remarkMath from "remark-math";
+import rehypeKatex from "rehype-katex";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
 import {
@@ -33,9 +35,11 @@ export default defineConfig({
   markdown: {
     remarkPlugins: [
       remarkMermaid,
+      remarkMath,
       remarkToc,
       [remarkCollapse, { test: "Table of contents" }],
     ],
+    rehypePlugins: [rehypeKatex],
     shikiConfig: {
       // For more themes, visit https://shiki.style/themes
       themes: { light: "github-light", dark: "github-dark" },
