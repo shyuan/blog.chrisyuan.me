@@ -88,6 +88,7 @@ description: "Karl Weierstrass 在 1872 年構造出處處連續卻處處不可�
 這些類比對應的抽象結構都一樣：
 
 > 強條件 → 弱條件 ✓
+>
 > 弱條件 → 強條件 ✗
 
 ## 然後 Weierstrass 掀桌了
