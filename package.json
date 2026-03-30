@@ -14,6 +14,7 @@
     "lint": "eslint .",
     "lint:text": "autocorrect --lint src/data/blog/",
     "fix:text": "autocorrect --fix src/data/blog/",
+    "draft": "bun scripts/draft.ts",
     "prepare": "husky"
   },
   "dependencies": {
