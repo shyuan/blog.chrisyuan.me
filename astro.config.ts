@@ -22,7 +22,24 @@ export default defineConfig({
   site: SITE.website,
   integrations: [
     sitemap({
-      filter: page => SITE.showArchives || !page.endsWith("/archives"),
+      filter: page => {
+        // 排除文章列表分頁：/posts/2/, /posts/3/, ...
+        if (/\/posts\/\d+\/$/.test(page)) return false;
+
+        // 排除 tag 分頁：/tags/xxx/2/, /tags/xxx/3/, ...
+        if (/\/tags\/[^/]+\/\d+\/$/.test(page)) return false;
+
+        // 排除低 SEO 價值的功能頁面
+        const siteUrl = SITE.website.replace(/\/$/, "");
+        const excludeExact = [
+          `${siteUrl}/search/`,
+          `${siteUrl}/tags/`,
+          ...(!SITE.showArchives ? [`${siteUrl}/archives/`] : []),
+        ];
+        if (excludeExact.includes(page)) return false;
+
+        return true;
+      },
     }),
     embeds({ services: { LinkPreview: false } }),
     mdx(),

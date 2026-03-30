@@ -4,8 +4,8 @@
   "version": "5.5.1",
   "scripts": {
     "dev": "astro dev",
-    "build": "astro check && astro build && pagefind --site dist && cp -r dist/pagefind public/",
-    "build:fast": "astro check && FAST_BUILD=true astro build && pagefind --site dist && cp -r dist/pagefind public/",
+    "build": "astro check && astro build && bun scripts/postbuild-sitemap.ts && pagefind --site dist && cp -r dist/pagefind public/",
+    "build:fast": "astro check && FAST_BUILD=true astro build && bun scripts/postbuild-sitemap.ts && pagefind --site dist && cp -r dist/pagefind public/",
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
