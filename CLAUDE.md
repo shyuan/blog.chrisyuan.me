@@ -213,6 +213,8 @@ ogImage: ""                   # 選用，社群分享圖片
 
 文章 frontmatter 結束後須加上 `## Table of contents`，`remark-toc` 會自動產生目錄，`remark-collapse` 會將其包成可收合區塊。
 
+**重要**：`## Table of contents` 與下一個 h2 之間的內容會被 `remark-toc` 替換為自動生成的目錄，放在這個區間的散文會消失。如果文章有開場段落（無 h2 標題），必須放在 `## Table of contents` **之前**，這樣才能正常渲染。
+
 ### 新增文章 Checklist（從原始 Markdown 到可發布狀態）
 
 當收到一份只有內容、沒有 frontmatter 的原始 Markdown 檔案時，依照以下步驟處理：
