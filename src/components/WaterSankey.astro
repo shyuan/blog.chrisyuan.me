@@ -1,0 +1,717 @@
+---
+/**
+ * 台灣水資源流向 Sankey Diagram
+ * 純 Astro + vanilla JS，無需 React
+ *
+ * 資料來源：水利署、農委會（103-112 年平均）
+ * 海水淡化：規劃產能（85 萬噸/日，2027-2028 陸續完工）
+ */
+
+// ── data & layout（server-side） ──────────────────────
+
+interface Flow {
+  from: string;
+  to: string;
+  value: number;
+  planned?: boolean;
+}
+
+const FLOWS: Flow[] = [
+  // 水源 → 用途
+  { from: "水庫", to: "農業用水", value: 12 },
+  { from: "水庫", to: "民生用水", value: 16 },
+  { from: "水庫", to: "工業用水", value: 10 },
+  { from: "河川引水", to: "農業用水", value: 69 },
+  { from: "河川引水", to: "民生用水", value: 3 },
+  { from: "地下水", to: "農業用水", value: 34 },
+  { from: "地下水", to: "民生用水", value: 13 },
+  { from: "地下水", to: "工業用水", value: 6 },
+  { from: "海水淡化", to: "民生用水", value: 2, planned: true },
+  { from: "海水淡化", to: "工業用水", value: 1, planned: true },
+  // 用途 → 去向
+  { from: "農業用水", to: "作物蒸散消耗", value: 38 },
+  { from: "農業用水", to: "地下水補注", value: 20 },
+  { from: "農業用水", to: "下游回灌重複利用", value: 35 },
+  { from: "農業用水", to: "回歸河川水體", value: 22 },
+  { from: "民生用水", to: "廢污水排放", value: 32 },
+  { from: "民生用水", to: "管網漏損等", value: 2 },
+  { from: "工業用水", to: "廢污水排放", value: 13 },
+  { from: "工業用水", to: "製程回收再利用", value: 4 },
+];
+
+const COLUMNS = [
+  ["水庫", "河川引水", "地下水", "海水淡化"],
+  ["農業用水", "民生用水", "工業用水"],
+  [
+    "作物蒸散消耗",
+    "地下水補注",
+    "下游回灌重複利用",
+    "回歸河川水體",
+    "廢污水排放",
+    "管網漏損等",
+    "製程回收再利用",
+  ],
+];
+
+const NODE_COLORS: Record<string, string> = {
+  水庫: "#2980b9",
+  河川引水: "#3498db",
+  地下水: "#1a5276",
+  海水淡化: "#00b894",
+  農業用水: "#27ae60",
+  民生用水: "#e67e22",
+  工業用水: "#8e44ad",
+  作物蒸散消耗: "#95a5a6",
+  地下水補注: "#1abc9c",
+  下游回灌重複利用: "#2ecc71",
+  回歸河川水體: "#5dade2",
+  廢污水排放: "#7f8c8d",
+  管網漏損等: "#bdc3c7",
+  製程回收再利用: "#a569bd",
+};
+
+const PLANNED_NODES = new Set(["海水淡化"]);
+const COLUMN_TITLES = ["水源", "用途", "去向"];
+
+const HOVER_TEXTS: Record<string, string> = {
+  農業用水:
+    "農業灌溉用水約 60% 取自河川引水、30% 取自地下水，不到 10% 來自水庫。其中約 67% 回歸水循環。",
+  民生用水:
+    "民生用水主要透過自來水系統供應，取自水庫及地下水，使用後大多經污水處理排放。未來海淡水將併入自來水系統作為備援。",
+  工業用水:
+    "工業用水佔比最低但每噸產值最高。近年科技業積極提升製程用水回收率，台積電達 86%。",
+  水庫: "水庫蓄水約佔全國供水 23%，主要供應民生與工業用水，農業僅取用不到一成。",
+  河川引水:
+    "河川引水佔全國供水約 44%，絕大部分供農業灌溉使用。這些水若不引用，即直接流入大海。",
+  地下水:
+    "地下水佔全國供水約 33%。農業是唯一在使用後仍能大量回補地下水的部門。",
+  海水淡化:
+    "規劃 8 座萬噸級海淡廠（新竹 10 萬噸/日・2027、台南 20 萬噸/日・2028 優先），不受降雨影響，定位為枯水期保險水源。每噸造水成本 30–40 元、耗電 4.25 度。副產鹵水含鎂、鋰、鉀、溴等礦物，國際正研發 brine mining 技術，可抵銷 65–90% 營運成本。",
+  地下水補注: "水稻田每年約補注 20 億噸地下水，是地下水永續的關鍵貢獻。",
+  下游回灌重複利用:
+    "上游農田排出的灌溉水，下游農田仍可再次引用，形成重複利用效益。",
+  作物蒸散消耗:
+    "作物蒸散是農業用水中真正被「消耗」的部分，但蒸散水氣最終仍會凝結為降雨。",
+  回歸河川水體: "農田排水回歸河川，可供下游其他用途使用。",
+  廢污水排放:
+    "民生與工業廢水經處理後排放，大部分無法直接再利用。提升污水回收再生是重要課題。",
+  製程回收再利用:
+    "如台積電製程用水回收率達 86%，友達回收量達用水 44 倍。部分再生水廠已開始供應工業用水。",
+  管網漏損等:
+    "自來水管網老舊造成的漏水損失，全台漏水率仍偏高，是值得投資改善的節水手段。",
+};
+
+// layout constants
+const W = 960;
+const H = 740;
+const PAD_X = 180;
+const PAD_TOP = 70;
+const PAD_BOTTOM = 130;
+const NODE_W = 18;
+const NODE_GAP = 14;
+
+// compute node values
+const inSum: Record<string, number> = {};
+const outSum: Record<string, number> = {};
+for (const f of FLOWS) {
+  outSum[f.from] = (outSum[f.from] || 0) + f.value;
+  inSum[f.to] = (inSum[f.to] || 0) + f.value;
+}
+const nodeVal: Record<string, number> = {};
+const allNodes = new Set<string>();
+for (const col of COLUMNS) for (const n of col) allNodes.add(n);
+for (const n of allNodes) nodeVal[n] = Math.max(inSum[n] || 0, outSum[n] || 0);
+
+const usableW = W - PAD_X * 2 - NODE_W;
+const colX = COLUMNS.map(
+  (_, i) => PAD_X + (usableW / (COLUMNS.length - 1)) * i
+);
+const usableH = H - PAD_TOP - PAD_BOTTOM;
+const maxColTotal = Math.max(
+  ...COLUMNS.map(col => col.reduce((s, n) => s + nodeVal[n], 0))
+);
+const scale =
+  (usableH - Math.max(...COLUMNS.map(c => (c.length - 1) * NODE_GAP))) /
+  maxColTotal;
+
+// compute node rectangles
+interface Rect {
+  x: number;
+  y: number;
+  w: number;
+  h: number;
+  col: number;
+}
+const nodeRect: Record<string, Rect> = {};
+for (let ci = 0; ci < COLUMNS.length; ci++) {
+  const col = COLUMNS[ci];
+  const totalH =
+    col.reduce((s, n) => s + nodeVal[n] * scale, 0) +
+    (col.length - 1) * NODE_GAP;
+  let y = PAD_TOP + (usableH - totalH) / 2;
+  for (const n of col) {
+    const h = Math.max(nodeVal[n] * scale, 4);
+    nodeRect[n] = { x: colX[ci], y, w: NODE_W, h, col: ci };
+    y += h + NODE_GAP;
+  }
+}
+
+// compute links
+const outOffset: Record<string, number> = {};
+const inOffset: Record<string, number> = {};
+for (const n of allNodes) {
+  outOffset[n] = 0;
+  inOffset[n] = 0;
+}
+
+interface Link extends Flow {
+  x0: number;
+  y0: number;
+  x1: number;
+  y1: number;
+  thickness: number;
+}
+const links: Link[] = FLOWS.map(f => {
+  const src = nodeRect[f.from];
+  const tgt = nodeRect[f.to];
+  const thickness = Math.max(f.value * scale, 1.5);
+  const y0 = src.y + outOffset[f.from];
+  const y1 = tgt.y + inOffset[f.to];
+  outOffset[f.from] += thickness;
+  inOffset[f.to] += thickness;
+  return {
+    ...f,
+    x0: src.x + NODE_W,
+    y0: y0 + thickness / 2,
+    x1: tgt.x,
+    y1: y1 + thickness / 2,
+    thickness,
+  };
+});
+
+function linkPath(l: Link) {
+  const mx = (l.x0 + l.x1) / 2;
+  return `M${l.x0},${l.y0} C${mx},${l.y0} ${mx},${l.y1} ${l.x1},${l.y1}`;
+}
+
+// build adjacency for hover
+const adjacency: Record<string, Set<string>> = {};
+for (const n of allNodes) adjacency[n] = new Set();
+for (const f of FLOWS) {
+  adjacency[f.from].add(f.to);
+  adjacency[f.to].add(f.from);
+}
+
+// percentage labels for middle column
+const pctLabel: Record<string, string> = {
+  農業用水: "70%",
+  民生用水: "20%",
+  工業用水: "10%",
+};
+---
+
+<div class="water-sankey-wrapper">
+  {/* title */}
+  <div class="sankey-title">
+    <h3>台灣水資源流向全貌</h3>
+    <p class="sankey-subtitle">
+      現有水源：103–112 年平均約 162 億噸 ｜ 海水淡化：規劃產能約 3 億噸/年
+    </p>
+    <p class="sankey-source">資料來源：水利署、農委會、環境資訊中心</p>
+  </div>
+
+  <svg viewBox={`0 0 ${W} ${H}`} width="100%" class="sankey-svg">
+    <defs>
+      <filter id="sankey-glow">
+        <feGaussianBlur stdDeviation="3" result="blur"></feGaussianBlur>
+        <feMerge>
+          <feMergeNode in="blur"></feMergeNode>
+          <feMergeNode in="SourceGraphic"></feMergeNode>
+        </feMerge>
+      </filter>
+      {
+        links.map((l, i) => (
+          <linearGradient
+            id={`slg-${i}`}
+            x1={l.x0}
+            y1="0"
+            x2={l.x1}
+            y2="0"
+            gradientUnits="userSpaceOnUse"
+          >
+            <stop
+              offset="0%"
+              stop-color={NODE_COLORS[l.from]}
+              stop-opacity="0.5"
+            />
+            <stop
+              offset="100%"
+              stop-color={NODE_COLORS[l.to]}
+              stop-opacity="0.5"
+            />
+          </linearGradient>
+        ))
+      }
+    </defs>
+
+    {/* column titles */}
+    {
+      COLUMN_TITLES.map((title, i) => (
+        <text
+          x={colX[i] + 9}
+          y="38"
+          text-anchor="middle"
+          fill="#5a7fa8"
+          font-size="13"
+          font-weight="500"
+          class="sankey-col-title"
+        >
+          {title}
+        </text>
+      ))
+    }
+
+    {/* links */}
+    {
+      links.map((l, i) => (
+        <path
+          class="sankey-link"
+          d={linkPath(l)}
+          fill="none"
+          stroke={`url(#slg-${i})`}
+          stroke-width={Math.max(1.5, l.thickness)}
+          stroke-dasharray={l.planned ? "6 4" : undefined}
+          data-from={l.from}
+          data-to={l.to}
+          data-planned={l.planned ? "true" : undefined}
+        />
+      ))
+    }
+
+    {/* nodes */}
+    {
+      Object.entries(nodeRect).map(([name, r]) => {
+        const isPlanned = PLANNED_NODES.has(name);
+        const inTotal = FLOWS.filter(f => f.to === name).reduce(
+          (s, f) => s + f.value,
+          0
+        );
+        const outTotal = FLOWS.filter(f => f.from === name).reduce(
+          (s, f) => s + f.value,
+          0
+        );
+        const valLabel =
+          r.col === 1
+            ? `${inTotal} 億噸（${pctLabel[name] || ""}）`
+            : `${r.col === 0 ? outTotal : inTotal} 億噸${isPlanned ? "（規劃中）" : ""}`;
+
+        return (
+          <g class="sankey-node" data-name={name}>
+            <rect
+              x={r.x}
+              y={r.y}
+              width={r.w}
+              height={r.h}
+              rx="4"
+              fill={isPlanned ? "none" : NODE_COLORS[name]}
+              stroke={isPlanned ? NODE_COLORS[name] : "none"}
+              stroke-width={isPlanned ? "2" : "0"}
+              stroke-dasharray={isPlanned ? "4 3" : undefined}
+              class="sankey-node-rect"
+            />
+            {isPlanned && (
+              <rect
+                x={r.x + 2}
+                y={r.y + 2}
+                width={r.w - 4}
+                height={Math.max(r.h - 4, 1)}
+                rx="2"
+                fill={NODE_COLORS[name]}
+                opacity="0.3"
+                class="sankey-node-fill"
+              />
+            )}
+            {/* label */}
+            <text
+              x={r.col === 0 ? r.x - 8 : r.x + r.w + 8}
+              y={r.y + r.h / 2}
+              text-anchor={r.col === 0 ? "end" : "start"}
+              dominant-baseline="central"
+              font-size={r.h > 28 ? "13" : "11"}
+              font-weight="500"
+              class="sankey-label"
+            >
+              {name}
+              {isPlanned ? " ⟡" : ""}
+            </text>
+            {/* value */}
+            {r.h > 14 && (
+              <text
+                x={r.col === 0 ? r.x - 8 : r.x + r.w + 8}
+                y={r.y + r.h / 2 + (r.h > 28 ? 16 : 13)}
+                text-anchor={r.col === 0 ? "end" : "start"}
+                dominant-baseline="central"
+                font-size="10"
+                class="sankey-value"
+              >
+                {valLabel}
+              </text>
+            )}
+          </g>
+        );
+      })
+    }
+
+    {/* annotation: agriculture return */}
+    <g class="sankey-anno" data-related="農業用水">
+      <rect
+        x={W - 172}
+        y={H - 78}
+        width="158"
+        height="62"
+        rx="8"
+        fill="#0f2035"
+        stroke="#1abc9c"
+        stroke-width="1"
+        opacity="0.85"></rect>
+      <text
+        x={W - 164}
+        y={H - 58}
+        fill="#1abc9c"
+        font-size="11"
+        font-weight="700"
+        class="sankey-col-title"
+      >
+        農業用水實際去向
+      </text>
+      <text
+        x={W - 164}
+        y={H - 42}
+        fill="#8abfaf"
+        font-size="10"
+        class="sankey-col-title"
+      >
+        真正消耗（蒸散）≈ 33%
+      </text>
+      <text
+        x={W - 164}
+        y={H - 28}
+        fill="#8abfaf"
+        font-size="10"
+        class="sankey-col-title"
+      >
+        回歸水循環 ≈ 67%
+      </text>
+    </g>
+
+    {/* annotation: reservoir share */}
+    <g class="sankey-anno" data-related="水庫 農業用水">
+      <rect
+        x="14"
+        y={H - 134}
+        width="152"
+        height="46"
+        rx="8"
+        fill="#0f2035"
+        stroke="#2980b9"
+        stroke-width="1"
+        opacity="0.85"></rect>
+      <text
+        x="22"
+        y={H - 114}
+        fill="#5dade2"
+        font-size="11"
+        font-weight="700"
+        class="sankey-col-title"
+      >
+        農業取用水庫水
+      </text>
+      <text
+        x="22"
+        y={H - 98}
+        fill="#7ea8d0"
+        font-size="10"
+        class="sankey-col-title"
+      >
+        僅佔農業用水的 ≈ 10%
+      </text>
+    </g>
+
+    {/* annotation: desalination brine */}
+    <g class="sankey-anno" data-related="海水淡化">
+      <rect
+        x="14"
+        y={H - 78}
+        width="152"
+        height="62"
+        rx="8"
+        fill="#0f2035"
+        stroke="#00b894"
+        stroke-width="1"
+        opacity="0.85"></rect>
+      <text
+        x="22"
+        y={H - 58}
+        fill="#00b894"
+        font-size="11"
+        font-weight="700"
+        class="sankey-col-title"
+      >
+        海淡副產物：鹵水
+      </text>
+      <text
+        x="22"
+        y={H - 43}
+        fill="#6ec6a8"
+        font-size="10"
+        class="sankey-col-title"
+      >
+        每產 1 噸淡水 → 1.8 噸鹵水
+      </text>
+      <text
+        x="22"
+        y={H - 29}
+        fill="#6ec6a8"
+        font-size="10"
+        class="sankey-col-title"
+      >
+        含 Mg Li K Br 等可回收礦物
+      </text>
+    </g>
+  </svg>
+
+  {/* hover info */}
+  <p class="sankey-hover-info" aria-live="polite"></p>
+
+  {/* legend */}
+  <div class="sankey-legend">
+    <span>
+      <span class="legend-line legend-solid"></span>
+      現有水源
+    </span>
+    <span>
+      <span class="legend-line legend-dashed"></span>
+      規劃中水源（⟡ 海水淡化 2027–2028）
+    </span>
+  </div>
+</div>
+
+<style>
+  .water-sankey-wrapper {
+    width: 100%;
+    min-height: 520px;
+    background: linear-gradient(180deg, #0b1628 0%, #122240 50%, #0d1a30 100%);
+    border-radius: 16px;
+    padding: 20px 0;
+    font-family: "Noto Sans TC", "Helvetica Neue", sans-serif;
+    overflow: hidden;
+    margin: 2rem 0;
+  }
+
+  .sankey-title {
+    text-align: center;
+    margin-bottom: 4px;
+    padding: 0 20px;
+  }
+  .sankey-title h3 {
+    color: #e8f0fe;
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+    letter-spacing: 2px;
+  }
+  .sankey-title h3::before {
+    content: none;
+  }
+  .sankey-subtitle {
+    color: #7ea8d0;
+    font-size: 12px;
+    margin: 6px 0 0;
+  }
+  .sankey-source {
+    color: #5a7fa8;
+    font-size: 10px;
+    margin: 2px 0 0;
+  }
+
+  .sankey-svg {
+    display: block;
+  }
+  .sankey-col-title {
+    font-family: "Noto Sans TC", sans-serif;
+  }
+
+  .sankey-link {
+    opacity: 0.65;
+    transition: opacity 0.3s ease;
+  }
+  .sankey-link[data-planned] {
+    opacity: 0.55;
+  }
+  .sankey-link.dimmed {
+    opacity: 0.08;
+  }
+
+  .sankey-node {
+    cursor: pointer;
+  }
+  .sankey-node-rect {
+    opacity: 1;
+    transition: opacity 0.3s ease;
+  }
+  .sankey-node.dimmed .sankey-node-rect {
+    opacity: 0.2;
+  }
+  .sankey-node.dimmed .sankey-node-fill {
+    opacity: 0.1;
+  }
+  .sankey-node.glowing .sankey-node-rect {
+    filter: url(#sankey-glow);
+  }
+
+  .sankey-label {
+    fill: #e0ecf8;
+    font-family: "Noto Sans TC", sans-serif;
+    transition: fill 0.3s ease;
+  }
+  .sankey-node.dimmed .sankey-label {
+    fill: #3a5575;
+  }
+
+  .sankey-value {
+    fill: #7ea8d0;
+    font-family: "Noto Sans TC", sans-serif;
+    transition: fill 0.3s ease;
+  }
+  .sankey-node.dimmed .sankey-value {
+    fill: #2a4060;
+  }
+
+  .sankey-anno {
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+  .sankey-anno.dimmed {
+    opacity: 0.15;
+  }
+
+  .sankey-hover-info {
+    color: #7ea8d0;
+    font-size: 12px;
+    margin: 0 auto;
+    max-width: 640px;
+    padding: 8px 20px;
+    text-align: center;
+    min-height: 2em;
+  }
+
+  .sankey-legend {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 6px;
+    font-size: 10px;
+    color: #5a7fa8;
+  }
+  .legend-line {
+    display: inline-block;
+    width: 20px;
+    vertical-align: middle;
+    margin-right: 4px;
+  }
+  .legend-solid {
+    height: 2px;
+    background: #7ea8d0;
+  }
+  .legend-dashed {
+    height: 0;
+    border-top: 2px dashed #00b894;
+  }
+</style>
+
+<script
+  define:vars={{
+    adjacencyJSON: JSON.stringify(
+      Object.fromEntries(Object.entries(adjacency).map(([k, v]) => [k, [...v]]))
+    ),
+    hoverTexts: HOVER_TEXTS,
+  }}
+>
+  // rebuild adjacency from serialized data
+  const adj = {};
+  const raw = JSON.parse(adjacencyJSON);
+  for (const [k, arr] of Object.entries(raw)) adj[k] = new Set(arr);
+
+  const wrapper = document.querySelector(".water-sankey-wrapper");
+  if (!wrapper) throw new Error("WaterSankey wrapper not found");
+
+  const nodes = wrapper.querySelectorAll(".sankey-node");
+  const links = wrapper.querySelectorAll(".sankey-link");
+  const annos = wrapper.querySelectorAll(".sankey-anno");
+  const infoEl = wrapper.querySelector(".sankey-hover-info");
+
+  function highlight(name) {
+    const related = adj[name] || new Set();
+
+    nodes.forEach(g => {
+      const n = g.dataset.name;
+      if (n === name || related.has(n)) {
+        g.classList.remove("dimmed");
+        if (n === name) g.classList.add("glowing");
+      } else {
+        g.classList.add("dimmed");
+        g.classList.remove("glowing");
+      }
+    });
+
+    links.forEach(path => {
+      if (path.dataset.from === name || path.dataset.to === name) {
+        path.classList.remove("dimmed");
+      } else {
+        path.classList.add("dimmed");
+      }
+    });
+
+    annos.forEach(anno => {
+      const rel = (anno.dataset.related || "").split(" ");
+      if (rel.includes(name)) {
+        anno.classList.remove("dimmed");
+      } else {
+        anno.classList.add("dimmed");
+      }
+    });
+
+    if (infoEl) infoEl.textContent = hoverTexts[name] || "";
+  }
+
+  function clearHighlight() {
+    nodes.forEach(g => {
+      g.classList.remove("dimmed", "glowing");
+    });
+    links.forEach(p => {
+      p.classList.remove("dimmed");
+    });
+    annos.forEach(a => {
+      a.classList.remove("dimmed");
+    });
+    if (infoEl) infoEl.textContent = "";
+  }
+
+  nodes.forEach(g => {
+    g.addEventListener("mouseenter", () => highlight(g.dataset.name));
+    g.addEventListener("mouseleave", clearHighlight);
+    // touch support
+    g.addEventListener(
+      "touchstart",
+      e => {
+        e.preventDefault();
+        highlight(g.dataset.name);
+      },
+      { passive: false }
+    );
+  });
+
+  document.addEventListener("touchstart", e => {
+    if (!e.target.closest(".sankey-node")) clearHighlight();
+  });
+</script>
