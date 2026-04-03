@@ -132,4 +132,4 @@ draft: false
 ---
 
 _資料來源：[臺灣證券交易所](https://www.twse.com.tw/)、[金融監督管理委員會](https://zh.wikipedia.org/wiki/金融監督管理委員會)、[元大投信](https://zh.wikipedia.org/wiki/元大證券投資信託)_
-_最後更新：2026 年 1 月_
+_最後更新：2026 年 4 月_
