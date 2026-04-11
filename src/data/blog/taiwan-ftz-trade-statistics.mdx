@@ -10,6 +10,14 @@ description: "2025 年台灣自貿港區貿易值突破 6 兆，但拆開來看�
 draft: false
 ---
 
+import FtzTradeChart from "@/components/FtzTradeChart.astro";
+import FtzReshoringTimeline from "@/components/FtzReshoringTimeline.astro";
+import FtzTaoyuanStaircase from "@/components/FtzTaoyuanStaircase.astro";
+import FtzSeaportInflection from "@/components/FtzSeaportInflection.astro";
+import FtzConcentration from "@/components/FtzConcentration.astro";
+import FtzMonthlyH1H2 from "@/components/FtzMonthlyH1H2.astro";
+import FtzFourPortsBeforeAfter from "@/components/FtzFourPortsBeforeAfter.astro";
+
 2025 年，台灣自由貿易港區全年貿易值突破 6 兆新台幣，比前一年翻了一倍。
 
 這個數字很容易讓人得出「自貿港區大成功」的結論。但把數據拆開來看，6 兆裡面其實裝著兩個完全不同的台灣經濟故事。一個是 AI 晶片，一個是台商回流。兩條線在同一張統計表上相遇，驅動力卻毫無交集。
@@ -35,9 +43,15 @@ draft: false
 
 時間軸也對得上。2021 年全球晶片荒，桃園空港從 6,366 億跳到 9,233 億。2023 年 ChatGPT 帶動 AI 伺服器需求，再跳到 1.34 兆。2024 年 2.38 兆。2025 年 5.13 兆。每一次跳躍都踩在半導體產業的節奏上。
 
+<FtzTaoyuanStaircase />
+
 月度數據可以看得更細。2025 年的成長不是平均分布的，上半年年增 73.8%，下半年年增 122.6%，逐季加速。10 月單月做了 7,093 億，是 15 年來的史上最高紀錄，桃園空港一港就貢獻 6,547 億，占 92.3%。
 
+<FtzMonthlyH1H2 />
+
 這個節奏排除了「關稅搶運」的解釋。川普 4 月宣布對台加徵關稅，如果廠商恐慌搶出貨，應該上半年爆量、下半年回落。實際走勢正好相反，更像是 NVIDIA [Blackwell](<https://en.wikipedia.org/wiki/Blackwell_(microarchitecture)>) 架構 GPU 在下半年放量出貨，[台積電](https://zh.wikipedia.org/wiki/%E5%8F%B0%E7%81%A3%E7%A9%8D%E9%AB%94%E9%9B%BB%E8%B7%AF)先進製程產能全開的結果。
+
+<FtzTradeChart />
 
 ## 海港群：8,888 億的台商回流紅利
 
@@ -47,11 +61,15 @@ draft: false
 
 然後 2021 年突然拐頭向上。3,707 億、5,333 億、5,991 億、6,356 億，到 2025 年的 8,888 億。五年翻了 2.4 倍，年複合成長率 26.3%。
 
+<FtzSeaportInflection />
+
 轉折點是什麼？2018 年美中貿易戰開打。
 
 2018 年 7 月 [301 條款](https://zh.wikipedia.org/wiki/%E8%B2%BF%E6%98%93%E6%B3%95%E7%AC%AC301%E6%A2%9D%E6%AC%BE)關稅生效，台商開始評估產線搬遷。2019 年 1 月行政院啟動「[投資臺灣三大方案](https://investtaiwan.nat.gov.tw/)」，提供土地、水電、資金等配套，截至 2024 年底已有 1,612 家企業通過審核，總投資額約 2.45 兆元。2020 年 COVID-19 又補了一腳——全球供應鏈斷鏈讓「離中國太近」的風險從抽象概念變成現實損失，加速了搬遷決策。
 
 不過工廠不是宣布回流就能馬上出貨。從核定投資到建廠、裝機、試產、量產，至少要一到兩年。所以三大方案 2019 年啟動，海港貿易值 2021 年才開始反映。時間差完全吻合。
+
+<FtzReshoringTimeline />
 
 而且台商回流的產業結構跟桃園空港那頭很不一樣。回流的主力是電子零組件、精密金屬、工具機、自行車、網通設備這些品項——不是 AI 晶片那種「一片晶圓值幾百萬美元」的極端高單價產品，而是體積更大、重量更重、走海運才划算的中間材和成品。
 
@@ -63,6 +81,8 @@ draft: false
 | 臺北港 | +8.6%          | +27.9%         | 北部電子零組件、代工 |
 | 高雄港 | -4.3%          | +18.7%         | 南部金屬加工、傳產   |
 | 基隆港 | -37.3%         | -7.0%          | 未接到回流紅利       |
+
+<FtzFourPortsBeforeAfter />
 
 臺中港的翻轉最明顯。它在 2020 年跌到 1,309 億的谷底，2025 年回到 4,762 億，走了一個漂亮的 U 型。中部本來就是台灣精密機械的重鎮，台中港的反彈很大程度是這批回流產能的出口在自貿區出貨。
 
@@ -77,6 +97,8 @@ draft: false
 這不是趨勢性成長，而是某批大型貨物的一次性通關。8 月那筆就占了臺北港全年貿易值的 29%。具體是什麼品項，光看這份數據無法判斷，需要對照海關進出口品項統計才能釐清。
 
 ## 一張表，兩個問題
+
+<FtzConcentration />
 
 把這兩條線放回同一張表上看，6 兆的數字背後其實是兩個不同的政策問題。
 

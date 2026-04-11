@@ -1,0 +1,172 @@
+---
+// 四港 2020 谷底 vs 2025 對比：台商回流五年 CAGR
+// 資料來源：行政院主計總處，自由貿易港區貿易值（A070105040）
+---
+
+<div class="ftz-fourports-container">
+  <div class="ftz-legend">
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #D3D1C7;"></span>2020
+      (谷底)</span
+    >
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #378ADD;"
+      ></span>2025</span
+    >
+  </div>
+  <div class="ftz-canvas-wrap" style="height: 380px;">
+    <canvas id="ftz-chart-fourports"></canvas>
+  </div>
+</div>
+
+<style>
+  .ftz-fourports-container {
+    padding: 0.5rem 0;
+  }
+  .ftz-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--foreground);
+    opacity: 0.9;
+  }
+  .ftz-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ftz-legend-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .ftz-canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+</style>
+
+<script is:inline>
+  (function init() {
+    if (typeof Chart === "undefined") {
+      setTimeout(init, 50);
+      return;
+    }
+    const rootStyles = getComputedStyle(document.documentElement);
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
+    const textColor =
+      rootStyles.getPropertyValue("--foreground").trim() ||
+      (isDark ? "#c9cacc" : "#282828");
+
+    const ports = ["臺中港", "臺北港", "高雄港", "基隆港"];
+    const v2020 = [1309, 708, 713, 12];
+    const v2025 = [4762, 2423, 1684, 9];
+    const cagrs = ["+29.5%", "+27.9%", "+18.7%", "-7.0%"];
+    const cagrColors = isDark
+      ? ["#85B7EB", "#85B7EB", "#85B7EB", "#F09595"]
+      : ["#185FA5", "#185FA5", "#185FA5", "#A32D2D"];
+
+    new Chart(document.getElementById("ftz-chart-fourports"), {
+      type: "bar",
+      data: {
+        labels: ports,
+        datasets: [
+          {
+            label: "2020",
+            data: v2020,
+            backgroundColor: isDark ? "#5F5E5A" : "#D3D1C7",
+            borderRadius: 4,
+            barPercentage: 0.7,
+          },
+          {
+            label: "2025",
+            data: v2025,
+            backgroundColor: "#378ADD",
+            borderRadius: 4,
+            barPercentage: 0.7,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { top: 40 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return (
+                  ctx.dataset.label + ": " + ctx.raw.toLocaleString() + " 億"
+                );
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: textColor, font: { size: 13, weight: "500" } },
+          },
+          y: {
+            grid: { color: gridColor },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              callback: function (v) {
+                return v.toLocaleString();
+              },
+            },
+            beginAtZero: true,
+            max: 5800,
+          },
+        },
+        animation: {
+          onComplete: function () {
+            const ctx = this.ctx;
+            const meta1 = this.getDatasetMeta(1);
+            ctx.save();
+            meta1.data.forEach(function (bar, i) {
+              ctx.textAlign = "center";
+              ctx.fillStyle = cagrColors[i];
+              ctx.font = "500 14px ui-monospace, monospace";
+              ctx.fillText(cagrs[i], bar.x, bar.y - 20);
+
+              ctx.fillStyle = isDark
+                ? "rgba(255,255,255,0.65)"
+                : "rgba(0,0,0,0.5)";
+              ctx.font = "400 11px ui-monospace, monospace";
+              ctx.fillText("5yr CAGR", bar.x, bar.y - 6);
+            });
+
+            const meta0 = this.getDatasetMeta(0);
+            meta0.data.forEach(function (bar, i) {
+              ctx.textAlign = "center";
+              ctx.fillStyle = isDark
+                ? "rgba(255,255,255,0.65)"
+                : "rgba(0,0,0,0.5)";
+              ctx.font = "400 11px ui-monospace, monospace";
+              ctx.fillText(v2020[i].toLocaleString(), bar.x, bar.y - 6);
+            });
+
+            meta1.data.forEach(function (bar, i) {
+              ctx.textAlign = "center";
+              ctx.fillStyle = "#fff";
+              ctx.font = "500 12px ui-monospace, monospace";
+              if (v2025[i] > 500) {
+                ctx.fillText(v2025[i].toLocaleString(), bar.x, bar.y + 20);
+              }
+            });
+
+            ctx.restore();
+          },
+        },
+      },
+    });
+  })();
+</script>

@@ -1,0 +1,271 @@
+---
+// 海港貿易值 vs 台商回流時間軸
+// 資料來源：行政院主計總處，自由貿易港區貿易值（A070105040），民國 100-114 年
+---
+
+<div class="ftz-reshoring-container">
+  <div class="ftz-legend">
+    <span class="ftz-legend-item"
+      ><span
+        class="ftz-legend-swatch"
+        style="background: rgba(55,138,221,0.65);"></span>海港合計 (扣桃園)</span
+    >
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-dash-amber"></span>海港年增率 (右軸)</span
+    >
+  </div>
+
+  <div class="ftz-canvas-wrap" style="height: 380px;">
+    <canvas id="ftz-chart-reshoring"></canvas>
+  </div>
+
+  <div class="ftz-timeline">
+    <div class="ftz-timeline-grid">
+      <span class="ftz-timeline-year">2018 Q3</span><span
+        >美中貿易戰 301 條款關稅生效</span
+      >
+      <span class="ftz-timeline-year">2019 Q1</span><span
+        >投資台灣三大方案啟動</span
+      >
+      <span class="ftz-timeline-year">2020 Q1</span><span
+        >COVID-19 全球供應鏈斷鏈</span
+      >
+      <span class="ftz-timeline-year">2021</span><span
+        >首批回流工廠投產，三大方案首階段 1,144 家、1.6 兆</span
+      >
+      <span class="ftz-timeline-year">2022-23</span><span
+        >回流產能持續開出，海港貿易值突破 5,000 億</span
+      >
+      <span class="ftz-timeline-year">2024 Q4</span><span
+        >三大方案累計 1,612 家、2.45 兆投資</span
+      >
+    </div>
+  </div>
+</div>
+
+<style>
+  .ftz-reshoring-container {
+    padding: 1rem 0;
+  }
+  .ftz-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--foreground);
+    opacity: 0.9;
+  }
+  .ftz-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ftz-legend-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .ftz-legend-dash-amber {
+    display: inline-block;
+    width: 22px;
+    height: 0;
+    border-top: 2.5px dashed #f59e0b;
+  }
+  html[data-theme="light"] .ftz-legend-dash-amber {
+    border-top-color: #d97706;
+  }
+  .ftz-canvas-wrap {
+    position: relative;
+    width: 100%;
+    margin-bottom: 1rem;
+  }
+  .ftz-timeline {
+    font-size: 13px;
+    color: var(--foreground);
+    line-height: 1.7;
+    margin-top: 1.5rem;
+    padding: 1rem;
+    background: var(--muted);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+  }
+  .ftz-timeline-grid {
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 4px 12px;
+  }
+  .ftz-timeline-year {
+    font-weight: 500;
+    opacity: 1;
+    color: var(--foreground);
+  }
+</style>
+
+<script is:inline>
+  (function init() {
+    if (typeof Chart === "undefined") {
+      setTimeout(init, 50);
+      return;
+    }
+    const rootStyles = getComputedStyle(document.documentElement);
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
+    const textColor =
+      rootStyles.getPropertyValue("--foreground").trim() ||
+      (isDark ? "#c9cacc" : "#282828");
+    const years = [
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+    ];
+    const exTaoyuan = [
+      1760, 3899, 3887, 3672, 3233, 3488, 3110, 3025, 3147, 2767, 3707, 5333,
+      5991, 6356, 8888,
+    ];
+    const yoy = [null, 122, 0, -6, -12, 8, -11, -3, 4, -12, 34, 44, 12, 6, 40];
+
+    new Chart(document.getElementById("ftz-chart-reshoring"), {
+      type: "bar",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "海港合計",
+            data: exTaoyuan,
+            backgroundColor: isDark
+              ? "rgba(55,138,221,0.65)"
+              : "rgba(55,138,221,0.55)",
+            borderRadius: 3,
+            yAxisID: "y",
+            order: 2,
+          },
+          {
+            label: "YoY%",
+            data: yoy,
+            type: "line",
+            borderColor: isDark ? "#F59E0B" : "#D97706",
+            backgroundColor: "transparent",
+            pointRadius: 4,
+            pointBackgroundColor: yoy.map(function (v) {
+              return v !== null && v < 0
+                ? "#E24B4A"
+                : isDark
+                  ? "#F59E0B"
+                  : "#D97706";
+            }),
+            pointBorderColor: yoy.map(function (v) {
+              return v !== null && v < 0
+                ? "#E24B4A"
+                : isDark
+                  ? "#F59E0B"
+                  : "#D97706";
+            }),
+            borderWidth: 2.5,
+            borderDash: [5, 3],
+            tension: 0.3,
+            yAxisID: "y1",
+            order: 0,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: { display: false },
+          title: {
+            display: true,
+            text: "扣除桃園空港後海港貿易值 vs 台商回流時間軸",
+            color: textColor,
+            font: { size: 14, weight: "500" },
+            padding: { bottom: 16 },
+          },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                if (ctx.datasetIndex === 0)
+                  return ctx.raw.toLocaleString() + " 億";
+                return ctx.raw !== null
+                  ? "YoY " + (ctx.raw >= 0 ? "+" : "") + ctx.raw + "%"
+                  : "";
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: years.map(function (y) {
+                const n = parseInt(y);
+                return n >= 2018 && n <= 2020
+                  ? "#E24B4A"
+                  : n >= 2021
+                    ? "#185FA5"
+                    : textColor;
+              }),
+              font: {
+                size: 11,
+                weight: years.map(function (y) {
+                  return parseInt(y) >= 2018 ? "500" : "400";
+                }),
+              },
+            },
+          },
+          y: {
+            position: "left",
+            grid: { color: gridColor },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              callback: function (v) {
+                return v.toLocaleString();
+              },
+            },
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: "億 NTD",
+              color: textColor,
+              font: { size: 11 },
+            },
+          },
+          y1: {
+            position: "right",
+            grid: { display: false },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              callback: function (v) {
+                return (v >= 0 ? "+" : "") + v + "%";
+              },
+            },
+            min: -40,
+            max: 140,
+            title: {
+              display: true,
+              text: "年增率",
+              color: textColor,
+              font: { size: 11 },
+            },
+          },
+        },
+      },
+    });
+  })();
+</script>

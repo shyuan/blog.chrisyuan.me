@@ -1,0 +1,194 @@
+---
+// 2025 vs 2024 月度貿易值：H1/H2 對比，10 月為史上最高
+// 資料來源：行政院主計總處，自由貿易港區貿易值（A070105040）
+---
+
+<div class="ftz-monthly-container">
+  <div class="ftz-legend">
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #85B7EB;"></span>H1
+      上半年 +73.8%</span
+    >
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #E24B4A;"></span>H2
+      下半年 +122.6%</span
+    >
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-dash"></span>113 年同期</span
+    >
+  </div>
+  <div class="ftz-canvas-wrap" style="height: 380px;">
+    <canvas id="ftz-chart-monthly"></canvas>
+  </div>
+</div>
+
+<style>
+  .ftz-monthly-container {
+    padding: 0.5rem 0;
+  }
+  .ftz-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--foreground);
+    opacity: 0.9;
+  }
+  .ftz-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ftz-legend-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .ftz-legend-dash {
+    display: inline-block;
+    width: 24px;
+    height: 0;
+    border-top: 1.5px dashed currentColor;
+    opacity: 0.5;
+  }
+  .ftz-canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+</style>
+
+<script is:inline>
+  (function init() {
+    if (typeof Chart === "undefined") {
+      setTimeout(init, 50);
+      return;
+    }
+    const rootStyles = getComputedStyle(document.documentElement);
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
+    const textColor =
+      rootStyles.getPropertyValue("--foreground").trim() ||
+      (isDark ? "#c9cacc" : "#282828");
+    const months = [
+      "1月",
+      "2月",
+      "3月",
+      "4月",
+      "5月",
+      "6月",
+      "7月",
+      "8月",
+      "9月",
+      "10月",
+      "11月",
+      "12月",
+    ];
+
+    const total114 = [
+      4466, 2257, 4611, 4860, 3635, 4719, 5548, 5265, 5608, 7093, 5675, 6440,
+    ];
+    const total113 = [
+      2130, 1788, 3053, 2549, 2029, 2580, 2946, 2507, 2335, 2709, 2375, 3138,
+    ];
+
+    const h1Color = "#85B7EB";
+    const h2Color = "#E24B4A";
+    const pointColors = total114.map(function (v, i) {
+      return i < 6 ? h1Color : h2Color;
+    });
+
+    new Chart(document.getElementById("ftz-chart-monthly"), {
+      type: "line",
+      data: {
+        labels: months,
+        datasets: [
+          {
+            label: "114 年",
+            data: total114,
+            borderColor: h2Color,
+            segment: {
+              borderColor: function (ctx) {
+                return ctx.p0DataIndex < 5 ? h1Color : h2Color;
+              },
+            },
+            pointBackgroundColor: pointColors,
+            pointBorderColor: pointColors,
+            pointRadius: 6,
+            pointHoverRadius: 8,
+            borderWidth: 3,
+            tension: 0.3,
+            fill: false,
+          },
+          {
+            label: "113 年",
+            data: total113,
+            borderColor: isDark
+              ? "rgba(200,200,190,0.45)"
+              : "rgba(136,135,128,0.4)",
+            borderDash: [5, 4],
+            pointRadius: 0,
+            borderWidth: 1.5,
+            tension: 0.3,
+            fill: false,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { top: 30, right: 10 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return (
+                  ctx.dataset.label + ": " + ctx.raw.toLocaleString() + " 億"
+                );
+              },
+            },
+          },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: textColor, font: { size: 12 }, autoSkip: false },
+          },
+          y: {
+            grid: { color: gridColor },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              callback: function (v) {
+                return v.toLocaleString();
+              },
+            },
+            beginAtZero: true,
+            max: 8200,
+          },
+        },
+        animation: {
+          onComplete: function () {
+            const ctx = this.ctx;
+            const meta = this.getDatasetMeta(0);
+            ctx.save();
+            const oct = meta.data[9];
+            ctx.textAlign = "center";
+            ctx.fillStyle = "#E24B4A";
+            ctx.font = "500 14px ui-monospace, monospace";
+            ctx.fillText("7,093 億", oct.x, oct.y - 18);
+            ctx.fillStyle = isDark
+              ? "rgba(255,255,255,0.7)"
+              : "rgba(0,0,0,0.55)";
+            ctx.font = "400 11px ui-monospace, monospace";
+            ctx.fillText("史上最高", oct.x, oct.y - 4);
+            ctx.restore();
+          },
+        },
+      },
+    });
+  })();
+</script>

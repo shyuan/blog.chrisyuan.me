@@ -1,0 +1,111 @@
+---
+// 桃園空港自貿區貿易值階梯圖：2021-2025 每次跳躍對應半導體產業事件
+// 資料來源：行政院主計總處，自由貿易港區貿易值（A070105040）
+---
+
+<div class="ftz-staircase-container">
+  <div class="ftz-canvas-wrap" style="height: 420px;">
+    <canvas id="ftz-chart-staircase"></canvas>
+  </div>
+</div>
+
+<style>
+  .ftz-staircase-container {
+    padding: 0.5rem 0;
+  }
+  .ftz-canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+</style>
+
+<script is:inline>
+  (function init() {
+    if (typeof Chart === "undefined") {
+      setTimeout(init, 50);
+      return;
+    }
+    const rootStyles = getComputedStyle(document.documentElement);
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const textColor =
+      rootStyles.getPropertyValue("--foreground").trim() ||
+      (isDark ? "#c9cacc" : "#282828");
+
+    const vals = [6366, 9233, 13403, 23780, 51289];
+    const labels = ["2021", "2022", "2023", "2024", "2025"];
+    const events = [
+      "全球晶片荒",
+      "成熟製程擴產",
+      "ChatGPT 元年",
+      "AI 伺服器放量",
+      "Blackwell 全開",
+    ];
+    const dispVals = ["6,366 億", "9,233 億", "1.34 兆", "2.38 兆", "5.13 兆"];
+
+    new Chart(document.getElementById("ftz-chart-staircase"), {
+      type: "bar",
+      data: {
+        labels: labels,
+        datasets: [
+          {
+            data: vals,
+            backgroundColor: [
+              "#F09595",
+              "#E24B4A",
+              "#E24B4A",
+              "#A32D2D",
+              "#791F1F",
+            ],
+            borderRadius: 6,
+            barPercentage: 0.75,
+            categoryPercentage: 0.85,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { top: 40 } },
+        plugins: {
+          legend: { display: false },
+          tooltip: { enabled: false },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: { color: textColor, font: { size: 13, weight: "500" } },
+          },
+          y: {
+            display: false,
+            beginAtZero: true,
+            max: 62000,
+          },
+        },
+        animation: {
+          onComplete: function () {
+            const ctx = this.ctx;
+            const meta = this.getDatasetMeta(0);
+            ctx.save();
+            meta.data.forEach(function (bar, i) {
+              const x = bar.x;
+              const y = bar.y;
+              ctx.textAlign = "center";
+              ctx.fillStyle = isDark
+                ? "rgba(255,255,255,0.85)"
+                : "rgba(0,0,0,0.8)";
+              ctx.font = "500 15px ui-monospace, monospace";
+              ctx.fillText(dispVals[i], x, y - 24);
+              ctx.fillStyle = isDark
+                ? "rgba(255,255,255,0.65)"
+                : "rgba(0,0,0,0.5)";
+              ctx.font = "400 11px ui-monospace, monospace";
+              ctx.fillText(events[i], x, y - 8);
+            });
+            ctx.restore();
+          },
+        },
+      },
+    });
+  })();
+</script>

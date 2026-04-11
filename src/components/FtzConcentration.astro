@@ -1,0 +1,216 @@
+---
+// 桃園空港 vs 海港合計：2011-2025 集中度對比
+// 資料來源：行政院主計總處，自由貿易港區貿易值（A070105040）
+---
+
+<div class="ftz-concentration-container">
+  <div class="ftz-legend">
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #E24B4A;"
+      ></span>桃園空港</span
+    >
+    <span class="ftz-legend-item"
+      ><span class="ftz-legend-swatch" style="background: #378ADD;"
+      ></span>其餘海港合計</span
+    >
+  </div>
+  <div class="ftz-canvas-wrap" style="height: 420px;">
+    <canvas id="ftz-chart-concentration"></canvas>
+  </div>
+</div>
+
+<style>
+  .ftz-concentration-container {
+    padding: 0.5rem 0;
+  }
+  .ftz-legend {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 16px;
+    margin-bottom: 8px;
+    font-size: 12px;
+    color: var(--foreground);
+    opacity: 0.9;
+  }
+  .ftz-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+  .ftz-legend-swatch {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 2px;
+  }
+  .ftz-canvas-wrap {
+    position: relative;
+    width: 100%;
+  }
+</style>
+
+<script is:inline>
+  (function init() {
+    if (typeof Chart === "undefined") {
+      setTimeout(init, 50);
+      return;
+    }
+    const rootStyles = getComputedStyle(document.documentElement);
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    const gridColor = isDark ? "rgba(255,255,255,0.12)" : "rgba(0,0,0,0.1)";
+    const textColor =
+      rootStyles.getPropertyValue("--foreground").trim() ||
+      (isDark ? "#c9cacc" : "#282828");
+
+    const years = [
+      "2011",
+      "2012",
+      "2013",
+      "2014",
+      "2015",
+      "2016",
+      "2017",
+      "2018",
+      "2019",
+      "2020",
+      "2021",
+      "2022",
+      "2023",
+      "2024",
+      "2025",
+    ];
+    const taoyuan = [
+      1267, 1120, 1672, 2192, 3030, 3258, 3661, 4449, 6434, 6366, 9233, 12671,
+      13403, 23780, 51289,
+    ];
+    const seaports = [
+      1760, 3899, 3887, 3672, 3233, 3488, 3110, 3025, 3147, 2767, 3707, 5333,
+      5991, 6356, 8888,
+    ];
+
+    new Chart(document.getElementById("ftz-chart-concentration"), {
+      type: "line",
+      data: {
+        labels: years,
+        datasets: [
+          {
+            label: "桃園空港",
+            data: taoyuan,
+            backgroundColor: isDark
+              ? "rgba(226,75,74,0.5)"
+              : "rgba(226,75,74,0.45)",
+            borderColor: "#E24B4A",
+            borderWidth: 1.5,
+            fill: "origin",
+            tension: 0.35,
+            pointRadius: 0,
+            order: 1,
+          },
+          {
+            label: "海港合計",
+            data: seaports,
+            backgroundColor: isDark
+              ? "rgba(55,138,221,0.55)"
+              : "rgba(55,138,221,0.4)",
+            borderColor: "#378ADD",
+            borderWidth: 1.5,
+            fill: "origin",
+            tension: 0.35,
+            pointRadius: 0,
+            order: 2,
+          },
+        ],
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        layout: { padding: { top: 20 } },
+        interaction: { mode: "index", intersect: false },
+        plugins: {
+          legend: { display: false },
+          tooltip: {
+            callbacks: {
+              label: function (ctx) {
+                return (
+                  ctx.dataset.label + ": " + ctx.raw.toLocaleString() + " 億"
+                );
+              },
+              afterBody: function (items) {
+                const t = items[0].raw;
+                const s = items[1].raw;
+                const total = t + s;
+                return (
+                  "總計: " +
+                  total.toLocaleString() +
+                  " 億\n桃園占比: " +
+                  Math.round((t / total) * 100) +
+                  "%"
+                );
+              },
+            },
+          },
+          filler: { propagate: false },
+        },
+        scales: {
+          x: {
+            grid: { display: false },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              autoSkip: false,
+              maxRotation: 45,
+            },
+          },
+          y: {
+            stacked: false,
+            grid: { color: gridColor },
+            ticks: {
+              color: textColor,
+              font: { size: 11 },
+              callback: function (v) {
+                return v >= 10000
+                  ? (v / 10000).toFixed(0) + " 兆"
+                  : v.toLocaleString();
+              },
+            },
+            beginAtZero: true,
+            max: 58000,
+          },
+        },
+        animation: {
+          onComplete: function () {
+            const ctx = this.ctx;
+            const meta0 = this.getDatasetMeta(0);
+            const meta1 = this.getDatasetMeta(1);
+            ctx.save();
+
+            const last = meta0.data[14];
+            ctx.textAlign = "right";
+            ctx.fillStyle = isDark ? "#F09595" : "#791F1F";
+            ctx.font = "500 13px ui-monospace, monospace";
+            ctx.fillText("5.1 兆", last.x - 8, last.y + 50);
+            ctx.fillStyle = isDark
+              ? "rgba(240,149,149,0.8)"
+              : "rgba(163,45,45,0.6)";
+            ctx.font = "400 11px ui-monospace, monospace";
+            ctx.fillText("桃園空港", last.x - 8, last.y + 66);
+
+            const lastSea = meta1.data[14];
+            ctx.textAlign = "left";
+            ctx.fillStyle = isDark ? "#85B7EB" : "#0C447C";
+            ctx.font = "500 12px ui-monospace, monospace";
+            ctx.fillText("0.89 兆", lastSea.x + 6, lastSea.y - 12);
+            ctx.fillStyle = isDark
+              ? "rgba(133,183,235,0.8)"
+              : "rgba(12,68,124,0.6)";
+            ctx.font = "400 11px ui-monospace, monospace";
+            ctx.fillText("海港", lastSea.x + 6, lastSea.y + 2);
+
+            ctx.restore();
+          },
+        },
+      },
+    });
+  })();
+</script>
