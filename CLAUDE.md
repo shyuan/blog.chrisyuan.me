@@ -6,7 +6,7 @@
 
 ## 技術棧
 
-- **框架**: Astro 6.x (`^6.0.7`)
+- **框架**: Astro 6.x (`^6.3.3`)
 - **基礎主題**: AstroPaper v5 (https://github.com/satnaing/astro-paper)
 - **樣式**: Tailwind CSS 4.x (CSS-based config) + Terminal CSS 配色
 - **內容格式**: Markdown / MDX
