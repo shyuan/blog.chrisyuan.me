@@ -49,7 +49,15 @@ const URL = Astro.url;
 }
 
 <script>
+  let cleanupHelper: AbortController | null = null;
+
   function initShareCopy() {
+    // Abort any listeners attached during a previous page so re-running
+    // on view-transition navigations doesn't stack handlers.
+    if (cleanupHelper) cleanupHelper.abort();
+    cleanupHelper = new AbortController();
+    const { signal } = cleanupHelper;
+
     const buttons =
       document.querySelectorAll<HTMLButtonElement>("[data-share-copy]");
     const feedback = document.querySelector<HTMLElement>(
@@ -60,36 +68,41 @@ const URL = Astro.url;
     let hideTimer: ReturnType<typeof setTimeout> | null = null;
 
     buttons.forEach(btn => {
-      btn.addEventListener("click", async () => {
-        try {
-          await navigator.clipboard.writeText(window.location.href);
-        } catch {
-          // Older browsers / non-secure contexts — fall back to legacy
-          const ta = document.createElement("textarea");
-          ta.value = window.location.href;
-          ta.style.position = "fixed";
-          ta.style.left = "-9999px";
-          document.body.appendChild(ta);
-          ta.select();
+      btn.addEventListener(
+        "click",
+        async () => {
           try {
-            document.execCommand("copy");
+            await navigator.clipboard.writeText(window.location.href);
           } catch {
-            // give up silently — clipboard was the best-effort path
+            // Older browsers / non-secure contexts — fall back to legacy
+            const ta = document.createElement("textarea");
+            ta.value = window.location.href;
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+            } catch {
+              // give up silently — clipboard was the best-effort path
+            }
+            document.body.removeChild(ta);
           }
-          document.body.removeChild(ta);
-        }
 
-        if (feedback) {
-          feedback.style.opacity = "1";
-          if (hideTimer) clearTimeout(hideTimer);
-          hideTimer = setTimeout(() => {
-            feedback.style.opacity = "0";
-          }, 1600);
-        }
-      });
+          if (feedback) {
+            feedback.style.opacity = "1";
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+              feedback.style.opacity = "0";
+            }, 1600);
+          }
+        },
+        { signal }
+      );
     });
   }
 
-  initShareCopy();
+  // Astro's ClientRouter fires astro:page-load on the initial load too, so
+  // subscribing here covers both first paint and subsequent soft navigations.
   document.addEventListener("astro:page-load", initShareCopy);
 </script>
