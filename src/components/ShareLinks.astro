@@ -81,8 +81,13 @@ const URL = Astro.url;
             ta.style.left = "-9999px";
             document.body.appendChild(ta);
             ta.select();
+            // execCommand is deprecated but is the only available fallback
+            // when the Clipboard API is unavailable (e.g. non-HTTPS contexts).
+            const legacyDocument = document as unknown as {
+              execCommand(command: string): boolean;
+            };
             try {
-              document.execCommand("copy");
+              legacyDocument.execCommand("copy");
             } catch {
               // give up silently — clipboard was the best-effort path
             }

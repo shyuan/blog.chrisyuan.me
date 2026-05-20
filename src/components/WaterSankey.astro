@@ -630,6 +630,7 @@ const pctLabel: Record<string, string> = {
 </style>
 
 <script
+  is:inline
   define:vars={{
     adjacencyJSON: JSON.stringify(
       Object.fromEntries(Object.entries(adjacency).map(([k, v]) => [k, [...v]]))

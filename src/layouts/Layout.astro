@@ -182,10 +182,12 @@ const articleSchema = isArticle
       PUBLIC_GA_MEASUREMENT_ID && (
         <>
           <script
+            is:inline
             type="text/partytown"
             src={`https://www.googletagmanager.com/gtag/js?id=${PUBLIC_GA_MEASUREMENT_ID}`}
           />
           <script
+            is:inline
             type="text/partytown"
             set:html={`
             window.dataLayer = window.dataLayer || [];
