@@ -6,6 +6,7 @@ import {
   PUBLIC_GOOGLE_SITE_VERIFICATION,
   PUBLIC_GA_MEASUREMENT_ID,
 } from "astro:env/client";
+import SearchModal from "@/components/SearchModal.astro";
 import { SITE } from "@/config";
 import "@/styles/global.css";
 
@@ -243,6 +244,8 @@ const articleSchema = isArticle
     </div>
 
     <slot />
+
+    <SearchModal />
 
     <!-- Load full theme logic -->
     <script src="../scripts/theme.ts"></script>
