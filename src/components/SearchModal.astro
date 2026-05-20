@@ -12,6 +12,7 @@ import "@pagefind/default-ui/css/ui.css";
   role="dialog"
   aria-modal="true"
   aria-label="Search the site"
+  aria-hidden="true"
 >
   <div class="search-modal-backdrop" data-search-close></div>
   <div class="search-modal-container">
@@ -81,13 +82,22 @@ import "@pagefind/default-ui/css/ui.css";
     const modal = document.getElementById("search-modal");
     if (!modal) return;
 
+    // Reset any leftover body scroll-lock from a previous page where the
+    // modal was open during a browser back/forward navigation
+    document.body.style.overflow = "";
+    modal.classList.remove("active");
+    modal.setAttribute("aria-hidden", "true");
+
     const emptyState = modal.querySelector(
       "[data-search-empty]"
     ) as HTMLElement | null;
     let pagefindLoaded = false;
+    let lastFocused: HTMLElement | null = null;
 
     function openModal() {
+      lastFocused = document.activeElement as HTMLElement | null;
       modal!.classList.add("active");
+      modal!.setAttribute("aria-hidden", "false");
       document.body.style.overflow = "hidden";
 
       if (!pagefindLoaded) {
@@ -105,7 +115,10 @@ import "@pagefind/default-ui/css/ui.css";
 
     function closeModal() {
       modal!.classList.remove("active");
+      modal!.setAttribute("aria-hidden", "true");
       document.body.style.overflow = "";
+      lastFocused?.focus?.();
+      lastFocused = null;
     }
 
     async function loadPagefind() {
