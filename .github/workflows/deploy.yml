@@ -8,6 +8,11 @@ on:
   push:
     branches:
       - main
+  # Hourly rebuild to publish scheduled posts (paired with
+  # SITE.scheduledPostMargin = 65 minutes in src/config.ts).
+  schedule:
+    - cron: "0 * * * *"
+  workflow_dispatch:
 
 env:
   FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true

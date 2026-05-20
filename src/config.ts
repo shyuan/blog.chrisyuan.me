@@ -8,7 +8,7 @@ export const SITE = {
   lightAndDarkMode: true,
   postPerIndex: 4,
   postPerPage: 10,
-  scheduledPostMargin: 15 * 60 * 1000, // 15 minutes
+  scheduledPostMargin: 65 * 60 * 1000, // 65 minutes (slightly larger than the hourly cron interval in .github/workflows/deploy.yml)
   showArchives: true,
   showBackButton: true, // show back button in post detail
   editPost: {

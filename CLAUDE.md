@@ -260,11 +260,25 @@ ogImage: ""                   # 選用，社群分享圖片
 - **`ci.yml`**（PR 觸發）：
   1. **lint** job：AutoCorrect（CJK 間距）→ ESLint → format check
   2. **build** job：`bun run build`（含 OG 圖片，完整驗證）
-- **`deploy.yml`**（push 到 `main` 觸發）：
+- **`deploy.yml`**（push 到 `main` / 每小時 cron / `workflow_dispatch` 觸發）：
   1. **lint** job：同 ci.yml
   2. **deploy** job：`bun run build`（含 GA 環境變數）→ wrangler 部署至 Cloudflare Pages
 
 lint 快速失敗時不浪費 build 資源；deploy 只 build 一次（不再透過 `workflow_call` 呼叫 ci.yml 導致雙重 build）。
+
+### 排程發布（scheduledPostMargin）
+
+文章 frontmatter 的 `pubDatetime` 可以設為未來時間。`src/utils/postFilter.ts` 在 production build 時會依下列規則決定文章是否納入：
+
+```ts
+Date.now() > new Date(pubDatetime).getTime() - SITE.scheduledPostMargin
+```
+
+- **`SITE.scheduledPostMargin`**（`src/config.ts`）預設 `65 * 60 * 1000` = 65 分鐘
+- 配合 `deploy.yml` 的 `schedule: cron "0 * * * *"`（每小時 0 分觸發 rebuild）
+- 意義：文章 `pubDatetime` 與 build 時間的差距小於 65 分鐘時即會上線；GitHub Actions cron 通常會延遲 0-15 分鐘，65 分 margin 確保「下個整點 cron」一定會把文章納入
+- **生效範圍**（dev 模式不檢查，所有非 draft 都顯示）：`index.astro`、`posts/[...page].astro`、`posts/[...slug]/index.astro`、`archives/index.astro`、`tags/*`、`rss.xml.ts`、`llms.txt.ts`、`og.png.ts`（per-post）
+- **dev 不受影響**：`import.meta.env.DEV` 時 postFilter 跳過時間檢查，未來日期的文章在本地預覽都可見
 
 ### Cloudflare 設定
 
