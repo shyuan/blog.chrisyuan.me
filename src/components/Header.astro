@@ -48,9 +48,14 @@ const isActive = (path: string) => {
     >
       {SITE.title}
     </a>
+    <div
+      aria-hidden="true"
+      class="dash-extension hidden sm:mx-4 sm:block sm:h-[18px] sm:flex-1"
+    >
+    </div>
     <nav
       id="nav-menu"
-      class="flex w-full flex-col items-center sm:ms-2 sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
+      class="flex w-full flex-col items-center sm:ms-2 sm:w-auto sm:flex-row sm:justify-end sm:space-x-4 sm:py-0"
     >
       <button
         id="menu-btn"
