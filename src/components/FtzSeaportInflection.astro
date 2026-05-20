@@ -212,13 +212,13 @@
                 return ctx.p1DataIndex <= 9 ? 2 : 3.5;
               },
             },
-            pointBackgroundColor: exTaoyuan.map(function (v, i) {
+            pointBackgroundColor: exTaoyuan.map(function (_v, i) {
               return i <= 9 ? plateauColor : growthColor;
             }),
-            pointBorderColor: exTaoyuan.map(function (v, i) {
+            pointBorderColor: exTaoyuan.map(function (_v, i) {
               return i <= 9 ? plateauColor : growthColor;
             }),
-            pointRadius: exTaoyuan.map(function (v, i) {
+            pointRadius: exTaoyuan.map(function (_v, i) {
               return i === 10 ? 0 : i <= 9 ? 3 : 5;
             }),
             tension: 0.3,
