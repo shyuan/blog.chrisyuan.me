@@ -121,6 +121,26 @@ import "@pagefind/default-ui/css/ui.css";
       lastFocused = null;
     }
 
+    function bindPagefindInputBehavior() {
+      const input = modal!.querySelector<HTMLInputElement>(
+        ".pagefind-ui__search-input"
+      );
+      if (input && emptyState) {
+        // Sync placeholder visibility with whatever the user has already typed
+        emptyState.style.display = input.value.trim() ? "none" : "";
+        input.addEventListener(
+          "input",
+          () => {
+            emptyState.style.display = input.value.trim() ? "none" : "";
+          },
+          { signal }
+        );
+      }
+      if (modal!.classList.contains("active")) {
+        setTimeout(() => input?.focus(), 200);
+      }
+    }
+
     async function loadPagefind() {
       const container = document.getElementById("modal-pagefind-search");
       if (!container) return;
@@ -134,11 +154,22 @@ import "@pagefind/default-ui/css/ui.css";
         return;
       }
 
+      // PagefindUI persists in the DOM across Astro view transitions, but
+      // every astro:page-load re-init creates a fresh AbortSignal, so the
+      // previous input listener is dead. Re-bind synchronously and bail.
+      if (container.querySelector(".pagefind-ui")) {
+        bindPagefindInputBehavior();
+        return;
+      }
+
       const onIdle =
         window.requestIdleCallback || ((cb: () => void) => setTimeout(cb, 1));
       onIdle(async () => {
         if (signal.aborted) return;
-        if (container.querySelector(".pagefind-ui")) return;
+        if (container.querySelector(".pagefind-ui")) {
+          bindPagefindInputBehavior();
+          return;
+        }
 
         try {
           // @ts-expect-error — Missing types for @pagefind/default-ui package.
@@ -164,22 +195,7 @@ import "@pagefind/default-ui/css/ui.css";
           return;
         }
 
-        const input = modal!.querySelector<HTMLInputElement>(
-          ".pagefind-ui__search-input"
-        );
-        if (input && emptyState) {
-          input.addEventListener(
-            "input",
-            () => {
-              emptyState.style.display = input.value.trim() ? "none" : "";
-            },
-            { signal }
-          );
-        }
-
-        if (modal!.classList.contains("active")) {
-          setTimeout(() => input?.focus(), 200);
-        }
+        bindPagefindInputBehavior();
       });
     }
 
