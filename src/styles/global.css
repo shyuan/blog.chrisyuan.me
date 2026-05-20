@@ -113,7 +113,7 @@ html[data-theme="dark"] {
   border-bottom: 3px dotted var(--accent);
 }
 .post-title::before {
-  content: "# ";
+  content: "# " / "";
   color: var(--accent);
   opacity: 0.4;
 }

@@ -24,17 +24,19 @@
       @apply mb-3 text-foreground;
     }
 
-    /* Terminal-style heading prefixes */
+    /* Terminal-style heading prefixes
+       The `/ ""` is CSS Generated Content alt-text — suppresses screen
+       reader announcement of the decorative # / ## / ### prefix. */
     h1::before {
-      content: "# ";
+      content: "# " / "";
       opacity: 0.4;
     }
     h2::before {
-      content: "## ";
+      content: "## " / "";
       opacity: 0.4;
     }
     h3::before {
-      content: "### ";
+      content: "### " / "";
       opacity: 0.4;
     }
 
