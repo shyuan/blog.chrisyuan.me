@@ -11,9 +11,6 @@ on:
       - synchronize
       - reopened
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   lint:
     name: Code standards
@@ -52,7 +49,7 @@ jobs:
         uses: actions/checkout@v6
 
       - name: "⬢ Setup Node.js"
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v6
         with:
           node-version: 22
 
