@@ -10,17 +10,99 @@ const URL = Astro.url;
     <div class="flex flex-none flex-col items-center justify-center gap-1 md:items-start">
       <span class="italic">Share this post on:</span>
       <div class="text-center">
-        {SHARE_LINKS.map(social => (
-          <LinkButton
-            href={`${social.href + URL}`}
-            class="scale-90 p-2 hover:rotate-6 sm:p-1"
-            title={social.linkTitle}
-          >
-            <social.icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
-            <span class="sr-only">{social.linkTitle}</span>
-          </LinkButton>
-        ))}
+        {SHARE_LINKS.map(social =>
+          social.copy ? (
+            <button
+              type="button"
+              class="group inline-flex scale-90 items-center gap-1 p-2 hover:rotate-6 hover:text-accent sm:p-1"
+              title={social.linkTitle}
+              aria-label={social.linkTitle}
+              data-share-copy
+            >
+              <social.icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
+              <span class="sr-only">{social.linkTitle}</span>
+            </button>
+          ) : (
+            <LinkButton
+              href={`${social.href + URL}`}
+              class="scale-90 p-2 hover:rotate-6 sm:p-1"
+              title={social.linkTitle}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <social.icon class="inline-block size-6 scale-125 fill-transparent stroke-current stroke-2 opacity-90 group-hover:fill-transparent sm:scale-110" />
+              <span class="sr-only">{social.linkTitle}</span>
+            </LinkButton>
+          )
+        )}
       </div>
+      <span
+        class="pointer-events-none text-xs text-accent opacity-0 transition-opacity duration-200"
+        data-share-copy-feedback
+        role="status"
+        aria-live="polite"
+      >
+        Link copied!
+      </span>
     </div>
   )
 }
+
+<script>
+  let cleanupHelper: AbortController | null = null;
+
+  function initShareCopy() {
+    // Abort any listeners attached during a previous page so re-running
+    // on view-transition navigations doesn't stack handlers.
+    if (cleanupHelper) cleanupHelper.abort();
+    cleanupHelper = new AbortController();
+    const { signal } = cleanupHelper;
+
+    const buttons =
+      document.querySelectorAll<HTMLButtonElement>("[data-share-copy]");
+    const feedback = document.querySelector<HTMLElement>(
+      "[data-share-copy-feedback]"
+    );
+    if (buttons.length === 0) return;
+
+    let hideTimer: ReturnType<typeof setTimeout> | null = null;
+
+    buttons.forEach(btn => {
+      btn.addEventListener(
+        "click",
+        async () => {
+          try {
+            await navigator.clipboard.writeText(window.location.href);
+          } catch {
+            // Older browsers / non-secure contexts — fall back to legacy
+            const ta = document.createElement("textarea");
+            ta.value = window.location.href;
+            ta.style.position = "fixed";
+            ta.style.left = "-9999px";
+            document.body.appendChild(ta);
+            ta.select();
+            try {
+              document.execCommand("copy");
+            } catch {
+              // give up silently — clipboard was the best-effort path
+            }
+            document.body.removeChild(ta);
+          }
+
+          if (feedback) {
+            feedback.style.opacity = "1";
+            if (hideTimer) clearTimeout(hideTimer);
+            hideTimer = setTimeout(() => {
+              feedback.style.opacity = "0";
+            }, 1600);
+          }
+        },
+        { signal }
+      );
+    });
+  }
+
+  // Astro's ClientRouter fires astro:page-load on the initial load too, so
+  // subscribing here covers both first paint and subsequent soft navigations.
+  document.addEventListener("astro:page-load", initShareCopy);
+</script>
