@@ -1,6 +1,6 @@
 ---
 pubDatetime: 2026-05-21T03:40:43Z
-title: "放下管理數千人的頭銜，去當一個「技術員工」"
+title: "從 CTO 變 MTS：AI Agent 為什麼把矽谷頂尖人才拉回第一線"
 slug: "top-talent-becoming-mts"
 tags:
   - AI
