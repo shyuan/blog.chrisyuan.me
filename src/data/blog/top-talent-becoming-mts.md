@@ -9,7 +9,7 @@ tags:
   - 職涯
   - 組織設計
   - Andrej Karpathy
-description: "2026 年 5 月，Andrej Karpathy 加入 Anthropic，職稱是 Member of Technical Staff——跟剛畢業的工程師同一張名片。從他到 Mike Krieger，一群在自己公司管著上千名工程師的高階主管陸續放下 C-suite 頭銜換上 MTS。當 AI Agent 翻轉了協作成本曲線，最稀缺的能力正從「組織一群人」轉移到「知道該做什麼，而且有品味地把它做出來」。"
+description: "從 Karpathy 到 Mike Krieger，矽谷頂尖主管紛紛放下 C-suite 換掛 MTS。AI Agent 重塑協作成本結構，「懂得做什麼、有品味地做出來」成為最稀缺的能力。"
 draft: false
 ---
 
