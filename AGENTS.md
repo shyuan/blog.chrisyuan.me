@@ -223,7 +223,7 @@ ogImage: ""                   # 選用，社群分享圖片
    - `pubDatetime`：發布日期（ISO 8601 格式，如 `2026-02-19T00:00:00Z`）
    - `title`：文章標題（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
    - `tags`：至少一個標籤
-   - `description`：1-2 句摘要，用於 SEO 與社群分享卡片
+   - `description`：1-2 句摘要，用於 SEO 與社群分享卡片；**字元數須在 25–150 之間**（Bing/Google 顯示上限約 150 字元，CJK 字元佔兩個半形寬度，超過會觸發 SEO 警告）
    - `slug`：英文 URL 路徑（如 `taiwan-stock-odd-lot-trading-reform`），中文檔名時必填，避免 URL 出現中文
    - `draft: false`：設為 false 才會發布
    - 選填：`featured`、`ogImage`、`canonicalURL`
