@@ -2,7 +2,7 @@
 title: "了解 Azure 服務和功能的 GA、私人預覽和公眾預覽的差異"
 pubDatetime: 2024-07-10T04:03:33.000Z
 slug: "azure-ga"
-description: "請記住，您絕不應該將非 GA 的服務和功能用於生產環境。私人和公眾預覽的目的是僅供評估之用。除了缺乏服務等級協議（SLA）和正式支持外，還可能存在其他尚未發現或修復的問題。想想 #ChaosDB 漏洞，這是由 CosmosDB 的一個公眾預覽功能引起的。 以下是您應該注意的一些最重要事項： Area 私人預覽公開預覽 GA SLA 無無有 Support 無受限支援正式支援 對誰可用？僅"
+description: "Azure Private Preview、Public Preview 與 GA 的差異：為什麼不應在正式環境使用非 GA 功能，以 ChaosDB 漏洞為例。"
 tags:
   - Azure
 ---

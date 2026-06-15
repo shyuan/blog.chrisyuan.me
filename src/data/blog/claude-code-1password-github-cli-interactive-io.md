@@ -11,7 +11,7 @@ tags:
   - aws
   - kubernetes
   - cli
-description: "Claude Code 以 non-interactive 子程序執行 gh / aws / kubectl，導致 1Password shell plugin 的 TouchID 認證失敗。記錄從發現問題到最終用條件式 alias + op read 注入 credentials 的除錯過程，涵蓋 GitHub CLI、AWS CLI 與 EKS kubectl。"
+description: "Claude Code 的 non-interactive 子程序導致 1Password TouchID 失敗。用條件式 alias + op read 注入 credentials 解決 gh / aws / kubectl 認證問題。"
 ---
 
 ## Table of contents

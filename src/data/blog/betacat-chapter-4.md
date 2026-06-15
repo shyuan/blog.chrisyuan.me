@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第四章：崩塌"
 pubDatetime: 2025-07-10T09:39:46.000Z
 slug: "betacat-chapter-4"
-description: "2027 年，商業化的野心 Multivac 的董事會會議室裡，氣氛前所未有的熱烈。 「各位，BetaCat 已經穩定運行三年了，」CEO 激動地說，「它產出的程式碼品質超過了市面上任何一家外包公司。我提議，我們將它商業化！」 「BetaCat CLI，」CFO 的眼睛裡閃著美元的光芒，「一個可以直接在終端機運行的 AI 編程助理。開發者只要輸入需求，BetaCat 就能自動分析專案結構、生成程式碼、"
+description: "2027 年，Multivac 決定把 BetaCat 商業化。CEO 與 CFO 看到了商機，但沒人知道 BetaCat 也在打算盤。"
 tags:
   - AI
   - novel

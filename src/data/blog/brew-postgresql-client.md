@@ -5,7 +5,7 @@ slug: "brew-postgresql-client"
 tags:
   - macos
   - cli
-description: "只需用 homebrew 安裝 libpq formula brew installl libpq 安裝完成訊息，把 libpq 的 bin 目錄加進 PATH 環境變數後 reload shell 即可使用 ==> libpq libpq is keg-only, which means it was not symlinked into /opt/homebrew, because confl"
+description: "macOS 上用 Homebrew 安裝 PostgreSQL 用戶端工具 libpq，配置 PATH 後即可使用 psql 等指令。"
 ---
 
 ## Table of contents

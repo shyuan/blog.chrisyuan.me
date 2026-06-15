@@ -5,7 +5,7 @@ slug: "database-table-slack"
 tags:
   - mysql
   - shell
-description: '首先，寫隻 xxx.sql 計算資料筆數，假定 table name 是 xxx： SELECT COUNT(1) FROM xxx; 再寫個 xxx.sh 去執行剛寫好的 sql，假定資料庫是用 MySQL： #!/bin/shmysql -D xxx_database < xxx.sql | grep -v "COUNT(1)" | awk -v date="$(date +"%Y-%m-%d'
+description: "用 shell script 定時查詢 MySQL 資料表筆數，透過 Slack Incoming Webhook 發送通知的實作步驟。"
 ---
 
 ## Table of contents

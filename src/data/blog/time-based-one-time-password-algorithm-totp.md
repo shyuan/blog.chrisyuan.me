@@ -4,7 +4,7 @@ pubDatetime: 2020-10-21T17:10:34.000Z
 slug: "time-based-one-time-password-algorithm-totp"
 tags:
   - others
-description: "Basic Time-based One-time Password algorithm TOTP: Time-Based One-Time Password Algorithm, RFC 6238 Authenticator FreeOTP Google Authenticator Authy Microsoft Authenticator Article 為什麼我拋棄 Google Au"
+description: "TOTP（RFC 6238）的演算法原理、主流驗證器比較（Google Authenticator、Authy、FreeOTP），以及選擇建議。"
 ---
 
 ## Table of contents

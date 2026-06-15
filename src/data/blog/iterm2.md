@@ -2,7 +2,7 @@
 title: "iTerm2 的獨特雙平台開發模式"
 pubDatetime: 2025-05-08T05:32:46.000Z
 slug: "iterm2"
-description: "在 macOS 平台上，如果要選擇終端機工具，iTerm2 絕對是首選。這款軟體採用了一種獨特的社群開發模式，同時運用 GitHub 和 GitLab 兩個平台進行協作。 維護者 George Nachman 對此做出了明確的分工安排：開發者若想為 iTerm2 貢獻程式碼，可以在 iTerm2 的 GitHub repository 發起 Pull Request；但如果要回報錯誤或查閱 Wik"
+description: "macOS 首選終端機工具 iTerm2：同時採用 GitHub 和 GitLab 的開發協作模式，以及分割視窗、profiles 等進階功能介紹。"
 tags:
   - iTerm2
   - GitHub

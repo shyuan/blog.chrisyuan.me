@@ -2,7 +2,7 @@
 title: "解決 Proxmox Backup Server 在舊款 Intel NUC 上的開機問題：Intel Microcode 更新指南"
 pubDatetime: 2025-11-25T16:12:33.000Z
 slug: "proxmox-backup-server-intel-nuc-intel-microcode"
-description: "前言 最近撿到一台 2016 年推出的 MSI Cubi 2 NUC（內部代號 MS-B142），搭載第七代 Intel® Core™ i5-7200U 處理器、DDR4 16GB 記憶體、128GB M.2 2242 SSD 和 1TB 7200 轉傳統硬碟（皆為 SATA 介面）。原本打算將它作為 Proxmox Backup Server (PBS) 4.0 來備份 PVE 環境的 VM 和"
+description: "把 2016 年的 MSI Cubi 2 NUC（i5-7200U）裝成 Proxmox Backup Server 4.0 備份 PVE，附 Intel microcode 注意事項。"
 tags:
   - intel-microcode
   - proxmox-backup-server

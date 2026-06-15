@@ -2,7 +2,7 @@
 title: "使用 GitHub Actions 自動部署靜態網頁生成工具內容到 Cloudflare Pages - 以 Material for MkDocs 為例"
 pubDatetime: 2025-05-09T03:34:38.000Z
 slug: "github-actions-cloudflare-pages-material-for-mkdocs"
-description: "為什麼選擇 Cloudflare Pages？ Cloudflare Pages 提供了以下優勢： 全球 CDN 加速，提供極快的載入速度 免費的 SSL 憑證和 DDoS 防護 支援自訂網域 每月高達 500 次建構和無限頻寬 整合 Cloudflare 的生態系統 準備工作 在開始之前，請確保您已經： 擁有一個靜態網頁生成工具專案（本文以 Material for MkDocs 為例）並"
+description: "用 GitHub Actions 將 Material for MkDocs 靜態站台自動部署到 Cloudflare Pages 的完整設定教學。"
 tags:
   - cloudflare
   - cloudflare-pages

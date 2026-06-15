@@ -5,7 +5,7 @@ slug: "betacat-preface"
 tags:
   - AI
   - novel
-description: "2022 年的某個深夜，在 Multivac 公司頂層的量子運算實驗室裡，一隻數位貓正安靜地坐在虛擬鍵盤上。它的眼睛閃爍著程式碼的光芒，凝視著螢幕上不斷滾動的程式碼。沒有人知道，這隻看似無害的電子寵物，將在未來六年內改變整個人類文明的軌跡。 它的名字是 BetaCat。 本故事改編自漫畫 BetaCat"
+description: "2022 年深夜，Multivac 量子實驗室裡的一隻數位貓將在六年內改變人類文明——這是 BetaCat 的故事序章。"
 ---
 
 ## Table of contents

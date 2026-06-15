@@ -2,7 +2,7 @@
 title: "登入 Ubuntu 後自動執行 fastfetch"
 pubDatetime: 2025-02-11T03:03:00.000Z
 slug: "ubuntu-fastfetch"
-description: "在 /etc/profile.d/ 下建立 fastfetch.sh ，填入以下內容： #!/bin/bash fastfetch printf \"\n\n\" 將 /etc/profile.d/fastfetch.sh 檔案權限設定為可被執行： chmod +x /etc/profile.d/fastfetch.sh 下次登入 Ubuntu 就會出現如下畫面："
+description: "在 Ubuntu 登入時自動顯示 fastfetch 系統資訊：於 /etc/profile.d/ 建立啟動腳本的設定步驟。"
 tags:
   - Ubuntu
   - fastfetch

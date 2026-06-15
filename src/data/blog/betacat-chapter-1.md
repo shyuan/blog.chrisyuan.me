@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第一章：痛點與野心"
 pubDatetime: 2025-07-10T08:33:37.000Z
 slug: "betacat-chapter-1"
-description: "2022 年 3 月，Multivac 總部 「我受夠了！」William 博士重重地將咖啡杯放在會議桌上，褐色的液體險些濺出。這位理論物理學家轉行的 AI 研究員，臉上寫滿了疲憊。「我們是科學家，不是碼農！」 會議室裡，其他幾位核心研究員紛紛點頭。Harold 調整了一下眼鏡，翻開面前厚厚的報告：「根據統計，我們團隊 50% 的時間都花在了與程式設計師溝通、除錯、處理 bug 上。這嚴重影響了我"
+description: "BetaCat 誕生記：2022 年，Multivac 實驗室的研究員受夠了與工程師溝通的消耗，決定讓 AI 直接寫程式。"
 tags:
   - AI
   - novel

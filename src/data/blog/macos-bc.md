@@ -2,7 +2,7 @@
 title: "深入瞭解 macOS 上的命令列計算機工具 bc"
 pubDatetime: 2025-05-08T14:21:05.000Z
 slug: "macos-bc"
-description: "bc 的歷史背景 bc 的全名是「basic calculator」或「bench calculator」，是一個支援任意精度運算的計算器語言。它的歷史可以追溯到 1975 年，首次出現在 Version 6 Unix 中。當時由貝爾實驗室的 Lorinda Cherry 開發，作為另一個計算器程式 dc(desk calculator) 的前端介面。 dc 使用的是反波蘭記法(Reverse P"
+description: "bc 是 Unix 1975 年就有的任意精度計算器語言，由貝爾實驗室開發，本文介紹其歷史與在 macOS 的常用場景。"
 tags:
   - bc
   - macOS

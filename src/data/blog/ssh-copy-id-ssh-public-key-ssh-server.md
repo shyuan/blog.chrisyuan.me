@@ -5,7 +5,7 @@ slug: "ssh-copy-id-ssh-public-key-ssh-server"
 tags:
   - ssh
   - cli
-description: "如果 ssh key 不是預設的 RSA 演算法產生，例如 ed25519 或是儲存位置不是在預設的 ~/.ssh/ 下，可以用 -i 參數另外指定。 如果遠端 SSH server 的 port 不是預設的 22 port，可以用 -p 參數指定。 範例如下： % ssh-copy-id -i .ssh/id_ed25519.pub -p 22222 remote_user_name@192."
+description: "ssh-copy-id 複製公鑰到遠端 server 的完整用法：指定非預設演算法（ed25519）的 key 與非 22 的 port。"
 ---
 
 ## Table of contents

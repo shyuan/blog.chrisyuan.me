@@ -2,7 +2,7 @@
 title: "在 Terminal 下查詢 macOS 的 CPU 資訊的指令"
 pubDatetime: 2025-02-14T09:11:46.000Z
 slug: "terminal-macos-cpu"
-description: "% sysctl -n machdep.cpu.brand_string Apple M1 Pro % system_profiler SPHardwareDataType Hardware: Hardware Overview: Model Name: MacBook Pro Model Identifier: MacBookPro18,3"
+description: "在 Terminal 用 sysctl 和 system_profiler 查詢 macOS CPU 型號、核心數等硬體資訊的常用指令。"
 tags:
   - macOS
   - cpu

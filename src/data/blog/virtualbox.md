@@ -4,7 +4,7 @@ pubDatetime: 2020-01-06T06:52:14.000Z
 slug: "virtualbox"
 tags:
   - others
-description: "Headless Mode 如果 VM 是跑成 server 不需要終端機做螢幕輸出和鍵盤滑鼠輸入，可以用 Headless 方式把 VM 跑起來 VBoxHeadless --startvm vm-name --vrde off & 強制改變 Disk Image 的 UUID 如果要使用的 disk image 被 VirtualBox 說有其他 VM 使用相同 UUID 的 disk ima"
+description: "VirtualBox 常用操作筆記：Headless 啟動、強制更改 Disk Image UUID、port forwarding 設定與快照管理。"
 ---
 
 ## Table of contents

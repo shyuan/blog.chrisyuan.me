@@ -2,7 +2,7 @@
 title: "MySQL 在 Y2K38 問題上的修正"
 pubDatetime: 2023-02-10T05:09:50.000Z
 slug: "mysql-y2k38"
-description: "MySQL 在 Y2K38 問題上的修正 前言 最近瀏覽 Year 2038 problem 維基百科條目時，發現其中列出了各種作業系統和軟體的解決方案。特別注意到 MySQL 8.0.28（2022 年 1 月釋出）終於修正了 FROM_UNIXTIME()、UNIX_TIMESTAMP()、CONVERT_TZ() 三個函式處理 64 位元數值的問題。 什麼是 Y2K38 問題？ 背景說明 在 32"
+description: "MySQL 8.0.28 修正 FROM_UNIXTIME()、UNIX_TIMESTAMP()、CONVERT_TZ() 的 Y2K38 問題，解析 32 位元時間戳極限。"
 tags:
   - MySQL
   - unix

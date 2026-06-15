@@ -4,7 +4,7 @@ pubDatetime: 2020-12-16T07:55:50.000Z
 slug: "eks-instance-node-pod"
 tags:
   - cli
-description: "由於每個 pod 上都會被 assign 一個 VPC subnet IP，所以每個 instance node 上的 pod 數量上限，取決於該 instance type 最多能接上的 network interface 張數及每張 network interface 上能 bind 的 IP 數量，可參考 IP addresses per network interface per inst"
+description: "EKS 節點的 Pod 數量上限由 instance type 的網路介面數與每介面可 bind 的 IP 數決定，附各類型的對照表。"
 ---
 
 ## Table of contents
