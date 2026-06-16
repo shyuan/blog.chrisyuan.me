@@ -17,7 +17,7 @@ jobs:
 
     steps:
       - name: "📡 Notify IndexNow"
-        uses: bojieyang/indexnow-action@v3
+        uses: bojieyang/indexnow-action@38ddfbd93579a8a44c0dee662121bf9d51098f71 # v3.0.0
         with:
           sitemap-location: "https://blog.chrisyuan.me/sitemap-index.xml"
           # IndexNow key 本身即為公開資訊（驗證檔 public/5f8ac260f0b943d2b05520fe1044b4ef.txt
