@@ -9,7 +9,7 @@ tags:
   - ai-coding
   - architecture
 description: "Context7 現在同時提供 MCP 與 CLI + Skills 兩種模式。從 git log 一路考古，拆解這兩條路的出現時間、設計動機、各自的問題，以及那個被 timeout 殺掉的 research mode。"
-draft: true
+draft: false
 ---
 
 ## Table of contents
