@@ -79,6 +79,9 @@ jobs:
     needs: deploy
     runs-on: ubuntu-latest
     timeout-minutes: 5
+    # 只呼叫外部 action 抓公開 sitemap，不需 deploy job 的 deployments: write。
+    permissions:
+      contents: read
 
     steps:
       # 等 Cloudflare 邊緣節點完成新部署的傳播，確保 IndexNow 抓到的是
