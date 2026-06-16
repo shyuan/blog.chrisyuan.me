@@ -73,3 +73,28 @@ jobs:
           apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
           accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
           command: pages deploy dist --project-name=blog-chrisyuan-me --commit-dirty=true --commit-message="${{ github.sha }}"
+
+  indexnow:
+    name: Notify IndexNow
+    needs: deploy
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+
+    steps:
+      # 等 Cloudflare 邊緣節點完成新部署的傳播，確保 IndexNow 抓到的是
+      # 更新後的 sitemap（含本次發布的文章）。
+      - name: "⏳ Wait for Cloudflare edge propagation"
+        run: sleep 30
+
+      - name: "📡 Notify IndexNow"
+        # SHA-pinned to v3.0.0 (38ddfbd) — mitigates floating-tag supply-chain risk.
+        uses: bojieyang/indexnow-action@38ddfbd93579a8a44c0dee662121bf9d51098f71 # v3.0.0
+        with:
+          sitemap-location: "https://blog.chrisyuan.me/sitemap-index.xml"
+          # IndexNow key 本即公開（驗證檔 public/5f8ac…txt 任何人可訪問），故直接內嵌。
+          key: "5f8ac260f0b943d2b05520fe1044b4ef"
+          # 通用端點，一次通知所有參與的搜尋引擎（Bing、Yandex、Seznam、Naver…）。
+          endpoint: api.indexnow.org
+          # 回看 2 天涵蓋本次發布及排程文章；重複提交為冪等操作，無副作用。
+          since: 2
+          since-unit: day
