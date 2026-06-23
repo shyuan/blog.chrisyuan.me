@@ -23,6 +23,9 @@ pnpm-debug.log*
 # jetbrains setting folder
 .idea/
 
+# Cogito Markdown editor
+.cogito-folder.json
+
 # pagefind
 
 public/pagefind
