@@ -31,7 +31,10 @@ const { tag } = params;
 const { page, tagName } = Astro.props;
 ---
 
-<Layout title={`Tag: ${tagName} | ${SITE.title}`}>
+<Layout
+  title={`Tag: ${tagName} | ${SITE.title}`}
+  description={`「${tagName}」主題下的所有文章——Chris Yuan 部落格中與此標籤相關的內容彙整，依發布時間由新到舊排序，方便依興趣深入特定主題、快速找到相關閱讀。`}
+>
   <Header />
   <Main
     pageTitle={[`Tag:`, `${tagName}`]}

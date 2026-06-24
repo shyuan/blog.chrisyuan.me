@@ -13,7 +13,10 @@ const posts = await getCollection("blog");
 let tags = getUniqueTags(posts);
 ---
 
-<Layout title={`Tags | ${SITE.title}`}>
+<Layout
+  title={`Tags | ${SITE.title}`}
+  description="瀏覽 Chris Yuan 部落格的所有標籤，依主題快速找到相關文章——從 DevOps、Cloud、AI、CLI 工具等技術領域，到地緣政治、兩岸關係與台灣公共議題。"
+>
   <Header />
   <Main pageTitle="Tags" pageDesc="All the tags used in posts.">
     <ul class="flex flex-wrap gap-6">

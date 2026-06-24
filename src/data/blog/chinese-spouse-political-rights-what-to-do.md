@@ -7,7 +7,7 @@ tags:
   - politics
   - taiwan
   - cross-strait
-description: "中配參政權卡在一把兩邊都打不開的鎖上。台灣要求放棄國籍，中國不讓放棄。問題拆得開嗎？"
+description: "中配參政權卡在一把兩邊都打不開的鎖上：台灣要求放棄國籍，中國不讓放棄。從李貞秀就任立委的爭議出發，拆解三層打結的困局、誰從僵局中獲益，以及務實的出路。"
 ---
 
 ## Table of contents
