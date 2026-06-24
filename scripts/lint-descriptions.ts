@@ -20,9 +20,8 @@
  *   bun scripts/lint-descriptions.ts <file...>  # 只檢查指定檔案，strict（給 lint-staged 用）
  */
 
-import { readFileSync } from "node:fs";
+import { readdirSync, readFileSync } from "node:fs";
 import { resolve } from "node:path";
-import { Glob } from "bun";
 
 const BLOG_DIR = resolve(import.meta.dirname, "../src/data/blog");
 const MIN_WIDTH = 100;
@@ -73,13 +72,18 @@ const args = process.argv.slice(2);
 const strict = args.includes("--strict");
 const fileArgs = args.filter(a => !a.startsWith("--"));
 
+/** 遞迴列出 blog 目錄下的 .md/.mdx（略過底線開頭的檔案／目錄，與 content loader 一致）。 */
+function scanBlogFiles(): string[] {
+  return readdirSync(BLOG_DIR, { recursive: true, encoding: "utf-8" })
+    .filter(f => {
+      const base = f.split("/").pop() ?? f;
+      return /\.(md|mdx)$/.test(base) && !f.split("/").some(p => p.startsWith("_"));
+    })
+    .map(f => resolve(BLOG_DIR, f));
+}
+
 // 有指定檔案 → 只檢查這些檔案且強制 strict（lint-staged 模式）；否則全庫掃描。
-const files =
-  fileArgs.length > 0
-    ? fileArgs
-    : [...new Glob("**/[!_]*.{md,mdx}").scanSync(BLOG_DIR)].map(f =>
-        resolve(BLOG_DIR, f)
-      );
+const files = fileArgs.length > 0 ? fileArgs : scanBlogFiles();
 const enforce = strict || fileArgs.length > 0;
 
 const short: Row[] = [];
