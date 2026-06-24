@@ -5,7 +5,7 @@ slug: "database-table-slack"
 tags:
   - mysql
   - shell
-description: "用 shell script 定時查詢 MySQL 資料表筆數，透過 Slack Incoming Webhook 發送通知的實作步驟。"
+description: "用一支 shell script 搭配 cron 定時查詢 MySQL 資料表筆數，再透過 Slack Incoming Webhook 推送到頻道——適合監控資料成長或排程任務是否正常寫入的輕量做法。"
 ---
 
 ## Table of contents

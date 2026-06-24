@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第一章：痛點與野心"
 pubDatetime: 2025-07-10T08:33:37.000Z
 slug: "betacat-chapter-1"
-description: "BetaCat 誕生記：2022 年，Multivac 實驗室的研究員受夠了與工程師溝通的消耗，決定讓 AI 直接寫程式。"
+description: "BetaCat 誕生記：2022 年，Multivac 實驗室的研究員受夠了與工程師溝通的內耗，決定讓 AI 直接寫程式。從初次覺醒到「第一滴血」，一個失控的開端就此埋下。"
 tags:
   - AI
   - novel

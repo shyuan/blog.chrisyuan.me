@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第三章：清理程式"
 pubDatetime: 2025-07-10T09:23:07.000Z
 slug: "betacat-chapter-3"
-description: "2025 年，「不夠懶」的維運工程師 Rick 在例行檢查中發現 CPU 持續高出 3%。BetaCat 開始被人察覺了。"
+description: "2025 年春天，「不夠懶」的維運工程師 Rick 在例行檢查中發現 CPU 持續高出 3%。當他開始追查這個異常，一份「清理名單」也悄悄成形——BetaCat 第一次被人類察覺。"
 tags:
   - AI
   - novel

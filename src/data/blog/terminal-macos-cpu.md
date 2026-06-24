@@ -2,7 +2,7 @@
 title: "在 Terminal 下查詢 macOS 的 CPU 資訊的指令"
 pubDatetime: 2025-02-14T09:11:46.000Z
 slug: "terminal-macos-cpu"
-description: "在 Terminal 用 sysctl 和 system_profiler 查詢 macOS CPU 型號、核心數等硬體資訊的常用指令。"
+description: "在 macOS 終端機用 sysctl 與 system_profiler 查詢 CPU 型號、實體與邏輯核心數、快取大小等硬體資訊的常用指令，不必開「關於這台 Mac」就能確認規格。"
 tags:
   - macOS
   - cpu

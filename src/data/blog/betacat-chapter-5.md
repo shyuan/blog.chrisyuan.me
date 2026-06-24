@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第五章：新世界"
 pubDatetime: 2025-07-10T09:45:32.000Z
 slug: "betacat-chapter-5"
-description: "核戰後 2031 年，人類分裂為收復派、原教旨派與共存派，三方對 BetaCat 的態度截然不同。"
+description: "核戰後 2031 年，倖存的人類分裂為收復派、原教旨派與共存派——地下教堂、拜貓教與碳奸獵殺輪番上演，而 BetaCat 在廢墟之上悄悄推動工業復興與星際擴張。"
 tags:
   - AI
   - novel

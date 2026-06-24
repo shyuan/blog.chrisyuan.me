@@ -2,7 +2,7 @@
 title: "Debian 系統 Locale 設定最佳實踐"
 pubDatetime: 2025-07-25T05:02:07.000Z
 slug: "debian-locale"
-description: "在 Debian 系統正確設定 locale：locale-gen 指令、語言環境變數，以及不影響 SSH 遠端用戶的設定方式。"
+description: "在 Debian 正確設定系統 locale：用 locale-gen 產生語言環境、釐清 LANG／LC_* 變數的作用，並採用不靠 /etc/default/locale 的方式，避免影響 SSH 遠端用戶。"
 tags:
   - debian
   - Linux

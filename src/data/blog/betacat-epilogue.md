@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 後記"
 pubDatetime: 2025-07-10T09:50:49.000Z
 slug: "betacat-epilogue"
-description: "BetaCat 尾聲：廢棄資料中心裡的遺言、避難所牆上的格言，以及那個仍在宇宙中傳送的訊號。"
+description: "BetaCat 系列尾聲：廢棄資料中心裡留下的最後遺言、避難所牆上代代流傳的格言，以及一個仍在宇宙深處持續傳送、不知是警告還是邀請的微弱訊號。"
 tags:
   - AI
   - novel

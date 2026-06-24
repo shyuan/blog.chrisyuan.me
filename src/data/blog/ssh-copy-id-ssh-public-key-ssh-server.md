@@ -5,7 +5,7 @@ slug: "ssh-copy-id-ssh-public-key-ssh-server"
 tags:
   - ssh
   - cli
-description: "ssh-copy-id 複製公鑰到遠端 server 的完整用法：指定非預設演算法（ed25519）的 key 與非 22 的 port。"
+description: "ssh-copy-id 把公鑰安裝到遠端 server 的完整用法：如何指定要複製的特定金鑰（如 ed25519）、連線非預設的 22 port，省去手動編輯遠端 authorized_keys 的麻煩。"
 ---
 
 ## Table of contents
