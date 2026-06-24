@@ -2,7 +2,7 @@
 title: "使用 GitHub Actions 自動部署靜態網頁生成工具內容到 Cloudflare Pages - 以 Material for MkDocs 為例"
 pubDatetime: 2025-05-09T03:34:38.000Z
 slug: "github-actions-cloudflare-pages-material-for-mkdocs"
-description: "用 GitHub Actions 將 Material for MkDocs 靜態站台自動部署到 Cloudflare Pages 的完整設定教學。"
+description: "用 GitHub Actions 將 Material for MkDocs 文件站自動部署到 Cloudflare Pages 的設定教學：從憑證、Secrets、Pages 專案到 workflow 與分支部署策略。"
 tags:
   - cloudflare
   - cloudflare-pages

@@ -2,7 +2,7 @@
 title: "投票的深層意義：憲法正當性與國家主權的民意基礎"
 pubDatetime: 2025-06-24T03:48:28.000Z
 slug: "the-deeper-meaning-of-voting-constitutional-legitimacy-and-the-popular-foundation-of-national-sovereignty"
-description: "「不管投不投都一樣」是錯的：投票行為的憲政意義、人民主權基礎，以及棄票對民主正當性的實質影響。"
+description: "「不管投不投都一樣」其實是錯的：從投票作為憲法正當性的背書、低投票率的正當性危機，到國際法理論下的主權地位，談棄票對民主正當性的實質影響與公民責任。"
 tags:
   - taiwan
   - constitution

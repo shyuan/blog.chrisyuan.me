@@ -2,7 +2,7 @@
 title: "利用 ssh ProxyJump 直接連上內部 ssh server"
 pubDatetime: 2021-01-28T02:09:08.000Z
 slug: "ssh-proxyjump-ssh-server"
-description: "用 SSH 的 -J 參數（ProxyJump）透過 bastion server 直接連線內部 server，不需手動設定 SSH tunnel。"
+description: "用 SSH 的 -J 參數（ProxyJump）穿過 bastion／跳板機直接連線內網主機，不必再手動開 SSH tunnel 或做兩段式登入，大幅簡化連線受防火牆保護的內部 server。"
 tags:
   - ssh
 ---

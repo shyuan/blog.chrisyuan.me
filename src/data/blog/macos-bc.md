@@ -2,7 +2,7 @@
 title: "深入瞭解 macOS 上的命令列計算機工具 bc"
 pubDatetime: 2025-05-08T14:21:05.000Z
 slug: "macos-bc"
-description: "bc 是 Unix 1975 年就有的任意精度計算器語言，由貝爾實驗室開發，本文介紹其歷史與在 macOS 的常用場景。"
+description: "bc 是 1975 年就存在於 Unix 的任意精度計算器語言，由貝爾實驗室開發。本文梳理其歷史、Unix／GNU／OpenBSD 等不同實作，以及 macOS 改採 Gavin Howard 版的緣由。"
 tags:
   - bc
   - macOS

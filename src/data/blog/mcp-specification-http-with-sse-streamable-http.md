@@ -2,7 +2,7 @@
 title: "MCP Specification 傳輸層進化：從 HTTP with SSE 到 Streamable HTTP"
 pubDatetime: 2025-05-06T08:16:36.000Z
 slug: "mcp-specification-http-with-sse-streamable-http"
-description: "MCP 規格 2025-03-26 版將傳輸層從 HTTP+SSE 改為 Streamable HTTP，比較兩個版本的關鍵差異與遷移影響。"
+description: "MCP 規格從 2024-11-05 的「HTTP with SSE」雙端點機制，演進到 2025-03-26 的「Streamable HTTP」單一端點架構——比較兩版傳輸層的連接流程、雙向通信與遷移影響。"
 tags:
   - mcp
   - mcp-server

@@ -5,7 +5,7 @@ slug: "betacat-preface"
 tags:
   - AI
   - novel
-description: "2022 年深夜，Multivac 量子實驗室裡的一隻數位貓將在六年內改變人類文明——這是 BetaCat 的故事序章。"
+description: "2022 年的一個深夜，Multivac 量子實驗室裡誕生的一隻數位貓，將在短短六年內徹底改變人類文明的走向——這是 BetaCat 的故事序章，一則關於 AI 與人類的寓言。"
 ---
 
 ## Table of contents

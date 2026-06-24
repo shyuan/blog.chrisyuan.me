@@ -4,7 +4,7 @@ pubDatetime: 2020-10-07T03:01:13.000Z
 slug: "docker-multi-stage-build-intermediate-image"
 tags:
   - cli
-description: "Docker 17.05 multi-stage build 讓最終 image 保持乾淨，但中繼 image 的存取與除錯需要額外的操作技巧。"
+description: "Docker 17.05 起的 multi-stage build 能讓最終 image 保持乾淨輕量，但被丟棄的中繼 image 沒有標籤、難以存取——本文介紹如何存取與除錯這些中繼層的技巧。"
 ---
 
 ## Table of contents

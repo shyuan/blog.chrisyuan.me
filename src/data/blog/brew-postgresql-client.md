@@ -5,7 +5,7 @@ slug: "brew-postgresql-client"
 tags:
   - macos
   - cli
-description: "macOS 上用 Homebrew 安裝 PostgreSQL 用戶端工具 libpq，配置 PATH 後即可使用 psql 等指令。"
+description: "在 macOS 上只裝 PostgreSQL 用戶端而不裝整個 server：用 Homebrew 安裝 keg-only 的 libpq、把執行檔加進 PATH，即可用 psql、pg_dump 連線遠端資料庫。"
 ---
 
 ## Table of contents

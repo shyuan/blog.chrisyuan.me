@@ -4,7 +4,7 @@ pubDatetime: 2020-01-06T06:52:14.000Z
 slug: "virtualbox"
 tags:
   - others
-description: "VirtualBox 常用操作筆記：Headless 啟動、強制更改 Disk Image UUID、port forwarding 設定與快照管理。"
+description: "VirtualBox 命令列常用操作筆記：以 Headless 模式啟動 VM、強制更改 Disk Image 的 UUID 以解決複製衝突、設定 port forwarding，以及送出關機訊號與快照管理。"
 ---
 
 ## Table of contents

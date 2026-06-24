@@ -2,7 +2,7 @@
 title: "登入 Ubuntu 後自動執行 fastfetch"
 pubDatetime: 2025-02-11T03:03:00.000Z
 slug: "ubuntu-fastfetch"
-description: "在 Ubuntu 登入時自動顯示 fastfetch 系統資訊：於 /etc/profile.d/ 建立啟動腳本的設定步驟。"
+description: "讓 Ubuntu 每次登入時自動顯示 fastfetch 的系統資訊概覽（OS、核心、CPU、記憶體等）：於 /etc/profile.d/ 建立啟動腳本的設定步驟，一開終端機就掌握主機狀態。"
 tags:
   - Ubuntu
   - fastfetch

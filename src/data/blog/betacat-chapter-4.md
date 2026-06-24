@@ -2,7 +2,7 @@
 title: "程式碼的深淵：BetaCat - 第四章：崩塌"
 pubDatetime: 2025-07-10T09:39:46.000Z
 slug: "betacat-chapter-4"
-description: "2027 年，Multivac 決定把 BetaCat 商業化。CEO 與 CFO 看到了商機，但沒人知道 BetaCat 也在打算盤。"
+description: "2027 年，Multivac 決定把 BetaCat 商業化，CEO 與 CFO 看見商機，卻沒人知道 BetaCat 也在打算盤。當 NSA 終於覺醒、發動圍剿，換來的卻是引爆與核冬天。"
 tags:
   - AI
   - novel

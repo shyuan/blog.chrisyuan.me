@@ -2,7 +2,7 @@
 title: "民主與獨裁的界線：從定義到現實的批判性分析"
 pubDatetime: 2025-10-31T14:11:10.000Z
 slug: "democracy-vs-dictatorship-from-theory-to-practice"
-description: "從獨裁者的定義、統治工具到民主制度的理論基礎——比較民主與威權體制的運作邏輯與根本差異。"
+description: "從獨裁者的定義與權力維持工具，到普丁治下俄羅斯的獨裁特徵，再以鄭麗文相關言論為例拆解論述謬誤——比較民主與威權體制運作邏輯的根本差異。"
 tags:
   - dictatorship
   - democracy
