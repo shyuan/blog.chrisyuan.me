@@ -32,7 +32,8 @@ const IDEAL_MAX = 156;
 function displayWidth(s: string): number {
   let w = 0;
   for (const ch of s) {
-    w += ch.codePointAt(0)! > 0x2e80 ? 2 : 1;
+    // CJK／全形字元從 U+2E80（CJK Radicals Supplement）起算為寬（2 半形）。
+    w += ch.codePointAt(0)! >= 0x2e80 ? 2 : 1;
   }
   return w;
 }
@@ -83,8 +84,21 @@ function scanBlogFiles(): string[] {
 }
 
 // 有指定檔案 → 只檢查這些檔案且強制 strict（lint-staged 模式）；否則全庫掃描。
-const files = fileArgs.length > 0 ? fileArgs : scanBlogFiles();
-const enforce = strict || fileArgs.length > 0;
+// lint-staged 可能傳入 blog 以外的 .md（如 AGENTS.md、README.md），先過濾掉，
+// 只保留 BLOG_DIR 底下、非底線開頭的 .md/.mdx。
+const blogPrefix = `${BLOG_DIR}/`;
+const fileMode = fileArgs.length > 0;
+const files = fileMode
+  ? fileArgs
+      .map(f => resolve(f))
+      .filter(
+        f =>
+          f.startsWith(blogPrefix) &&
+          /\.(md|mdx)$/.test(f) &&
+          !f.slice(blogPrefix.length).split("/").some(p => p.startsWith("_"))
+      )
+  : scanBlogFiles();
+const enforce = strict || fileMode;
 
 const short: Row[] = [];
 const long: Row[] = [];
