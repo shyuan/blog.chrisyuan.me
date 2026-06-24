@@ -2,7 +2,7 @@ export const SITE = {
   website: "https://blog.chrisyuan.me/",
   author: "Chris Yuan",
   profile: "https://blog.chrisyuan.me/",
-  desc: "Chris Yuan 的技術筆記與時事觀察 — 涵蓋 DevOps、Cloud、AI、CLI 工具實務，以及地緣政治、台灣議題分析",
+  desc: "Chris Yuan 的技術筆記與時事觀察。技術面涵蓋 DevOps、Cloud、AI、CLI 工具與 macOS／Linux 實務；時事面聚焦地緣政治、兩岸關係與台灣公共議題的結構性分析。",
   title: "Chris Yuan | Blog",
   ogImage: "",
   lightAndDarkMode: true,

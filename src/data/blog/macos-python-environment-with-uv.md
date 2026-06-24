@@ -8,7 +8,7 @@ tags:
   - python
   - uv
   - homebrew
-description: "在 macOS Tahoe 上用 uv 取代 pyenv、pipx、poetry，統一管理 Python 版本與 CLI 工具的筆記。"
+description: "在 macOS Tahoe 上用 uv 取代 pyenv、pipx、poetry，一個工具統一管理 Python 版本、虛擬環境、套件與 CLI 工具，涵蓋安裝、多版本管理與專案釘選的實際指令。"
 ---
 
 ## Table of contents

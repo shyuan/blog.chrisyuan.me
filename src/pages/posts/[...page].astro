@@ -18,7 +18,10 @@ export const getStaticPaths = (async ({ paginate }) => {
 const { page } = Astro.props;
 ---
 
-<Layout title={`Posts | ${SITE.title}`}>
+<Layout
+  title={`Posts | ${SITE.title}`}
+  description="Chris Yuan 部落格的全部文章列表，依發布時間排序。內容橫跨 DevOps、Cloud、AI 與 CLI 工具等技術筆記，以及地緣政治、兩岸關係與台灣公共議題的時事分析。"
+>
   <Header />
   <Main pageTitle="Posts" pageDesc="All the articles I've posted.">
     <ul>

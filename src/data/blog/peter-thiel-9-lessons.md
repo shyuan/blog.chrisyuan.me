@@ -2,7 +2,7 @@
 title: "Peter Thiel 的九堂課"
 pubDatetime: 2025-10-16T09:09:27.000Z
 slug: "peter-thiel-9-lessons"
-description: "Joe Lonsdale 分享從 Peter Thiel 身上學到的九個商業原則——涵蓋思考紀律、專注策略、招聘哲學與第一性原理，適用於各種決策情境。"
+description: "Joe Lonsdale 分享從 Peter Thiel 身上學到的九個商業原則，源自 Palantir 經驗——思考紀律、第一性原理、專注策略、招聘哲學與對外部夥伴的懷疑，適用於各種決策情境。"
 tags:
   - peter-thiel
   - palantir

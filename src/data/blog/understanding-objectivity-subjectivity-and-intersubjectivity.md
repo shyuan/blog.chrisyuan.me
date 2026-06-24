@@ -2,7 +2,7 @@
 title: "理解客觀、主觀與互為主體性"
 pubDatetime: 2025-10-24T18:59:34.000Z
 slug: "understanding-objectivity-subjectivity-and-intersubjectivity"
-description: "客觀性、主觀性與互為主觀性的哲學辨析：三種認識框架如何共存，在科學、倫理與社會共識中各自扮演的角色。"
+description: "客觀性、主觀性與互為主體性的哲學辨析：三種認識框架如何共存，從科學事實、個人經驗到語言、金錢與法律等社會制度，各自扮演什麼角色又如何動態互動。"
 tags:
   - philosophy
 ---
