@@ -13,6 +13,7 @@
     "format": "prettier --write .",
     "lint": "eslint .",
     "lint:text": "autocorrect --lint src/data/blog/",
+    "lint:desc": "bun scripts/lint-descriptions.ts",
     "fix:text": "autocorrect --fix src/data/blog/",
     "draft": "bun scripts/draft.ts",
     "prepare": "husky"

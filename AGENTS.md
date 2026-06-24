@@ -224,7 +224,7 @@ ogImage: ""                   # 選用，社群分享圖片
    - `pubDatetime`：發布日期（ISO 8601 格式，如 `2026-02-19T00:00:00Z`）
    - `title`：文章標題（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
    - `tags`：至少一個標籤
-   - `description`：1-2 句摘要，用於 SEO 與社群分享卡片；**字元數須在 25–150 之間**（Bing/Google 顯示上限約 150 字元，CJK 字元佔兩個半形寬度，超過會觸發 SEO 警告）
+   - `description`：1-2 句摘要，用於 SEO 與社群分享卡片。長度以**顯示寬度**（半形單位）為準，不用原始字元數——詳見下方「meta description 長度標準」。目標 **130–156 半形（≈ 65–78 個中文字）**，把最重要的資訊放前 ~60 字
    - `slug`：英文 URL 路徑（如 `taiwan-stock-odd-lot-trading-reform`），中文檔名時必填，避免 URL 出現中文
    - `draft: false`：設為 false 才會發布
    - 選填：`featured`、`ogImage`、`canonicalURL`
@@ -250,7 +250,37 @@ ogImage: ""                   # 選用，社群分享圖片
 
 8. **CJK 間距**：執行 `bun run fix:text` 自動在 CJK 與英數之間補上空格（或依賴 lint-staged 在 commit 時自動修正）
 
-9. **驗證建置**：執行 `bun run build` 確認無錯誤
+9. **檢查 description 長度**：執行 `bun run lint:desc`，確認新文章的 meta description 顯示寬度落在 130–156 半形（過短會被 Bing 回報 too short、過長會被 SERP 截斷）
+
+10. **驗證建置**：執行 `bun run build` 確認無錯誤
+
+### meta description 長度標準
+
+搜尋引擎的 SERP snippet 是依**像素寬度**截斷（桌機 ~920px、手機 ~680px），**不是字元數**。英文 920px ≈ 150–160 字元，但 CJK 每字約佔 2 倍寬，所以中文約 65–80 字就填滿。因此本專案以「半形等寬」估算顯示寬度（CJK／全形 = 2、ASCII = 1），而非字元數。
+
+| 區間（半形寬度） | 判定 | 說明 |
+|---|---|---|
+| < 100 | 過短 | Bing Webmaster Tools 會回報「meta description too short」 |
+| 100–129 | 可接受 | 不理想但不會被特別標記 |
+| **130–156** | **理想** | 中文約 65–78 字，前置重點、不被 SERP 截斷 |
+| > 156 | 過長 | 桌機 SERP 會截斷尾段 |
+
+要點：
+
+- **不要追 Bing 建議的 150–160「字元數」**——那是英文校準值，對中文站是偽陽性；硬塞到 150 字會讓顯示寬度爆到 ~300，反而被 SERP 截斷
+- **前置重要資訊**：手機只顯示前 ~120px（~60 中文字），把賣點／關鍵字放最前面
+- 長度**不影響排名**（Google 官方多次重申），只影響 CTR；且 Google 約七成情況會自行改寫 description
+- 結構頁（home／posts／archives／tags）的 meta description 來自 `SITE.desc`（`src/config.ts`）與各頁面傳給 `<Layout>` 的 `description` prop，不要讓它們共用 fallback
+- **GEO（生成式引擎優化）**：對 AI 答案引擎而言 meta description 影響很小，重點在內文前 200 字直接回答主問題、結構化（短段落／清單／表格）、freshness、robots.txt 不擋 AI 爬蟲——本專案的 Astro 靜態站天然符合
+
+檢查指令：
+
+```bash
+bun run lint:desc              # 掃描全部文章，advisory（exit 0）
+bun run lint:desc --strict     # 有違規就 exit 1（CI 全庫把關用）
+```
+
+`scripts/lint-descriptions.ts` 會略過 `draft: true` 的草稿。目前既有文章中仍有部分落在區間外（過短／過長），屬待整理項目，故預設為 advisory、未納入 CI 硬擋。
 
 ## 部署設定
 
@@ -329,6 +359,10 @@ bun run lint:text
 
 # CJK 間距自動修正
 bun run fix:text
+
+# meta description 長度檢查（顯示寬度，advisory）
+bun run lint:desc
+bun run lint:desc --strict   # 有違規就 exit 1
 
 # 新增文章
 # 在 src/data/blog/ 建立 .md 檔案
