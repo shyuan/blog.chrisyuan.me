@@ -87,13 +87,17 @@ describe("postFilter — the DEV override branch", () => {
   it("DEV=true makes a far-future, normally-hidden post visible", () => {
     const env = (import.meta as unknown as { env: Record<string, unknown> })
       .env;
+    const had = "DEV" in env;
     const original = env.DEV;
     try {
       env.DEV = true;
       expect(env.DEV).toBe(true); // guard: the override is actually in effect
       expect(postFilter(makeEntry({ offsetMs: 10 * MARGIN }))).toBe(true);
     } finally {
-      env.DEV = original;
+      // Restore exactly: delete the key if it never existed, so we don't leave
+      // a truthy residue for any test added after this block in the same file.
+      if (had) env.DEV = original;
+      else delete env.DEV;
     }
   });
 });
