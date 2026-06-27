@@ -289,7 +289,7 @@ bun run lint:desc --strict     # 有違規就 exit 1（CI 全庫把關用）
 兩個 workflow 皆使用 bun（`oven-sh/setup-bun@v2`），各自拆為兩個 job：
 
 - **`ci.yml`**（PR 觸發）：
-  1. **lint** job：AutoCorrect（CJK 間距）→ ESLint → format check
+  1. **lint** job：AutoCorrect（CJK 間距）→ ESLint → format check → `bun test`（單元測試）
   2. **build** job：`bun run build`（含 OG 圖片，完整驗證）
 - **`deploy.yml`**（push 到 `main` / 每小時 cron / `workflow_dispatch` 觸發）：
   1. **lint** job：同 ci.yml

@@ -9,6 +9,7 @@
     "preview": "astro preview",
     "sync": "astro sync",
     "astro": "astro",
+    "test": "bun test",
     "format:check": "prettier --check .",
     "format": "prettier --write .",
     "lint": "eslint .",
