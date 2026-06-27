@@ -41,6 +41,9 @@ jobs:
       - name: "📝 Checking code format"
         run: bun run format:check
 
+      - name: "🧪 Run tests"
+        run: bun test
+
   deploy:
     name: Build & Deploy
     needs: lint
