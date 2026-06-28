@@ -1,7 +1,7 @@
 ---
 pubDatetime: 2026-06-22T00:00:00Z
-title: "太平洋上的另一個夏威夷？台灣政治終局的思想實驗"
-slug: "hawaii-analogy-taiwan-political-endgame"
+title: "台灣政治終局的想像：與日本對等共組一個政治實體"
+slug: "taiwan-japan-austro-hungarian-endgame"
 tags:
   - 台灣
   - 地緣政治
@@ -13,7 +13,7 @@ tags:
   - 半導體
   - 政治終局
   - 日菲合作
-description: "從 1898 年夏威夷被併吞的故事出發，提出一個命題：當吞併劇本對所有大國都不划算時，台灣的政治終局比較像 1867 年奧匈體制式的對等主權整合，而不是任何形式的併吞"
+description: "當吞併對中美日都不划算，台灣的政治終局比較像 1867 年的奧匈體制：與日本走向對等主權的功能性整合，而非任何形式的併吞。從日菲準同盟與台日半導體共同體看起"
 draft: true
 ---
 
