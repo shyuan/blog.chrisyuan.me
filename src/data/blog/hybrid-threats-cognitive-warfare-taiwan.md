@@ -1,7 +1,6 @@
 ---
 title: "從孫子兵法到認知戰：混合性威脅的本質與台灣的因應之道"
-pubDatetime: 2025-02-19T05:45:47.000Z
-modDatetime: 2026-07-01T07:31:31Z
+pubDatetime: 2026-07-01T12:09:06Z
 slug: "hybrid-threats-cognitive-warfare-taiwan"
 tags:
   - warfare
