@@ -24,7 +24,7 @@ draft: false
 
 先把這個字講清楚。「視為」是一種[法律擬制](https://zh.wikipedia.org/zh-tw/%E6%B3%95%E5%BE%8B%E6%93%AC%E5%88%B6)（[legal fiction](https://en.wikipedia.org/wiki/Legal_fiction)）。它的核心動作是：把某件事「當作」某種狀態來處理，不管它在現實中是不是真的如此。
 
-它常常跟另一個近義詞「[推定](https://zh.wikipedia.org/zh-tw/%E6%8E%A8%E5%AE%9A)」被搞混，但兩者力道差很多。「推定」是可以拿反證推翻的，法律先假設一個狀態，你若能證明相反，就能翻案。「視為」原則上不給你這個機會，法律直接下結論，就算事實明明相反，也照這個結論走。[民法第七條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=7)說胎兒關於個人利益的保護「視為既已出生」，胎兒當然還不是人，但為了保護他將來的繼承權，法律就當他已經出生了，不容爭辯。
+它常常跟另一個近義詞「[推定](https://zh.wikipedia.org/zh-tw/%E6%8E%A8%E5%AE%9A)」被搞混，但兩者力道差很多。「推定」是可以拿反證推翻的，法律先暫時當它是真的，你若能拿出證據證明相反，就能翻案。最好懂的例子是親子關係：[民法第一〇六三條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1063)先「推定」妻子在婚姻關係中所生的子女是丈夫親生的，但如果丈夫拿得出一張證明不是的 DNA 報告，這個推定就會被推翻。「視為」原則上不給你這個機會，法律直接下結論，就算事實明明相反，也照這個結論走。[民法第七條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=7)說胎兒關於個人利益的保護「視為既已出生」，胎兒當然還不是人，但為了保護他將來的繼承權，法律就當他已經出生了，不容爭辯。
 
 這種字眼其實離生活很近。租約到期你繼續住、繼續付租，房東沒吭聲，[民法第四五一條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=451)就「視為」你們以不定期限續了約。定期工作契約期滿你繼續上班、老闆沒反對，[勞基法第九條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=N0030001&flno=9)同樣「視為」成立不定期契約。網購收到東西你不檢查也不吭聲，過了合理期間，[民法第三五六條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=356)「視為」你已經驗收接受。你每天按下的那些「繼續使用即視為同意」，健身房和訂閱服務最愛用的自動續約條款，背後都是同一個「視為」在運作。稅法上的「視為居住者」也是這一套：不管你主觀上想不想當稅務居民，一年待滿一百八十三天，就當你是。
 
