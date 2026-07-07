@@ -1,6 +1,6 @@
 ---
 pubDatetime: 2026-07-07T04:35:59Z
-title: "反正我是信了：看一段歷史合約條文中的「視為」發揮什麼作用"
+title: "反正我是信了：一段歷史和約條文中的「視為」發揮什麼作用"
 slug: "treaty-of-taipei-deemed-nationality"
 tags:
   - 臺灣史
@@ -22,7 +22,7 @@ draft: false
 
 ## 法律的「視為」：明知未必為真，仍照此處理
 
-先把這個字講清楚。「視為」是一種[法律擬制](https://zh.wikipedia.org/zh-tw/%E6%B3%95%E5%BE%8B%E6%93%AC%E5%88%B6)（[legal fiction](https://en.wikipedia.org/wiki/Legal_fiction)）。它的核心動作是：把某件事「當作」某種狀態來處理，不管它在現實中是不是真的如此。
+先講清楚這個字的意思。「視為」是一種[法律擬制](https://zh.wikipedia.org/zh-tw/%E6%B3%95%E5%BE%8B%E6%93%AC%E5%88%B6)（[legal fiction](https://en.wikipedia.org/wiki/Legal_fiction)）。它的核心動作是：把某件事「當作」某種狀態來處理，不管它在現實中是不是真的如此。
 
 它常常跟另一個近義詞「[推定](https://zh.wikipedia.org/zh-tw/%E6%8E%A8%E5%AE%9A)」被搞混，但兩者力道差很多。「推定」是可以拿反證推翻的，法律先暫時當它是真的，你若能拿出證據證明相反，就能翻案。最好懂的例子是親子關係：[民法第一〇六三條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=1063)先「推定」妻子在婚姻關係中所生的子女是丈夫親生的，但如果丈夫拿得出一張證明不是的 DNA 報告，這個推定就會被推翻。「視為」原則上不給你這個機會，法律直接下結論，就算事實明明相反，也照這個結論走。[民法第七條](https://law.moj.gov.tw/LawClass/LawSingle.aspx?pcode=B0000001&flno=7)說胎兒關於個人利益的保護「視為既已出生」，胎兒當然還不是人，但為了保護他將來的繼承權，法律就當他已經出生了，不容爭辯。
 
