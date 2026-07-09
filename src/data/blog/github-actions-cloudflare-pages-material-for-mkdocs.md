@@ -1,8 +1,9 @@
 ---
-title: "Material for MkDocs 部署到 Cloudflare Pages：GitHub Actions 推送即上線"
+title: "GitHub Actions 自動部署靜態網站到 Cloudflare Pages：推送即上線"
 pubDatetime: 2025-05-09T03:34:38.000Z
+modDatetime: 2026-07-09T08:47:21Z
 slug: "github-actions-cloudflare-pages-material-for-mkdocs"
-description: "用 GitHub Actions 將 Material for MkDocs 文件站自動部署到 Cloudflare Pages 的設定教學：從憑證、Secrets、Pages 專案到 workflow 與分支部署策略。"
+description: "用 GitHub Actions 把靜態網站自動部署到 Cloudflare Pages，git push 就上線。以 Material for MkDocs 示範，但管線與 SSG 無關，換 Hugo、Jekyll 只改 build 一步。"
 tags:
   - cloudflare
   - cloudflare-pages
@@ -12,32 +13,39 @@ tags:
   - static-site
 ---
 
+每次改完文件，你是不是都要重複同一套動作：本地跑一次 build、把 `public/` 或 `dist/` 拖上去、等它上傳、再開網頁確認沒壞。做十次還好，做一百次就會有一次忘了 build、或上傳到錯的目錄，然後線上掛著半天才發現。
+
+這篇要換掉那套手動流程，讓部署變成一件你不用再想的事——`git push` 之後，剩下的交給 [GitHub Actions](https://github.com/features/actions) 建置、交給 [Cloudflare Pages](https://pages.cloudflare.com/) 上線。文章全程以 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 當範例，但先講結論：**這條管線跟你用哪個靜態網站生成器（SSG）幾乎無關**，真正綁定工具的只有「build 那一步」，其餘從憑證到部署全部通用。看完你手上的 Hugo、Jekyll、Next.js 專案，換一行指令就能套。
+
 ## Table of contents
 
-## 為什麼選擇 Cloudflare Pages？
+## 為什麼是 GitHub Actions + Cloudflare Pages 這個組合
 
-[Cloudflare Pages](https://pages.cloudflare.com/) 提供了以下優勢：
+自動化部署的工具不少，這篇挑這個組合，是因為兩邊各自把一件事做到「不用再管」：
 
-- 全球 CDN 加速，提供極快的載入速度
-- 免費的 SSL 憑證和 DDoS 防護
-- 支援自訂網域
-- 每月高達 500 次建構和無限頻寬
-- 整合 Cloudflare 的生態系統
+- **GitHub Actions** 就住在你的 repo 裡，push 即觸發，不必再接第三方 CI，build 環境每次都乾淨一致。
+- **Cloudflare Pages** 提供全球 CDN、免費 SSL 與 DDoS 防護、自訂網域，免費方案每月 500 次建構、頻寬無上限——對一個文件站或部落格來說，等於「架好就不用再繳費、不用再擔心流量」。
+
+兩者交會點是 Cloudflare 官方的 [`wrangler-action`](https://developers.cloudflare.com/workers/wrangler/)：GitHub Actions build 完，把成品目錄交給它，它負責上傳、部署、回傳網址。整條線一次設定、之後全自動。
 
 ## 準備工作
 
-在開始之前，請確保您已經：
+在開始之前，請先備妥：
 
-1. 擁有一個靜態網頁生成工具專案（本文以 [Material for MkDocs](https://squidfunk.github.io/mkdocs-material/) 為例）並推送到 GitHub
-2. 註冊 Cloudflare 帳號
-3. 了解基本的 [GitHub Actions](https://github.com/features/actions) 概念
-4. 安裝 Status 為 [Current, Active 或 Maintenance] 的 (https://nodejs.org/en/about/previous-releases#looking-for-the-latest-release-of-a-version-branch) [Node.js](https://nodejs.org/) 版本（用於執行 [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/)）
+1. 一個靜態網站專案並推送到 GitHub（本文以 Material for MkDocs 為例，但**任何 SSG 都適用**）
+2. 一組 Cloudflare 帳號
+3. 對 GitHub Actions 的基本概念（知道 workflow、job、step 是什麼即可）
+4. 一個 Status 為 [Current、Active 或 Maintenance](https://nodejs.org/en/about/previous-releases#looking-for-the-latest-release-of-a-version-branch) 的 [Node.js](https://nodejs.org/) 版本（本地執行 [Wrangler CLI](https://developers.cloudflare.com/workers/wrangler/) 時需要）
+
+整套設定分五步：拿憑證 → 存進 GitHub Secrets → 建立 Pages 專案 → 寫 workflow → 首次部署。前四步只做一次，之後每次上線都只剩 `git push`。
 
 ### 步驟一：取得 Cloudflare 憑證
 
+自動化部署需要兩樣東西向 Cloudflare 證明「我有權限」：一組 API Token（能做什麼）和一個 Account ID（對哪個帳號做）。
+
 #### 1.1 生成 Cloudflare API Token
 
-Cloudflare 提供兩種類型的 API Token：[User-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) 和 [Account-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/)。選擇適合您需求的方式：
+Cloudflare 提供兩種類型的 API Token：[User-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/create-token/) 和 [Account-Owned Token](https://developers.cloudflare.com/fundamentals/api/get-started/account-owned-tokens/)。差別在於 Token 綁在「你個人」還是「帳號」上——個人專案用前者最快，團隊環境用後者才不會因為人員異動而失效。
 
 ##### 方式一：User-Owned Token（個人使用）
 
@@ -48,17 +56,15 @@ Cloudflare 提供兩種類型的 API Token：[User-Owned Token](https://develope
 5. 在「Custom Token」下方點擊「Get started」
 6. 設定如下：
    - **Token name**：輸入一個識別名稱，例如 `GitHub Actions Deploy`
-   - **Permissions**：
-     - 選擇 `Account` → `Cloudflare Pages` → `Edit`
-   - **Account Resources**：
-     - Include → 選擇您的帳號
+   - **Permissions**：選擇 `Account` → `Cloudflare Pages` → `Edit`
+   - **Account Resources**：Include → 選擇您的帳號
 7. 點擊「Continue to summary」
 8. 檢查設定後點擊「Create Token」
 9. 複製並安全保存生成的 API Token
 
 ##### 方式二：Account-Owned Token（團隊協作/企業使用）
 
-Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，不會因為人員異動而受影響。
+Account-Owned Token 屬於帳號而非個人，成員來去都不影響部署，因此更適合團隊：
 
 1. 登入 [Cloudflare Dashboard](https://dash.cloudflare.com)
 2. 選擇您的帳號，進入 Account Dashboard
@@ -67,21 +73,13 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
 5. 在「Custom Token」下方點擊「Get started」
 6. 設定如下：
    - **Token name**：輸入一個識別名稱，例如 `CI/CD Deployment Token`
-   - **Permissions**：
-     - 選擇 `Account` → `Cloudflare Pages` → `Edit`
-   - **IP Address Filtering**（選擇性）：
-     - 如果您的 CI/CD 系統有固定 IP，可以在此限制 Token 只能從特定 IP 使用
+   - **Permissions**：選擇 `Account` → `Cloudflare Pages` → `Edit`
+   - **IP Address Filtering**（選擇性）：如果 CI/CD 系統有固定 IP，可在此限制 Token 只能從特定 IP 使用
 7. 點擊「Continue to summary」
 8. 檢查設定後點擊「Create Token」
 9. 複製並安全保存生成的 API Token
 
-:::tip[建議]
-對於企業或團隊使用，建議使用 Account-Owned Token。這樣可以：
-
-- 避免 Token 與個人帳號綁定
-- 便於團隊共同管理
-- 減少人員異動時的影響
-  :::
+> **選哪一種？** 個人專案用 User-Owned Token 最省事；企業或團隊建議用 Account-Owned Token——避免 Token 與個人帳號綁定、便於團隊共同管理、減少人員異動時的影響。無論哪一種，權限都只需 `Cloudflare Pages → Edit` 這一項，不要多給。
 
 #### 1.2 取得 Account ID
 
@@ -90,6 +88,8 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
 3. 複製該 ID 備用
 
 ### 步驟二：設定 GitHub Secrets
+
+拿到的 Token 與 Account ID 不能寫進 repo，要存進 GitHub Secrets，讓 workflow 執行時才注入、不會外洩到程式碼裡：
 
 1. 前往您的 GitHub repository
 2. 點擊「Settings」
@@ -103,7 +103,7 @@ Account-Owned Token 更適合團隊環境，因為它屬於帳號而非個人，
 
 ### 步驟三：建立 Cloudflare Pages 專案
 
-在設定 GitHub Actions 之前，我們需要先在 Cloudflare 建立專案。您可以選擇以下兩種方式之一：
+workflow 部署時會指定「要送到哪個 Pages 專案」，所以這個專案得先存在。以下兩種方式擇一：
 
 #### 方式一：使用 Wrangler CLI（推薦）
 
@@ -133,10 +133,10 @@ npx wrangler pages project create my-docs-site
 
 ### 步驟四：建立 GitHub Actions Workflow
 
-在專案根目錄建立 `.github/workflows/deploy-to-cloudflare-pages.yml`：
+這是整條管線的核心。在專案根目錄建立 `.github/workflows/deploy-to-cloudflare-pages.yml`：
 
 ```yaml
-name: Build site and deploy it to Cloudflare Pages with Wrangler2
+name: Build site and deploy it to Cloudflare Pages
 
 on:
   push:
@@ -177,11 +177,12 @@ jobs:
           restore-keys: |
             mkdocs-material-
 
+      # ↓↓↓ 這一步是唯一綁定 SSG 的地方，換工具就換這裡 ↓↓↓
       - name: Install dependencies and build site
         run: |
           pip install mkdocs-material==${{ env.MKDOCS_MATERIAL_VERSION }}
           mkdocs build --site-dir public
-
+      # ↑↑↑ 換工具就換這裡 ↑↑↑
       - name: Deploy to Cloudflare
         id: deploy
         uses: cloudflare/wrangler-action@v3
@@ -196,19 +197,17 @@ jobs:
         run: echo "$CMD_OUTPUT"
 ```
 
-#### 設定說明
+先記住我用註解框起來的那一步——這是全篇唯一跟 MkDocs 有關的地方，後面〈換成任何 SSG〉整節就是在替換它。其餘每一步（checkout、cache、deploy）對所有 SSG 都一樣。
 
-在 `env` 區塊中，您需要設定：
+幾個關鍵設定：
 
-- `CLOUDFLARE_PROJECT_NAME`: 您在 Cloudflare Pages 的專案名稱（必須與步驟三建立的專案名稱相同）
-
-這個名稱將會成為您的網站 URL 的一部分：`https://<project-name>.pages.dev`
+- **`env` 區塊集中管理版本與專案名**：升級 MkDocs 或改專案名稱時只改一個地方。`CLOUDFLARE_PROJECT_NAME` 必須與步驟三建立的專案名稱一致，它也決定了你的預設網址 `https://<project-name>.pages.dev`。
+- **cache 用「週數」當 key**：`$(date --utc '+%V')` 取當年第幾週，於是快取每週自動翻新一次；當週沒有快取時，`restore-keys` 會退而用最近一份，讓多數 build 都能省下重裝依賴的時間。
+- **`wrangler-action` 收尾**：把 `public` 目錄交給它，它驗證憑證、上傳檔案、部署、回傳網址，你不必自己碰 API。
 
 ### 步驟五：首次部署與後續設定
 
-#### 5.1 首次部署
-
-推送 workflow 文件到您的 repository：
+把 workflow 推上去，管線就開始運轉：
 
 ```bash
 git add .github/workflows/deploy-to-cloudflare-pages.yml
@@ -216,78 +215,64 @@ git commit -m "Add GitHub Actions workflow for Cloudflare Pages deployment"
 git push origin main
 ```
 
-#### 5.2 Cloudflare Pages 專案設定
+推送後到 GitHub 的 **Actions** 分頁，就能看到 workflow 正在跑；跑完在日誌尾端會印出 Wrangler 回傳的網址，打開 `https://<project-name>.pages.dev` 確認網站上線。
 
-部署成功後，您可以在 Cloudflare Dashboard 進行進一步設定：
+之後就進入「推送即上線」的日常——每次 `git push` 到 `main`，網站就自動更新，你不用再碰部署。想更進一步，可以回 Cloudflare Dashboard 的 Pages 專案裡設定自訂網域、查看部署歷史、配置重新導向規則。
 
-1. 登入 Cloudflare Dashboard
-2. 選擇「Pages」→ 找到您的專案（例如：`my-docs-site`）
-3. 在專案中可以：
-   - 設定自訂網域
-   - 查看部署歷史
-   - 設定環境變數
-   - 配置網頁重新導向規則
+## 換成任何 SSG：唯一要改的是 build 那一步
 
-專案部署後會獲得一個預設網址：`https://<project-name>.pages.dev`
+這才是整篇的重點。前面四步——憑證、Secrets、Pages 專案、`wrangler-action` 部署——完全不管你用什麼工具生成網站。真正綁定 SSG 的，只有步驟四裡我框起來的那一步：**安裝工具、跑 build、把成品放進一個目錄**。
 
-#### 5.3 驗證部署
+換言之，把那一步換掉，這條管線就直接服務另一個 SSG。以下是幾個常見工具的替換版本：
 
-您可以透過以下方式驗證部署是否成功：
-
-1. 在 GitHub Actions 頁面查看 workflow 執行狀態
-2. 檢查 workflow 日誌中的 Wrangler 輸出
-3. 訪問您的網站：`https://my-docs-site.pages.dev`
-4. 在 Cloudflare Dashboard 中查看部署詳情
-
-### 工作流程詳解
-
-#### 環境變數設定
-
-我們在 workflow 中定義了幾個環境變數，方便統一管理：
+**Hugo**：
 
 ```yaml
-env:
-  PYTHON_VERSION: "3.13.2"
-  MKDOCS_MATERIAL_VERSION: "9.6.5"
-  CLOUDFLARE_PROJECT_NAME: "my-docs-site"
+- name: Install dependencies and build site
+  run: |
+    wget https://github.com/gohugoio/hugo/releases/download/v0.124.1/hugo_extended_0.124.1_linux-amd64.deb
+    sudo dpkg -i hugo_extended_0.124.1_linux-amd64.deb
+    hugo --minify -d public
 ```
 
-這些變數的用途：
-
-- `PYTHON_VERSION`: Python 執行環境版本
-- `MKDOCS_MATERIAL_VERSION`: MkDocs Material 套件版本
-- `CLOUDFLARE_PROJECT_NAME`: Cloudflare Pages 專案名稱
-
-這樣的設計讓版本和專案設定更加集中和便利，當需要修改時，只需要在一個地方調整。
-
-#### Cache 機制解析
-
-我們的工作流程實現了高效的快取機制：
+**Jekyll**：
 
 ```yaml
-- name: Set cache id
-  run: echo "cache_id=$(date --utc '+%V')" >> $GITHUB_ENV
-
-- name: Cache mkdocs build
-  uses: actions/cache@v4
-  with:
-    key: mkdocs-material-${{ env.cache_id }}
-    path: |
-      ~/.cache/pip
-      .cache
-    restore-keys: |
-      mkdocs-material-
+- name: Install dependencies and build site
+  run: |
+    gem install bundler jekyll
+    bundle install
+    bundle exec jekyll build -d public
 ```
 
-這個設計具有以下特點：
+**Next.js（靜態輸出）**：
 
-1. **快取 key 設計**：使用週數（`%V`）作為 cache key，每週更新一次快取
-2. **快取範圍**：同時快取 pip 套件和 MkDocs 建構結果
-3. **還原機制**：如果當週快取不存在，會使用最近的快取
+```yaml
+- name: Install dependencies and build site
+  run: |
+    npm install
+    npm run build
+    npm run export
+    mv out public
+```
 
-#### Wrangler CLI 部署
+**Hexo**：
 
-工作流程使用 Cloudflare 官方的 `wrangler-action` 進行部署：
+```yaml
+- name: Install dependencies and build site
+  run: |
+    npm install hexo-cli -g
+    npm install
+    hexo generate
+```
+
+抓到通用原則就好——不管哪個 SSG，都只是三件事：
+
+1. **裝對應的建構工具**（`pip install`、`gem install`、`npm install`……）
+2. **執行 build 指令** 生成靜態檔案
+3. **把成品放進部署目錄**——上面全部統一輸出到 `public`，好對接 `wrangler-action`
+
+如果你的 SSG 預設輸出到 `dist`（或別的目錄），不必硬改它，把部署指令的目錄一起改掉即可：
 
 ```yaml
 - name: Deploy to Cloudflare
@@ -295,23 +280,18 @@ env:
   with:
     apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
     accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-    command: pages deploy public --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }}
+    command: pages deploy dist --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }}
 ```
 
-Wrangler 會：
-
-1. 驗證 API Token 和 Account ID
-2. 上傳 `public` 目錄中的靜態檔案
-3. 部署到 Cloudflare Pages
-4. 返回部署結果和 URL
-
-部署完成後，您的網站會在 `https://<project-name>.pages.dev` 上線。例如，如果專案名稱設為 `my-docs-site`，網址就會是 `https://my-docs-site.pages.dev`。
+build 步驟輸出的目錄，和 `pages deploy` 指定的目錄對得上，就成了。這就是為什麼標題說「靜態網站」而不是「MkDocs」——MkDocs 只是這篇借來的示範。
 
 ## 進階設定
 
-### 1. 不同分支的部署策略
+基本管線跑起來之後，可以視需要再加料。
 
-如果您想要為不同分支設定不同的部署策略：
+### 依分支採不同部署策略
+
+想讓 `main` 以外的分支也能各自預覽，用 `--branch` 帶入當前分支名：
 
 ```yaml
 on:
@@ -321,10 +301,7 @@ on:
       - staging
       - "feature/**"
 
-env:
-  PYTHON_VERSION: "3.13.2"
-  MKDOCS_MATERIAL_VERSION: "9.6.5"
-  CLOUDFLARE_PROJECT_NAME: "my-docs-site"
+# ...（env 同上）
 
 jobs:
   deploy:
@@ -337,9 +314,9 @@ jobs:
           command: pages deploy public --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }} --branch=${{ github.ref_name }}
 ```
 
-### 2. 條件式部署
+### 只在內容變更時才部署
 
-只在特定檔案變更時觸發部署：
+改了 README 也重新部署一次網站，很浪費。用 `paths` 限定只有文件或設定變動時才觸發：
 
 ```yaml
 on:
@@ -352,9 +329,9 @@ on:
       - ".github/workflows/deploy-to-cloudflare-pages.yml"
 ```
 
-### 3. 部署通知
+### 部署通知
 
-加入部署成功或失敗的通知：
+在成功或失敗時發出提醒，接上 Slack、Discord 就不必盯著 Actions 分頁：
 
 ```yaml
 - name: Notify on success
@@ -370,144 +347,44 @@ on:
     # 可以在這裡加入錯誤通知
 ```
 
-### 常見問題排除
+## 常見問題排除
 
-### 1. 專案不存在錯誤
+第一次接管線，多半會撞到下面幾個錯誤，這裡對照解法：
 
-如果在首次部署時遇到錯誤：
+### `Project "my-docs-site" does not exist`
 
-```
-Error: Project "my-docs-site" does not exist
-```
+Pages 專案還沒建。回到步驟三，用 Wrangler CLI 或 Dashboard 先把專案建起來。
 
-這表示您尚未在 Cloudflare 建立專案。請回到步驟三，使用 Wrangler CLI 或 Dashboard 建立專案。
+### `Failed to create deployment`（API Token 權限不足）
 
-### 2. API Token 權限不足
+Token 權限不對。確認它具有 `Account → Cloudflare Pages → Edit`；必要時重新生成 Token 並更新 GitHub Secrets。
 
-錯誤訊息：
+### 快取相關問題
 
-```
-Error: Failed to create deployment
-```
+當快取讓 build 出現詭異結果時，可以手動刪除 GitHub Actions 的快取，或修改 cache key 強制翻新一份。
 
-解決方案：
+### `Project not found`（專案名稱不一致）
 
-- 確認 API Token 具有正確的權限（Account → Cloudflare Pages → Edit）
-- 重新生成 Token 並更新 GitHub Secrets
+`CLOUDFLARE_PROJECT_NAME` 與實際在 Cloudflare 建立的專案名稱必須**完全一致**，且該專案已成功建立。
 
-### 3. 快取失效問題
+### 部署了空目錄或找不到檔案
 
-如果遇到快取相關問題，可以：
-
-1. 手動刪除 GitHub Actions 的快取
-2. 修改 cache key 來強制更新
-
-### 4. 專案名稱不一致
-
-如果出現以下錯誤：
-
-```
-Error: Project not found
-```
-
-確保：
-
-- GitHub Actions 中的 `CLOUDFLARE_PROJECT_NAME` 與實際在 Cloudflare 建立的專案名稱完全一致
-- 專案已經在 Cloudflare Pages 中成功建立
-
-### 5. 部署目錄錯誤
-
-確保：
-
-- MkDocs 建構輸出目錄設定正確（`--site-dir public`）
-- Wrangler 部署指定的目錄相符（`pages deploy public`）
+build 輸出目錄和部署目錄要對得上：MkDocs 用 `--site-dir public`，Wrangler 就得 `pages deploy public`；換成別的 SSG（輸出到 `dist` 等）時，兩邊要一起改。
 
 ## 結語
 
-透過本文的設定，您的靜態網站現在可以自動化部署到 Cloudflare Pages。這個流程不僅節省了手動部署的時間，還確保了每次更新都能即時上線。雖然本文以 MkDocs Material 為範例，但同樣的流程可以套用到任何靜態網頁生成工具。
+設定看起來有五步，但真正的變化只有一個：部署從「一件你每次都要記得做的事」，變成「一件你不用再想的事」。之後你的注意力可以全部放回內容本身——工具則保持可替換，哪天想從 MkDocs 換到 Hugo，改的也只是 build 那一步。
 
-主要優勢：
+這條管線帶來的：
 
-- 推送即部署，完全自動化
-- 快取機制提升建構速度
-- 版本控制集中管理，升級維護更方便
-- 版本鎖定確保環境一致性
-- Cloudflare 全球 CDN 加速
+- **推送即部署**，手動上傳與「忘記 build」從此絕跡
+- **cache 機制**省下重裝依賴的時間
+- **版本與專案設定集中管理**，升級維護只改一處
+- **版本鎖定**確保每次 build 環境一致
+- **Cloudflare 全球 CDN** 讓網站在各地都快
 
-如果您在設定過程中遇到問題，可以參考：
+延伸閱讀：
 
 - [Cloudflare Pages 官方文件](https://developers.cloudflare.com/pages/)
 - [GitHub Actions 文件](https://docs.github.com/en/actions)
-- [MkDocs Material 指南](https://squidfunk.github.io/mkdocs-material/)
-
-## 適用於其他靜態網站生成器
-
-這套部署流程的優點在於它的通用性，您可以將其應用到任何靜態網站生成器（Static Site Generator, SSG）。只需要調整以下部分：
-
-#### 常見的靜態網站生成器設定範例
-
-1. **Hugo**：
-
-```yaml
-- name: Install dependencies and build site
-  run: |
-    # 安裝 Hugo
-    wget https://github.com/gohugoio/hugo/releases/download/v0.124.1/hugo_extended_0.124.1_linux-amd64.deb
-    sudo dpkg -i hugo_extended_0.124.1_linux-amd64.deb
-    # 建構網站
-    hugo --minify -d public
-```
-
-2. **Jekyll**：
-
-```yaml
-- name: Install dependencies and build site
-  run: |
-    gem install bundler jekyll
-    bundle install
-    bundle exec jekyll build -d public
-```
-
-3. **Next.js (靜態輸出)**：
-
-```yaml
-- name: Install dependencies and build site
-  run: |
-    npm install
-    npm run build
-    npm run export
-    mv out public
-```
-
-4. **Hexo**：
-
-```yaml
-- name: Install dependencies and build site
-  run: |
-    npm install hexo-cli -g
-    npm install
-    hexo generate
-```
-
-### 通用原則
-
-無論使用哪種靜態網站生成器，只要遵循以下原則即可：
-
-1. **安裝相應的建構工具**：根據您使用的 SSG 安裝對應的套件
-2. **執行建構指令**：執行相應的建構指令來生成靜態檔案
-3. **統一輸出目錄**：確保靜態檔案輸出到 `public` 目錄，或修改 Wrangler 部署指令中的目錄路徑
-
-例如，如果您的 SSG 輸出到 `dist` 目錄，可以這樣修改部署指令：
-
-```yaml
-- name: Deploy to Cloudflare
-  uses: cloudflare/wrangler-action@v3
-  with:
-    apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
-    accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-    command: pages deploy dist --project-name=${{ env.CLOUDFLARE_PROJECT_NAME }}
-```
-
-這種靈活性讓您可以輕鬆地將任何靜態網站專案部署到 Cloudflare Pages，享受其提供的全球 CDN 加速和安全防護。
-
-祝您部署順利！
+- [Material for MkDocs 指南](https://squidfunk.github.io/mkdocs-material/)
