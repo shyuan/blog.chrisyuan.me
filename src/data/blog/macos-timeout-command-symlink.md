@@ -121,7 +121,15 @@ mkdir -p ~/.local/bin
 ln -sf "$(command -v gtimeout)" ~/.local/bin/timeout
 ```
 
-`~/.local/bin` 通常本來就已經在 PATH 裡（這個專案的 `.zshrc` 也是），所以不需要額外改 PATH 設定。這個方式：
+（這裡 `command -v gtimeout` 假設 Homebrew 的 bin 已經在 PATH 上；若沒有，把目標寫死成 `"$(brew --prefix)/bin/gtimeout"` 會更保險，免得展開成空字串、建出一個指向空路徑的壞 symlink。）
+
+`~/.local/bin` 只要已經在 PATH 上就不用再改設定——我的 `.zshrc` 本來就有這一行。要注意的是 macOS 預設並不會把 `~/.local/bin` 放進 PATH，如果你的環境還沒有，得先自己加一行：
+
+```bash
+export PATH="$HOME/.local/bin:$PATH"
+```
+
+而這一步之所以能讓子行程也吃到 `timeout`，靠的正是 PATH 會被匯出、由子行程繼承，而不是子行程回頭去 source 你的 `.zshrc`。這個方式：
 
 - 只新增 `timeout` 一個指令，不會動到 `ls`／`dir`／`vdir` 等任何其他東西。
 - 是檔案系統層級的真實 PATH 項目，任何 shell、任何非互動式子行程（Makefile recipe、CI 腳本、`xargs`／`find -exec` 等直接 exec 呼叫的情境）都能找到它，不受「有沒有 source `.zshrc`」影響。
