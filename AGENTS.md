@@ -222,7 +222,7 @@ ogImage: ""                   # 選用，社群分享圖片
 
 1. **補 frontmatter**：在檔案最上方加入 `---` 區塊，必填欄位：
    - `pubDatetime`：發布日期（ISO 8601 格式，如 `2026-02-19T00:00:00Z`）
-   - `title`：文章標題（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
+   - `title`：文章標題，此時先用工作標題即可，最終標題於步驟 7 內容定稿後決定（注意 YAML 引號跳脫，標題內含引號時用不同引號包裹）
    - `tags`：至少一個標籤
    - `description`：1-2 句摘要，用於 SEO 與社群分享卡片。長度以**顯示寬度**（半形單位）為準，不用原始字元數——詳見下方「meta description 長度標準」。目標 **130–156 半形（≈ 65–78 個中文字）**，把最重要的資訊放前 ~60 字
    - `slug`：英文 URL 路徑（如 `taiwan-stock-odd-lot-trading-reform`），中文檔名時必填，避免 URL 出現中文
@@ -242,17 +242,23 @@ ogImage: ""                   # 選用，社群分享圖片
 
 6. **AI 語法修訂**：使用 `writing-humanizer` skill 檢測並修正 AI 寫作痕跡（誇大象徵、宣傳性語言、否定式排比等），使文字更自然
 
-7. **專有名詞補連結**：為人名、機構名、法案名、書名等專有名詞補上外部連結
+7. **決定標題**：標題在內容定稿後（步驟 5、6 完成）才決定，此前用工作標題即可。好標題須同時回答 **Who**（寫給誰）、**What**（主題與範圍）、**Why**（讀者能獲得什麼）三問題——只答得出 What、沒有 Who/Why 的標題視為未完成
+   - **長度上限 70 字元**（含 CJK，每字算 1 字元）：Bing Webmaster Tools 會回報「Title too long」，超過會被搜尋引擎截斷或忽略
+   - **最強長尾關鍵字前置**：手機 SERP 只顯示前段，把命中率最高的關鍵字放最前面
+   - **提案方式**：用 `AskUserQuestion` 的 `preview` 欄位視覺化比較，每個選項展示「完整標題 + Who/What/Why ✓/△/✗ 三維度 + 優缺點」；永遠附「保留現有」作為對照選項；上限 3 個替代 + 1 個現有（對應 `AskUserQuestion` 4 個 options 上限）
+   - **發佈後也適用**：只改 `title`、`slug` 不變時 URL 不受影響，不需 `_redirects`，一次 commit + push 即可
+
+8. **專有名詞補連結**：為人名、機構名、法案名、書名等專有名詞補上外部連結
    - 連結須經查證確認可正常訪問（使用 WebFetch 或 WebSearch 驗證）
    - 不可自行臆測 URL，必須查到實際頁面
    - 若遭網站技術性阻擋（Cloudflare 驗證、403 等），列出改由真人測試
    - 優先使用官方網站、維基百科、或權威來源
 
-8. **CJK 間距**：執行 `bun run fix:text` 自動在 CJK 與英數之間補上空格（或依賴 lint-staged 在 commit 時自動修正）
+9. **CJK 間距**：執行 `bun run fix:text` 自動在 CJK 與英數之間補上空格（或依賴 lint-staged 在 commit 時自動修正）
 
-9. **檢查 description 長度**：執行 `bun run lint:desc`，確認新文章的 meta description 顯示寬度落在 130–156 半形（過短會被 Bing 回報 too short、過長會被 SERP 截斷）
+10. **檢查 description 長度**：執行 `bun run lint:desc`，確認新文章的 meta description 顯示寬度落在 130–156 半形（過短會被 Bing 回報 too short、過長會被 SERP 截斷）
 
-10. **驗證建置**：執行 `bun run build` 確認無錯誤
+11. **驗證建置**：執行 `bun run build` 確認無錯誤
 
 ### meta description 長度標準
 
