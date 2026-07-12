@@ -129,6 +129,13 @@ const articleSchema = isArticle
       )
     }
 
+    <!-- Mastodon author byline: credit the author when posts are shared on the Fediverse -->
+    {
+      isArticle && SITE.fediverseCreator && (
+        <meta name="fediverse:creator" content={SITE.fediverseCreator} />
+      )
+    }
+
     <!-- Twitter -->
     <meta property="twitter:card" content="summary_large_image" />
     <meta property="twitter:url" content={canonicalURL} />
