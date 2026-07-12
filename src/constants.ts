@@ -6,6 +6,7 @@ import IconLinkedin from "@/assets/icons/IconLinkedin.svg";
 import IconFacebook from "@/assets/icons/IconFacebook.svg";
 import IconLine from "@/assets/icons/IconLine.svg";
 import IconThreads from "@/assets/icons/IconThreads.svg";
+import IconMastodon from "@/assets/icons/IconMastodon.svg";
 import IconBluesky from "@/assets/icons/IconBluesky.svg";
 import IconTelegram from "@/assets/icons/IconTelegram.svg";
 import IconCopy from "@/assets/icons/IconCopy.svg";
@@ -16,6 +17,8 @@ interface Social {
   href: string;
   linkTitle: string;
   icon: (_props: Props) => Element;
+  /** Extra `rel` value for the anchor (e.g. "me" for Mastodon identity verification). */
+  rel?: string;
 }
 
 export const SOCIALS: Social[] = [
@@ -36,6 +39,13 @@ export const SOCIALS: Social[] = [
     href: "https://www.linkedin.com/in/shyuan/",
     linkTitle: `${SITE.title} on LinkedIn`,
     icon: IconLinkedin,
+  },
+  {
+    name: "Mastodon",
+    href: "https://g0v.social/@chrisyuan",
+    linkTitle: `${SITE.title} on Mastodon`,
+    icon: IconMastodon,
+    rel: "me",
   },
   {
     name: "Mail",
