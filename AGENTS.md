@@ -6,7 +6,7 @@
 
 ## 技術棧
 
-- **框架**: Astro 7.x (`^7.2.0`，Rust 編譯器 + Vite 8 / Rolldown）
+- **框架**: Astro 7.x (`^7.2.3`，Rust 編譯器 + Vite 8 / Rolldown）
 - **基礎主題**: AstroPaper v5 (https://github.com/satnaing/astro-paper)
 - **樣式**: Tailwind CSS 4.x (CSS-based config) + Terminal CSS 配色
 - **內容格式**: Markdown / MDX
@@ -82,7 +82,7 @@
 - **Tailwind**: 透過 `@tailwindcss/vite` 作為 Vite plugin 載入（非 `@astrojs/tailwind`）
 - **Markdown processor**: Astro 7 預設改用 Rust 的 Sätteri pipeline。本專案重度依賴 remark/rehype 外掛，故安裝 `@astrojs/markdown-remark` 並以 `markdown.processor: unified({ remarkPlugins, rehypePlugins })` 走回 unified 流程（`markdown.remarkPlugins` / `rehypePlugins` 頂層寫法已 deprecated，勿再使用）。`shikiConfig` 仍留在 `markdown` 頂層。`astro-embed` 仍以舊 API 注入 remark plugin，build 時會印一行 deprecation 警告，屬上游套件問題、不影響功能
 - **Mermaid**: `beautiful-mermaid` 透過自製 remark plugin（`src/utils/remark-mermaid.ts`）在 build 時將 `` ```mermaid `` code block 渲染為 SVG
-- **Shiki**: 雙主題 `github-light` / `github-dark`，搭配 `@shikijs/transformers` 提供 diff、highlight、fileName 等功能。注意：`@shikijs/transformers` 的 `@shikijs/types` 版本必須與 Astro 內建 `shiki` 的 `@shikijs/types` 版本完全一致（目前皆為 4.0.2），否則 `astro check` 會報 `ShikiTransformer` 型別不相容錯誤。因此 `@shikijs/transformers` 須釘版 `"4.0.2"`（不能用 `^`），不能領先 Astro 內建的 shiki 版本
+- **Shiki**: 雙主題 `github-light` / `github-dark`，搭配 `@shikijs/transformers` 提供 diff、highlight、fileName 等功能。注意：`@shikijs/transformers` 的 `@shikijs/types` 版本必須與 Astro 內建 `shiki` 的 `@shikijs/types` 版本完全一致（目前皆為 4.4.3），否則 `astro check` 會報 `ShikiTransformer` 型別不相容錯誤。因此 `@shikijs/transformers` 須釘版（不能用 `^`），且不能領先 Astro 內建的 shiki 版本。Astro 只宣告 `shiki: ^4.0.2`，實際解析版本由 `bun.lock` 決定；要升 transformers 前先確認 `node_modules/shiki/package.json` 與 `node_modules/@shikijs/types/package.json` 的版本，兩者對齊後才改 `package.json`
 - **字型**: 使用 Astro fonts API（Astro 6+ 穩定功能），透過 `fontProviders.google()` 載入 Fira Code
 - **輸出模式**: `static`（預設）
 - **圖片**: responsive styles + constrained layout
