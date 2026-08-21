@@ -91,7 +91,11 @@ describe("postFilter — the DEV override branch", () => {
     const original = env.DEV;
     try {
       env.DEV = true;
-      expect(env.DEV).toBe(true); // guard: the override is actually in effect
+      // guard: the override is actually in effect. Assert truthiness, not
+      // `=== true`: bun 1.4.0 coerces values written to `import.meta.env` to
+      // strings (matching Vite), so this reads back as "true". postFilter only
+      // uses the value in a boolean OR, so truthy is exactly what matters.
+      expect(env.DEV).toBeTruthy();
       expect(postFilter(makeEntry({ offsetMs: 10 * MARGIN }))).toBe(true);
     } finally {
       // Restore exactly: delete the key if it never existed, so we don't leave
