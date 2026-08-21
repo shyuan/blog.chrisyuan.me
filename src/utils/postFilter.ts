@@ -5,9 +5,10 @@ const postFilter = ({ data }: CollectionEntry<"blog">) => {
   const isPublishTimePassed =
     Date.now() >
     new Date(data.pubDatetime).getTime() - SITE.scheduledPostMargin;
-  // Boolean(): import.meta.env values are not guaranteed to be real booleans
-  // (bun 1.4+ / Vite coerce assigned values to strings), and `||` would leak
-  // that value straight into the return type.
+  // Boolean(): import.meta.env values are not guaranteed to be real booleans.
+  // Under bun, import.meta.env IS process.env, and bun 1.4 coerces every
+  // assignment to a string (Node semantics), so `||` would leak "true" straight
+  // into the return type.
   return !data.draft && (Boolean(import.meta.env.DEV) || isPublishTimePassed);
 };
 

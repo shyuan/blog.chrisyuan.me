@@ -92,9 +92,10 @@ describe("postFilter — the DEV override branch", () => {
     try {
       env.DEV = true;
       // guard: the override is actually in effect. Assert truthiness, not
-      // `=== true`: bun 1.4.0 coerces values written to `import.meta.env` to
-      // strings (matching Vite), so this reads back as "true". postFilter only
-      // uses the value in a boolean OR, so truthy is exactly what matters.
+      // `=== true`: under bun, import.meta.env is an alias of process.env, and
+      // bun 1.4 coerces assigned values to strings (Node semantics), so this
+      // reads back as "true". postFilter only uses the value in a boolean OR,
+      // so truthy is exactly what matters.
       expect(env.DEV).toBeTruthy();
       expect(postFilter(makeEntry({ offsetMs: 10 * MARGIN }))).toBe(true);
     } finally {
