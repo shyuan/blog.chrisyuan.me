@@ -329,7 +329,7 @@ Date.now() > new Date(pubDatetime).getTime() - SITE.scheduledPostMargin
 - **自訂網域**: `blog.chrisyuan.me`
 - **GitHub Repo**: https://github.com/shyuan/blog.chrisyuan.me
 - **GitHub Secrets**:
-  - `CLOUDFLARE_API_TOKEN`（需要 Workers Scripts 編輯權限；自訂網域需 Zone 的 Workers Routes 編輯權限）
+  - `CLOUDFLARE_API_TOKEN`（建立時選「Edit Cloudflare Workers」範本，見 https://developers.cloudflare.com/workers/ci-cd/external-cicd/github-actions/ ；原本只有 Pages 權限的 token 部署會回 `Authentication error [code: 10000]`）
   - `CLOUDFLARE_ACCOUNT_ID`
 - **GitHub Variables**:
   - `PUBLIC_GA_MEASUREMENT_ID`（Google Analytics GA4 Measurement ID，格式 `G-XXXXXXXXXX`）
