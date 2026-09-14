@@ -2,7 +2,7 @@
 
 ## 專案概述
 
-基於 AstroPaper v5 主題建立個人技術部落格，套用 Terminal CSS 風格（Fira Code monospace 字型、復古終端機美學），部署至 Cloudflare Pages。
+基於 AstroPaper v5 主題建立個人技術部落格，套用 Terminal CSS 風格（Fira Code monospace 字型、復古終端機美學），部署至 Cloudflare Workers（Static Assets）。
 
 ## 技術棧
 
@@ -11,7 +11,7 @@
 - **樣式**: Tailwind CSS 4.x (CSS-based config) + Terminal CSS 配色
 - **內容格式**: Markdown / MDX
 - **CJK 間距**: AutoCorrect (`autocorrect-node`) — 強制 CJK 與英數間加空格
-- **部署**: GitHub Actions + Cloudflare Wrangler → Cloudflare Pages
+- **部署**: GitHub Actions + Cloudflare Wrangler → Cloudflare Workers（Static Assets）
 - **套件管理**: bun
 
 ## 目錄結構
@@ -68,6 +68,7 @@
 │   └── content.config.ts       # Astro Content Collections 定義
 ├── .autocorrectrc             # AutoCorrect 設定（僅啟用 space-word）
 ├── astro.config.ts
+├── wrangler.jsonc             # Cloudflare Workers 設定（assets、自訂網域）
 ├── tsconfig.json
 ├── package.json
 ├── bun.lock
@@ -299,7 +300,7 @@ bun run lint:desc --strict     # 有違規就 exit 1（CI 全庫把關用）
   2. **build** job：`bun run build`（含 OG 圖片，完整驗證）
 - **`deploy.yml`**（push 到 `main` / 每小時 cron / `workflow_dispatch` 觸發）：
   1. **lint** job：同 ci.yml
-  2. **deploy** job：`bun run build`（含 GA 環境變數）→ wrangler 部署至 Cloudflare Pages
+  2. **deploy** job：`bun run build`（含 GA 環境變數）→ `wrangler deploy` 部署至 Cloudflare Workers
 
 lint 快速失敗時不浪費 build 資源；deploy 只 build 一次（不再透過 `workflow_call` 呼叫 ci.yml 導致雙重 build）。
 
@@ -319,11 +320,16 @@ Date.now() > new Date(pubDatetime).getTime() - SITE.scheduledPostMargin
 
 ### Cloudflare 設定
 
-- **Pages 專案名稱**: `blog-chrisyuan-me`
+- **Worker 名稱**: `blog-chrisyuan-me`（設定在 `wrangler.jsonc`，原為 Cloudflare Pages 專案，已遷移至 Workers）
+- **型態**: 純靜態 assets-only Worker（無 `main` script），`assets.directory` 指向 `./dist`
+- **`not_found_handling: "404-page"`**：Pages 會自動回 `404.html`，Workers 需明確設定
+- **`html_handling: "auto-trailing-slash"`**：與 Pages 行為一致；`_redirects` 在 Workers Assets 原生支援
+- **`workers_dev` / `preview_urls` 皆關閉**：只走自訂網域，避免 `*.workers.dev` 重複內容被索引
+- **部署指令**: `wrangler deploy`（勿用 `wrangler pages deploy`）；本地預覽可 `bunx wrangler dev`
 - **自訂網域**: `blog.chrisyuan.me`
 - **GitHub Repo**: https://github.com/shyuan/blog.chrisyuan.me
 - **GitHub Secrets**:
-  - `CLOUDFLARE_API_TOKEN`（需要 Cloudflare Pages 編輯權限）
+  - `CLOUDFLARE_API_TOKEN`（需要 Workers Scripts 編輯權限；自訂網域需 Zone 的 Workers Routes 編輯權限）
   - `CLOUDFLARE_ACCOUNT_ID`
 - **GitHub Variables**:
   - `PUBLIC_GA_MEASUREMENT_ID`（Google Analytics GA4 Measurement ID，格式 `G-XXXXXXXXXX`）
@@ -407,5 +413,5 @@ bun run lint:desc --strict   # 有違規就 exit 1
 - AstroPaper 文件: https://github.com/satnaing/astro-paper
 - Terminal CSS 產生器: https://panr.github.io/terminal-css/
 - Astro 官方文件: https://docs.astro.build/
-- Cloudflare Pages 文件: https://developers.cloudflare.com/pages/
+- Cloudflare Workers Static Assets 文件: https://developers.cloudflare.com/workers/static-assets/
 - Tailwind CSS 4.x: https://tailwindcss.com/docs

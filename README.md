@@ -2,7 +2,7 @@
 
 Chris Yuan 的個人部落格 — 技術筆記與時事觀察，涵蓋 DevOps、Cloud、AI、CLI 工具實務，以及地緣政治、台灣議題分析。
 
-基於 [AstroPaper v5](https://github.com/satnaing/astro-paper) 主題，套用 Terminal CSS 風格（Fira Code monospace 字型、復古終端機美學），部署至 [Cloudflare Pages](https://pages.cloudflare.com/)。
+基於 [AstroPaper v5](https://github.com/satnaing/astro-paper) 主題，套用 Terminal CSS 風格（Fira Code monospace 字型、復古終端機美學），部署至 [Cloudflare Workers](https://developers.cloudflare.com/workers/static-assets/)（Static Assets）。
 
 > https://blog.chrisyuan.me
 
@@ -15,7 +15,7 @@ Chris Yuan 的個人部落格 — 技術筆記與時事觀察，涵蓋 DevOps、
 | Content         | Markdown / MDX                                                                         |
 | Search          | [Pagefind](https://pagefind.app/)                                                      |
 | OG Image        | [satori](https://github.com/vercel/satori) + [sharp](https://sharp.pixelplumbing.com/) |
-| Deployment      | GitHub Actions + [Cloudflare Pages](https://pages.cloudflare.com/)                     |
+| Deployment      | GitHub Actions + [Cloudflare Workers](https://developers.cloudflare.com/workers/)      |
 | Package Manager | [bun](https://bun.sh/)                                                                 |
 
 ## Getting Started
@@ -99,7 +99,7 @@ description: "文章描述，用於 SEO 與社群分享"
 透過 GitHub Actions 自動部署：
 
 - **PR** 觸發 CI（lint + format check + build）
-- **Push to main** 觸發部署至 Cloudflare Pages
+- **Push to main** 觸發部署至 Cloudflare Workers
 
 ## License
 
