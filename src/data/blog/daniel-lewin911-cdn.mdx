@@ -1,8 +1,9 @@
 ---
 title: "Daniel Lewin：911 事件的第一位犧牲者與 CDN 技術革命先驅"
 pubDatetime: 2025-05-08T06:36:57.000Z
+modDatetime: 2026-09-20T07:59:40.000Z
 slug: "daniel-lewin911-cdn"
-description: "從丹佛到耶路撒冷：塑造英雄的成長歷程 1970 年 5 月 14 日，Daniel Mark Lewin 出生於美國科羅拉多州丹佛市的一個知識份子家庭。父親 Charles 是精神科醫師，母親 Peggy 是小兒科醫師。在這個重視教育的猶太家庭中，Daniel 從小就展現出非凡的活力和智慧。家裡的早餐麥片盒常被父親貼上《科學美國人》的文章剪報，餐桌上的話題不是卡通，而是無限概念和賽局理論。 14"
+description: "911 第一位犧牲者 Daniel Lewin 是 Akamai 共同創辦人。他在 MIT 證明的 consistent hashing 催生 CDN 產業，如今仍運作在 Cassandra、nginx 與 LLM 推論路由裡。"
 tags:
   - "911"
   - CDN
@@ -67,6 +68,56 @@ https://www.youtube.com/watch?v=5wOGj2kVMuY
 Akamai 現任 CEO Tom Leighton 在談到與 Uniqlo 合作推出「Peace for All」慈善 T 恤時，特別提到了對和平理念的深刻理解。這件 T 恤上印著 Akamai 網路安全解決方案的部分程式碼，象徵著科技力量對和平的貢獻。對於 Leighton 來說，這份對和平的追求顯然與他失去摯友和合作夥伴 Daniel 的經歷密不可分。
 
 https://www.youtube.com/watch?v=jfKEm5_0BNo
+
+## 演算法的下半場：Consistent Hashing 的二十五年
+
+Lewin 過世那年，consistent hashing 還只是一篇 STOC 論文加上一家剛上市的公司。二十五年後，用它的系統遠比 CDN 多，而其中幾個最後又把它換掉了。
+
+### Dynamo 把它從快取搬進資料庫
+
+2007 年，Amazon 發表了 [Dynamo 論文](https://www.allthingsdistributed.com/files/amazon-dynamo-sosp2007.pdf)，那是後來整個 NoSQL 浪潮的起點。論文第 4.2 節開頭就說明，Dynamo 的分區機制依賴 consistent hashing 把負載分散到多台儲存主機；而緊接著標註的參考文獻 [10]，正是 Karger、Lehman、Leighton、Panigrahy、Levine、Lewin 1997 年那篇 STOC 論文。Lewin 過世六年後，他的名字出現在 Amazon 工程師的參考文獻裡。
+
+Amazon 的工程師也誠實記下了原始演算法的兩個麻煩。第一，節點在環上的位置是隨機取的，資料分佈不會平均。第二，演算法對「這台機器比那台強」這件事完全無感。他們的解法是讓一台實體機器在環上佔據多個位置，稱為 virtual node，也叫 token；一台機器分到幾個 token，可以依它的容量決定。
+
+至於 2012 年推出的 [DynamoDB](https://en.wikipedia.org/wiki/Amazon_DynamoDB)，和 2007 年的 Dynamo 只共用名字。它的資料切分是連續的 key range，由中央服務負責管理，[2022 年那篇描述 DynamoDB 架構的論文](https://www.usenix.org/system/files/atc22-elhemali.pdf)全文沒有出現 consistent hashing 這個詞。
+
+真正照著 Dynamo 做的是 [Cassandra](https://cassandra.apache.org/) 與 [Riak](https://en.wikipedia.org/wiki/Riak)。Cassandra 至今仍用 Murmur3Partitioner 把 partition key 映射到環上的 token，每個節點分到幾個 token 由 `num_tokens` 設定。這個值的預設在 4.0 版[從 256 調降到 16](https://issues.apache.org/jira/browse/CASSANDRA-13701)，因為運維經驗顯示 vnode 太多會讓 repair 與擴縮容變得昂貴。
+
+### 你今天改的 nginx.conf 裡就有它
+
+1997 年那篇論文的標題很長，重點其實在後半段：distributed caching protocols for relieving hot spots on the World Wide Web。它一開始要解的是快取問題，而有快取問題的不只 Akamai。
+
+2007 年，[Last.fm](https://en.wikipedia.org/wiki/Last.fm) 的工程師 [Richard Jones](https://www.metabrew.com/) 碰上一個問題：他們的 [memcached](https://en.wikipedia.org/wiki/Memcached) 叢集只要加一台或掉一台機器，所有 key 的歸屬就整個重算，等於把快取清空。他照著 consistent hashing 寫了一個 C 函式庫叫 [libketama](https://www.metabrew.com/article/libketama-consistent-hashing-algo-memcached-clients)，把每台伺服器雜湊成環上一兩百個點，然後開源出來。ketama 後來成了 memcached client 的事實標準。
+
+痕跡留到了今天：
+
+```nginx
+upstream backend {
+    hash $request_uri consistent;
+    server backend1.example.com;
+    server backend2.example.com;
+}
+```
+
+[nginx 官方文件](https://nginx.org/en/docs/http/ngx_http_upstream_module.html)對 `consistent` 這個參數的說明是「改用 ketama consistent hashing 方法」，還特別註明與 `ketama_points` 設為 160 的 client 相容。
+
+### 演算法本身也一直在改
+
+consistent hashing 並不是這個問題的第一個答案。1996 年，密西根大學的 David Thaler 與 Chinya Ravishankar 發表了 [rendezvous hashing](https://en.wikipedia.org/wiki/Rendezvous_hashing)（又稱 highest random weight），比 Karger 那篇早了一年，解的是同一件事，只是從來沒有得到同等的名氣。
+
+後來的改良分兩類。一是把環換掉。Google 在 2014 年提出 [Jump](https://arxiv.org/abs/1406.2294)，五行程式碼、完全不需要額外記憶體，代價是 bucket 必須連號、只能從尾端移除；2016 年的 [Maglev](https://www.usenix.org/conference/nsdi16/technical-sessions/presentation/eisenbud) 負載平衡器則改用一張查找表換取 O(1) 的查詢。2020 年之後還有 Anchor 與 Dx。2023 年有[一份研究](https://amosbrocco.ch/pubs/paper03.pdf)把這些演算法全部用 Java 重寫、放在同一台機器上實測，結論是在記憶體、查找時間與平衡度三項指標上，Jump、Anchor、Dx 都勝過 1997 年的原始環。
+
+二是承認伺服器有容量上限。原始的 consistent hashing 只保證節點變動時搬動的資料最少，並不保證任何一台不會被打爆。2016 年 Google 的研究團隊提出 [consistent hashing with bounded loads](https://research.google/blog/consistent-hashing-with-bounded-loads/)：給每台機器設一個 (1+ε) 倍平均負載的上限，滿了就順時針找下一台。論文放上 arXiv 三個月後，Vimeo 的 Andrew Rodland [把它實作進 HAProxy](https://www.haproxy.com/user-spotlight-series/haproxy-load-balancing-at-vimeo)，快取頻寬降到原本的八分之一左右。Google 自己的 Cloud Pub/Sub 也採用了同一套做法，[Envoy](https://www.envoyproxy.io/docs/envoy/latest/intro/arch_overview/upstream/load_balancing/load_balancers) 則同時提供 `ring_hash` 與 `maglev` 兩種選項。
+
+也有系統選擇不走這條路。[Redis Cluster 的官方文件](https://redis.io/docs/latest/operate/oss_and_stack/management/scaling/)直接寫著「不使用 consistent hashing」，改用 16384 個固定的 hash slot。理由很實際：每個節點要把自己持有的 slot 以 bitmap 塞進 gossip 心跳封包，16384 個 bit 剛好是 2KB，換成 65536 就變成 8KB。
+
+### 2026 年的新戰場：LLM 推論路由
+
+跑大型語言模型推論時，每台 GPU 節點都留著一份 KV cache，記著它最近處理過的提示詞前綴。一個請求如果被送到沒有對應前綴的節點，這台機器就得從頭重算整段 prefill，先前的計算等於白做。但如果把所有共用前綴的請求全部塞給同一台，那台馬上就過載。
+
+要快取命中，又要負載平均，而且節點會在擴縮容與故障之中不斷進出。這正是 Lewin 那篇論文的題目，只是把「網頁物件與快取伺服器」換成了「提示詞前綴與 GPU」。[vLLM 官方的 router](https://github.com/vllm-project/router) 把 consistent hashing 列為內建的負載平衡策略之一，用途寫得很明白：讓帶有相同 routing key 的請求黏在同一個 worker 上，提高 KV cache 的重用率。[SGLang](https://www.lmsys.org/blog/2024-12-04-sglang-v0-4/) 則走另一條路，在 router 裡維護一份各節點快取狀態的近似 radix tree。
+
+Lewin 當年是為了讓網頁載入快一點才證明這件事。同一套想法現在決定你送出的提示詞落在哪一張 GPU 上。
 
 ## 未竟的夢想：如果...
 
