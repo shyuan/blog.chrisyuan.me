@@ -1,7 +1,7 @@
 ---
 pubDatetime: 2026-06-22T00:00:00Z
-modDatetime: 2026-09-21T03:58:42Z
-title: "想像中的台灣政治終局：獨立理想下的日台奧匈式對等整合"
+modDatetime: 2026-09-21T04:19:43Z
+title: "想像中的台灣政治終局：獨立理想下的日台奧匈式對等整合（台湾の政治的終局——独立の理想と日台オーストリア=ハンガリー型の対等統合）"
 slug: "taiwan-japan-austro-hungarian-endgame"
 tags:
   - 台灣

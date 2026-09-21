@@ -27,6 +27,19 @@ const fontsConfig = [
     weight: 700 as const,
     style: "normal" as const,
   },
+  // 補日文新字體（湾、独、対等），Noto Sans TC 沒有這些字會渲染成方框
+  {
+    name: "Noto Sans JP",
+    font: "Noto+Sans+JP",
+    weight: 400 as const,
+    style: "normal" as const,
+  },
+  {
+    name: "Noto Sans JP",
+    font: "Noto+Sans+JP",
+    weight: 700 as const,
+    style: "normal" as const,
+  },
 ];
 
 async function fetchGoogleFont(
