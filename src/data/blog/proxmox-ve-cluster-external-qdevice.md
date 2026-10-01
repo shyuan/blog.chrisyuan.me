@@ -25,6 +25,27 @@ QDevice 走 TCP 5403，走家中內網，不繞 Tailscale 或其他 VPN。文中
 
 ## Table of contents
 
+## Corosync 是什麼
+
+PVE 叢集的成員管理和計票都交給 [Corosync](https://corosync.github.io/corosync/)。它是開源的群組通訊系統（Group Communication System），讓多台機器可靠地互傳訊息，並且隨時知道誰還在叢集裡。依 [維基百科](https://en.wikipedia.org/wiki/Corosync_Cluster_Engine)，它是 2008 年 7 月從 OpenAIS 專案拆出來的，採 BSD 授權，底層的 Totem 協定（Totem Single Ring Ordering and Membership）保證所有節點看到的訊息順序一致。
+
+官方列出的 C API 有四類：
+
+- closed process group（CPG）：成員之間的群組訊息，有 extended virtual synchrony 保證，可以用來做複製狀態機
+- 簡單的 availability manager：應用程式掛掉時把它重新啟動
+- 記憶體內的設定與統計資料庫（cmap），可以讀寫，也可以訂閱變更通知
+- quorum 系統：取得或失去 quorum 時通知應用程式，下一節講的 votequorum 就是這一塊
+
+Corosync 用的頻寬不多，但對延遲抖動很敏感。PVE 文件要求節點之間的延遲低於 5 ms，PVE 6.0 起傳輸層改用 [Kronosnet](https://kronosnet.org/)（knet），目前只支援 UDP unicast，不再用 multicast。
+
+### 誰在用 Corosync
+
+PVE 的 `/etc/pve` 是 [pmxcfs](<https://pve.proxmox.com/wiki/Proxmox_Cluster_File_System_(pmxcfs)>)，資料存在 SQLite，透過 Corosync 即時同步到每台節點。RAM 裡也放了一份完整資料，所以總大小上限是 128 MiB。下一節提到失去 quorum 時 `/etc/pve` 會變唯讀，也是發生在 pmxcfs 這一層。
+
+Linux 上常見的 HA 堆疊是 ClusterLabs 的 [Pacemaker](https://clusterlabs.org/pacemaker/) 加 Corosync：Corosync 管成員、訊息和 quorum，Pacemaker 管資源的啟動、停止與監控。[RHEL 的 High Availability Add-On](https://docs.redhat.com/en/documentation/red_hat_enterprise_linux/9/html-single/configuring_and_managing_high_availability_clusters/index) 和 [SUSE Linux Enterprise High Availability](https://documentation.suse.com/sle-ha/15-SP7/html/SLE-HA-all/cha-ha-concepts.html) 都是這個組合，叢集設定一樣寫在 `corosync.conf`。
+
+應用程式也可以直接用 Corosync 的 API。開源電話交換軟體 Asterisk 有個 `res_corosync` 模組，用它在多台 Asterisk 之間同步分機狀態（device state）和語音信箱通知（MWI），詳見 [Asterisk 文件](https://docs.asterisk.org/Fundamentals/Key-Concepts/States-and-Presence/)。
+
 ## Quorum 怎麼計票
 
 ### 為什麼要過半
