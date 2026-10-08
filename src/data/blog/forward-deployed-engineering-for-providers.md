@@ -3,19 +3,19 @@ pubDatetime: 2026-12-31T00:00:00Z
 title: "想提供 FDE 服務前先回答三個問題：誰需要、你缺什麼、和外包顧問差在哪"
 slug: "forward-deployed-engineering-for-providers"
 featured: false
-draft: false
+draft: true
 tags:
   - AI
   - FDE
   - business
-description: "想提供 FDE（Forward Deployed Engineer）服務的公司與工程師，先回答三個問題：客戶是否真的需要、自己有沒有平台撐得住客製、和 SaaS、外包、顧問差在哪裡。"
+description: "想提供 FDE（Forward Deployed Engineer）服務的公司與工程師，先回答三個問題：客戶是否真的需要、自己有沒有平台撐得住客製，以及和 SaaS、外包、顧問的差別。"
 ---
 
 2026 年 5 月 4 日，Anthropic 和 Blackstone、Hellman & Friedman、Goldman Sachs [宣布合資成立一家 AI 服務公司](https://am.gs.com/en-us/institutions/news/press-release/2026/anthropic-partners-with-blackstone-hf-and-goldman-sachs-ai-services)，把工程師派進中型企業；5 月 11 日，OpenAI 成立 [OpenAI Deployment Company](https://openai.com/index/openai-launches-the-deployment-company/)，取得超過 40 億美元的初始投資，同時宣布收購倫敦的 AI 顧問公司 Tomoro，約 150 名工程師併入。兩家公司要大量派出的，都是 FDE（Forward Deployed Engineer，前線部署工程師）。
 
 這個職位源自 [Palantir](https://www.palantir.com/)，最近兩年突然熱起來。[The New Stack](https://thenewstack.io/forward-deployed-engineers-ai/) 引用的資料是：2025 年 1 月到 9 月，FDE 職缺數成長超過 800%。
 
-職缺多了，想「也來做 FDE」的公司跟著變多：系統整合商、軟體外包、AI 新創，還有想接案的獨立工程師。這篇寫給這群人。我整理了十一篇文章，其中六篇出自 Palantir 官方或前 Palantir 員工，用它們回答三個問題：什麼樣的客戶需要 FDE？提供 FDE 服務的一方自己要先有什麼？FDE 和 SaaS、外包、顧問差在哪裡？
+職缺多了，想「也來做 FDE」的公司跟著變多：系統整合商、軟體外包、AI 新創，還有想接案的獨立工程師。這篇寫給這群人。我整理了十一篇文章，其中七篇的作者現職或曾任職 Palantir，用它們回答三個問題：什麼樣的客戶需要 FDE？提供 FDE 服務的一方自己要先有什麼？FDE 和 SaaS、外包、顧問差在哪裡？
 
 主要框架取自 Kevin Bai 在 AI Engineer World's Fair 2026 的短講〈[Forward Deployed Engineering 101](https://ai.engineer/talks/KwhgfwOSToQ-forward-deployed-engineering-101)〉。Bai 現在在 [Anthropic](https://www.anthropic.com/) 的 applied AI 團隊，之前是 [Rippling](https://www.rippling.com/) FDE 團隊的第一號成員，更早在 Palantir。這場演講只有 17 分鐘，給的是判斷用的框架。其他文章用來補充與對照，完整清單列在文末。
 
