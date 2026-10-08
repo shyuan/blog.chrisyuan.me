@@ -15,7 +15,7 @@ description: "想提供 FDE（Forward Deployed Engineer）服務的公司與工�
 
 這個職位源自 [Palantir](https://www.palantir.com/)，最近兩年突然熱起來。[The New Stack](https://thenewstack.io/forward-deployed-engineers-ai/) 引用的資料是：2025 年 1 月到 9 月，FDE 職缺數成長超過 800%。
 
-職缺多了，想「也來做 FDE」的公司跟著變多：系統整合商、軟體外包、AI 新創，還有想接案的獨立工程師。這篇寫給這群人。我整理了十一篇文章，其中七篇的作者現職或曾任職 Palantir，用它們回答三個問題：什麼樣的客戶需要 FDE？提供 FDE 服務的一方自己要先有什麼？FDE 和 SaaS、外包、顧問差在哪裡？
+職缺多了，想「不如也來做做看 FDE」的公司跟著變多：系統整合商、軟體外包、AI 新創，還有想接案的獨立工程師。這篇寫給這群人。整理了十一篇 FDE 相關文章，其中七篇的作者現職或曾任職 Palantir，用它們回答三個問題：什麼樣的客戶需要 FDE？提供 FDE 服務的一方自己要先有什麼？FDE 和 SaaS、外包、顧問差在哪裡？
 
 主要框架取自 Kevin Bai 在 AI Engineer World's Fair 2026 的短講〈[Forward Deployed Engineering 101](https://ai.engineer/talks/KwhgfwOSToQ-forward-deployed-engineering-101)〉。Bai 現在在 [Anthropic](https://www.anthropic.com/) 的 applied AI 團隊，之前是 [Rippling](https://www.rippling.com/) FDE 團隊的第一號成員，更早在 Palantir。這場演講只有 17 分鐘，給的是判斷用的框架。其他文章用來補充與對照，完整清單列在文末。
 
@@ -23,7 +23,7 @@ description: "想提供 FDE（Forward Deployed Engineer）服務的公司與工�
 
 ## FDE 從哪裡來
 
-Palantir 的產品 Foundry 是資料平台：把組織散在各處的資料集中起來，建立 ontology（把「table1、table2」整理成「倉庫」「訂單」這類有業務意義的物件），再在上面開發應用。
+Palantir 的產品 Foundry 是資料平台：把組織散落各處的資料集中起來，建立 ontology（把「table1、table2」整理成「倉庫」「訂單」這類有業務意義的物件），再在上面開發應用。
 
 Bai 說，問題出在向產業主管介紹它的時候。對方的反應是：「你把我的資料整理好了，然後呢？這對我的生意有什麼用？」平台能不能成功，取決於客戶會不會用。客戶除了付錢買平台，還要先訓練自己的員工，訓練完才開始做東西。Bai 的評語是：
 
@@ -60,7 +60,7 @@ Bai 對想建 FDE 部門的人，第一個建議是問自己「我需要嗎」�
 
 ### 哪些客戶值得派 FDE
 
-PostHog 認為適合用 FDE 的情況，是產品需要大量實作、要和客戶既有的基礎設施深度整合，而且毛利高到撐得起這個成本。醫療、金融、政府、國防這些高度管制的產業也常用 FDE。另一種是公司要切入新的客群。Ramp 的 FDE 團隊在〈[Forward Deployed Engineering](https://builders.ramp.com/post/forward-deployed-engineering)〉寫過自己的經過：Ramp 原本做小企業的費用管理，往大企業擴張時，碰到客戶用了幾十年的舊系統和要被取代的流程，才在 2023 年秋天從兩個人開始組 FDE 團隊。這篇也寫明了不適用的情況：消費性產品，以及只靠產品自助成長（PLG）的公司。
+PostHog 認為適合用 FDE 的情況，是產品需要大量實作、要和客戶既有的基礎設施深度整合，而且毛利高到撐得起這個成本。醫療、金融、政府、國防這些高度管制的產業也常用 FDE。另一種是公司要切入新的客群。Ramp 的 FDE 團隊在〈[Forward Deployed Engineering](https://builders.ramp.com/post/forward-deployed-engineering)〉寫過自己的經過：Ramp 原本做小企業的費用管理，往大企業擴張時，碰到客戶用了幾十年的舊系統和要被取代的流程，才在 2023 年秋天從兩個人開始組 FDE 團隊。這篇也寫明了不適用的情況：消費性產品，以及只靠產品導向成長（PLG）的公司。
 
 Bai 後來在他的 Substack〈[What It Means to Be a Forward Deployed Engineer](https://fdepod.substack.com/p/what-it-means-to-be-a-forward-deployed)〉把判斷再往下推一層：就算公司確定需要 FDE，也不是每個問題都派 FDE。
 
@@ -100,7 +100,7 @@ Nabeel Qureshi 2015 到 2023 年在 Palantir，他在〈[Reflections on Palantir
 
 他自己的第一個客戶是 Airbus。他搬到土魯斯住了一年，每週四天在工廠裡和製造部門的人一起工作。Airbus 的 CEO 說他最大的問題是 A350 擴產，團隊就直接針對這件事做軟體。Qureshi 形容那是「造飛機版的 Asana」：把工單、缺料、品質異常整合到同一個介面，現場可以勾選完成的工作，看到其他團隊的進度、零件在哪裡、排程怎麼排，也能搜尋過去的品質問題當時怎麼處理。他說這些都是很基本的軟體功能，但企業軟體平常做得太差，光是把像樣的介面放進工廠就很有用。根據他的說法，這套系統幫 A350 的生產速度提高到原來的 4 倍，品質標準沒有降低。
 
-這套系統很難用一句話說清楚它是什麼，因為它是針對這一個問題做的完整解法，完全不考慮能不能泛化。Qureshi 這樣描述兩邊的分工：
+這套系統很難用一句話說清楚它是什麼，因為它是針對這一個問題做的完整解法，完全不考慮能不能通用化。Qureshi 這樣描述兩邊的分工：
 
 > Your job was to solve the problem, and not worry about overfitting; PD's job was to take whatever you'd built and generalize it, with the goal of selling it elsewhere.
 
@@ -112,25 +112,25 @@ Palantir 官方部落格的〈[Dev versus Delta](https://blog.palantir.com/dev-v
 
 Delta 碰到平台缺功能時可以自己補，但要和產品團隊協調，大一點的需求得排進產品路線圖。現場累積的東西也不一定都要進核心產品。另一篇〈[A Day in the Life of a Palantir Forward Deployed Software Engineer](https://blog.palantir.com/a-day-in-the-life-of-a-palantir-forward-deployed-software-engineer-45ef2de257b1)〉（2020）裡，受訪的 FDSE 把資安專案做出來的設定分享給其他 FDSE，之後新開的資安專案就能從一個比較貼近需求、也比較強化過的基準版本開始。
 
-Palantir 早期高管 Bob McGrew 的比喻（引自 PostHog）講的是同一件事：FDE 先鋪出通往產品方向的碎石路，核心產品團隊再把它鋪成高速公路，讓接下來十個客戶也能走。
+Palantir 早期高管 Bob McGrew 的比喻（引自 PostHog）講的是同一件事：FDE 先鋪出通往產品方向的碎石路，核心產品團隊再把它鋪成高速公路，讓接下來十個客戶也能跟著開上去。
 
-反過來看，如果只派人駐點，沒有人負責把現場做出來的東西產品化，公司就會一直是服務公司，毛利率也停在 Accenture 那一級。
+反過來看，如果只派人駐點，沒有人負責把現場做出來的東西產品化，公司就會一直只是服務公司，毛利率也停在 Accenture 那一級。
 
-Palantir 全球商業負責人 Ted Mabrey 寫〈[Sorry, that isn't an FDE](https://tedmabrey.substack.com/p/sorry-that-isnt-an-fde)〉，是因為看到太多公司只學到 FDE 的表面。他認為 FDE 要綁著整套商業模式才成立：產品要瞄準難到幾乎解決不了、但有一點進展就有價值的問題；要挑對的客戶，而不是所有客戶；還要在客戶端接住所有複雜度的同時，把軟體槓桿做進公司：
+Palantir 全球商業負責人 Ted Mabrey 寫〈[Sorry, that isn't an FDE](https://tedmabrey.substack.com/p/sorry-that-isnt-an-fde)〉，是因為看到太多公司只學到 FDE 的表面。他認為 FDE 必須綁著整套商業模式才成立：產品要瞄準那些難到幾乎解決不了、但有一點進展就能展現出價值的問題；要挑對的客戶，而不是所有客戶；還要在客戶端接住所有複雜度的同時，把軟體槓桿做進公司：
 
 > The financial success of a company pursuing the FDE model hinges on whether or not you can embrace this complexity at the edge, but actually build software leverage into the business at the same time.
 
 「對的客戶」有多集中？Mabrey 引用 Palantir 公開揭露的數字：前 20 大客戶貢獻了超過 11 億美元的年營收。
 
-他也承認這套模式的代價。決定「哪些客製值得泛化」高度依賴少數人的判斷；FDE 和核心產品團隊之間經常有矛盾；有些產品要累積 10 到 20 個客製實作，才提煉得出共用的技術。
+他也承認這套模式的代價。決定「哪些客製值得通用化」高度依賴少數人的判斷；FDE 和核心產品團隊之間經常有矛盾；有些產品要累積 10 到 20 個客製實作，才提煉得出共用的技術。
 
 照這個說法，團隊裡得有人專門判斷哪些東西該收進平台，也要先想好累積下來的東西放在哪：通用的平台，還是某個產業專用的模組。
 
 ### 人：會寫程式，也放心讓他面對客戶
 
-Bai 對理想 FDE 的定義是「customer-facing software engineer」：你會錄用他當團隊的軟體工程師，同時信得過他站在客戶面前。他也建議同一個案子派多個 FDE，避免一個人掌握所有資訊、他一休假案子就停擺。
+Bai 對理想 FDE 的定義是「customer-facing software engineer」：你會錄用他當團隊的軟體工程師，同時信得過他站在客戶面前。他也建議同一個案子派多個 FDE，避免只有一個人掌握所有資訊、他一休假案子就停擺。
 
-PostHog 整理了 OpenAI、Anthropic、Databricks 等公司的職缺，FDE 的共同要求大致是：五年以上面對客戶的工程經驗、對客戶的同理心、能和高管溝通、自我不要太強、有產品感、具備領域知識。Qureshi 提到 Palantir 的新人書單裡有即興劇場的書《Impro》，因為 FDE 要讀得懂會議室裡的權力關係。Constantin 的說法更直白：
+PostHog 整理了 OpenAI、Anthropic、Databricks 等公司的職缺，FDE 的共同要求大致是：五年以上面對客戶的工程經驗、對客戶的同理心、能和高管溝通、自我不要太強、有產品感、具備領域知識。Qureshi 提到 Palantir 的新人書單裡有即興劇場的書《Impro》，因為 FDE 要讀得懂會議室裡的權力關係和結構。Constantin 的說法更直白：
 
 > The Palantir Way is labor-intensive and virtually impossible to systematize, let alone automate away. This is why there aren't a hundred Palantirs. You have to throw humans at the persuasion problem — well-paid, cognitively flexible, emotionally intelligent humans, who can cope with corporate dysfunction.
 
