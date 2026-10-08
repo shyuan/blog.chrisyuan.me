@@ -1,9 +1,9 @@
 ---
-pubDatetime: 2026-12-31T00:00:00Z
-title: "想提供 FDE 服務前先回答三個問題：誰需要、你缺什麼、和外包顧問差在哪"
+pubDatetime: 2026-10-08T15:43:00Z
+title: "FDE 和外包、顧問差在哪？給想提供 FDE 服務的團隊：誰需要、要先有什麼平台"
 slug: "forward-deployed-engineering-for-providers"
 featured: false
-draft: true
+draft: false
 tags:
   - AI
   - FDE
@@ -78,8 +78,6 @@ PostHog 也提到 AI 讓買方更需要 FDE 的幾個原因：企業不願把資
 
 The New Stack 引用了 MIT NANDA 計畫的研究：在 300 個公開的企業 AI 專案裡，95% 對損益沒有可量測的影響（[Fortune 的報導](https://fortune.com/2025/08/18/mit-report-95-percent-generative-ai-pilots-at-companies-failing-cfo/)）。研究作者認為問題出在導入方式，模型本身沒什麼問題。這些客戶大多已經看過 demo、做過 PoC，卡住的是後面上線、接進日常營運的那一段，FDE 的工作主要就在這裡。
 
-<!-- TODO(Chris)：台灣客戶的實際樣貌——哪類產業落在「技術平台 × 非技術買家」那一格、資料數位化程度、誰拍板 -->
-
 ## 提供 FDE 服務的一方要先有什麼
 
 ### 平台：沒有平台就是 dev shop
@@ -117,8 +115,6 @@ Delta 碰到平台缺功能時可以自己補，但要和產品團隊協調，�
 Palantir 早期高管 Bob McGrew 的比喻（引自 PostHog）講的是同一件事：FDE 先鋪出通往產品方向的碎石路，核心產品團隊再把它鋪成高速公路，讓接下來十個客戶也能走。
 
 反過來看，如果只派人駐點，沒有人負責把現場做出來的東西產品化，公司就會一直是服務公司，毛利率也停在 Accenture 那一級。
-
-### 把客製提煉成產品需要判斷力
 
 Palantir 全球商業負責人 Ted Mabrey 寫〈[Sorry, that isn't an FDE](https://tedmabrey.substack.com/p/sorry-that-isnt-an-fde)〉，是因為看到太多公司只學到 FDE 的表面。他認為 FDE 要綁著整套商業模式才成立：產品要瞄準難到幾乎解決不了、但有一點進展就有價值的問題；要挑對的客戶，而不是所有客戶；還要在客戶端接住所有複雜度的同時，把軟體槓桿做進公司：
 
@@ -167,8 +163,6 @@ Bai 在 Substack 上說，很多公司把 FDE 當成本中心，看成薪水比�
 > At odds with traditional waterfall or agile software development strategies, the FDE yearns for scope creep because the customer's mission demands it.
 
 傳統專案怕範圍擴張，FDE 則把它當成客戶目標的一部分。要這樣做，合約得撐得住；按工時或交付物計價的一次性專案，碰到範圍擴張只會一直虧。The New Stack 指出 AI 系統是機率性的，測試時表現好，碰到正式資料和真實使用者後可能變差，所以合約要涵蓋上線後的監控、評估（evals）與調整，也要定義交棒給客戶團隊的條件。
-
-<!-- TODO(Chris)：自己在平台、人力配置、報價方式上的實際做法 -->
 
 ## FDE 和 SaaS、外包、顧問差在哪
 
@@ -240,8 +234,6 @@ Palantir 從 2000 年代中期就這樣做生意了，為什麼 2026 年大家�
 Bai 還有一個說法：新創早期會和 design partner 密切合作找出產品方向，FDE 就是把這種合作規模化到企業端。Palantir 的主張是，誰說 design partnership 只屬於公司草創期？
 
 需求變多，Bai 的兩道關卡並沒有因此變低。想提供 FDE 服務，還是要先確定客戶真的需要，再確認自己有沒有平台，讓這次駐點做出來的東西能帶到下一個客戶。第二題答不出來的話，做的其實是外包。Bai 自己也說 dev shop 是很賺錢的生意，只是和 FDE 不同。
-
-<!-- TODO(Chris)：自身經驗收尾，或對台灣市場的看法 -->
 
 ## 參考資料
 
