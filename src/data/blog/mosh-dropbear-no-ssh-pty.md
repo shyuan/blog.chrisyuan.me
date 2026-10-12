@@ -90,3 +90,5 @@ alias mosh='mosh --ssh="ssh -A" --no-ssh-pty'
 ## 結語
 
 「mosh 連不上」的第一反應常常是去找 server 端的 service 設定，但 mosh 的設計哲學就是沒有 daemon。遇到連不上，先理解工具的架構再排查，這次的答案是 client 端一個 mosh 1.3.0 就加好的 flag。
+
+另一種常見的連不上是 server 端找不到 `mosh-server`，macOS 上用 Homebrew 安裝時特別容易遇到，解法記在[這篇 TIL](/posts/mosh-server-command-not-found-macos/)。
