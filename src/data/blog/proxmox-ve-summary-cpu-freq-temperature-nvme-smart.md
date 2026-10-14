@@ -13,7 +13,7 @@ description: "讓 PVE 9.2 Summary 頁顯示各核心時脈、溫度與 NVMe SMAR
 
 Proxmox VE（PVE）9.2 的節點 Summary 頁只有 CPU 使用率、記憶體、負載這些數字，看不到 CPU 溫度、各核心時脈，也看不到 NVMe 的 SMART 健康狀態。API 也沒有這些欄位。想讓它們出現在 Summary 頁，唯一的辦法是 patch 兩個 PVE 自帶的檔案：後端的 `Nodes.pm` 和前端的 `pvemanagerlib.js`。社群的做法都是這樣，我也不例外，只是多花了力氣讓 patch 出錯時不會弄壞 PVE，升級後也會自己補回來。
 
-以下是我寫的 `pve-hwinfo` 的做法與安裝方式。
+以下是我寫的 `pve-hwinfo` 的做法與安裝方式，完整原始碼在 [shyuan/pve-hwinfo](https://github.com/shyuan/pve-hwinfo)，文中的程式碼片段有省略。
 
 ## Table of contents
 
@@ -318,7 +318,16 @@ PVE 節點上不適合反覆試錯，所以先在 Mac 上測：拿一份真的 `
 
 ### 部署
 
-`install.sh` 把檔案裝到 `/usr/local/sbin`、`/usr/local/lib/pve-hwinfo`、systemd 和 apt 設定目錄，啟用 timer、先跑一次收集，再 `apply`。先在一台節點上跑 `install.sh`，再從這台用 `deploy.sh` 透過叢集內建的 SSH 推到其他節點（`bash deploy.sh <node> <node> ...`）：
+在 PVE 節點上以 root 身分 clone repo 後執行 `install.sh`（PVE 預設沒有 git，要先裝）：
+
+```bash
+apt install -y git
+cd /root
+git clone https://github.com/shyuan/pve-hwinfo.git
+bash pve-hwinfo/install.sh
+```
+
+`install.sh` 把檔案裝到 `/usr/local/sbin`、`/usr/local/lib/pve-hwinfo`、systemd 和 apt 設定目錄，啟用 timer、先跑一次收集，再 `apply`。裝完後重新整理瀏覽器，Summary 頁就會多出三列。叢集的其他節點不用逐台 clone，從已安裝的這台用 `deploy.sh` 透過叢集內建的 SSH 推過去即可（`bash /root/pve-hwinfo/deploy.sh <node> <node> ...`）：
 
 ```bash
 for node in "$@"; do
