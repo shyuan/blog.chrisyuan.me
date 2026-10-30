@@ -49,7 +49,7 @@ curl https://github.com/torvalds.keys
 curl https://api.github.com/users/torvalds/keys
 ```
 
-回傳的 JSON 會包含完整欄位：
+回傳的 JSON 會包含完整欄位（註：官方文件雖僅列出 `id` 與 `key`，但實測端點會一併回傳時間欄位）：
 
 ```json
 [
@@ -72,13 +72,13 @@ curl https://gitlab.com/api/v4/users/{username}/keys
 
 除了 GitHub 與 GitLab，自架的 Git 平台多半也沿用了相同的慣例：
 
-| 平台      | 公開端點           | 備註                                                                             |
-| --------- | ------------------ | -------------------------------------------------------------------------------- |
-| GitHub    | `/{username}.keys` | 支援                                                                             |
-| GitLab    | `/{username}.keys` | 支援（含自架 GitLab instance）                                                   |
-| Gitea     | `/{username}.keys` | 支援（含自架 Gitea instance）                                                    |
-| Codeberg  | `/{username}.keys` | 支援（基於 Forgejo / Gitea）                                                     |
-| Bitbucket | 無                 | 無 `.keys` 路徑；雖有公開 API `/2.0/users/{account_id}/ssh-keys`，但無法用帳號查 |
+| 平台      | 公開端點           | 備註                                                                                   |
+| --------- | ------------------ | -------------------------------------------------------------------------------------- |
+| GitHub    | `/{username}.keys` | 支援                                                                                   |
+| GitLab    | `/{username}.keys` | 支援（含自架 GitLab instance）                                                         |
+| Gitea     | `/{username}.keys` | 支援（含自架 Gitea instance）                                                          |
+| Codeberg  | `/{username}.keys` | 支援（基於 Forgejo / Gitea）                                                           |
+| Bitbucket | 無                 | 無 `.keys` 路徑；`/2.0/users/{username}/ssh-keys` 有對應 API，但需要認證，無法匿名查詢 |
 
 自架的 GitLab 與 Gitea 只要把 domain 換成公司內部的 instance 網址，路徑格式完全相同。
 
@@ -112,7 +112,7 @@ ssh-import-id gh:torvalds
 ssh-import-id lp:kirkland
 ```
 
-AWS EC2 等雲端主機開機時執行的 `cloud-init`，底層就是呼叫 `ssh-import-id` 來匯入使用者金鑰。
+雲端主機開機時執行的 `cloud-init` 也原生整合了這個工具——例如在 AWS EC2 上，除了預設由 instance metadata 注入金鑰外，只要在 `cloud-init` 設定加上 `ssh_import_id`，開機時就會自動呼叫它從 GitHub 或 Launchpad 匯入金鑰。
 
 > **維運小提醒**：一個人的 GitHub 帳號可能綁定了好幾台電腦（包含多年前淘汰的舊筆電）的公鑰。直接整包匯入雖然方便，但當人員異動或需要撤銷權限時，別忘了清理對應的紀錄。
 
