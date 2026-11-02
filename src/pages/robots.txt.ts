@@ -10,9 +10,6 @@ Disallow: /pagefind/
 # Partytown 內部代理腳本，無索引價值
 Disallow: /~partytown/
 
-# 客戶端搜尋頁，內容由 JS 動態載入，無可索引內容（前綴匹配，含子路徑與查詢參數）
-Disallow: /search
-
 Sitemap: ${sitemapURL.href}
 `;
 
