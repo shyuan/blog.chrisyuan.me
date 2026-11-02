@@ -19,6 +19,7 @@ type Props = {
   pubDatetime?: Date;
   modDatetime?: Date | null;
   scrollSmooth?: boolean;
+  noindex?: boolean;
 };
 
 const {
@@ -30,6 +31,7 @@ const {
   pubDatetime,
   modDatetime,
   scrollSmooth = false,
+  noindex = false,
 } = Astro.props;
 
 const socialImageURL = new URL(ogImage, Astro.url);
@@ -99,6 +101,7 @@ const articleSchema = isArticle
     <meta name="title" content={title} />
     <meta name="description" content={description} />
     <meta name="author" content={author} />
+    {noindex && <meta name="robots" content="noindex, follow" />}
     <link rel="sitemap" href="/sitemap-index.xml" />
     <link rel="llms-txt" href="/llms.txt" />
 
