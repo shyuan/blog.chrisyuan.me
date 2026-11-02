@@ -1,19 +1,21 @@
 import type { APIRoute } from "astro";
 
-const getRobotsTxt = (sitemapURL: URL) => `
-User-agent: *
+const getRobotsTxt = (sitemapURL: URL) =>
+  `User-agent: *
 Allow: /
 
 # Pagefind 搜尋索引（.pf_fragment / .pf_index 分塊），無 SEO 價值、數量龐大
 Disallow: /pagefind/
 
-# 客戶端搜尋頁，內容由 JS 動態載入，無可索引內容（前綴匹配，含子路徑）
-Disallow: /search
+# Partytown 內部代理腳本，無索引價值
+Disallow: /~partytown/
 
 Sitemap: ${sitemapURL.href}
 `;
 
 export const GET: APIRoute = ({ site }) => {
   const sitemapURL = new URL("sitemap-index.xml", site);
-  return new Response(getRobotsTxt(sitemapURL));
+  return new Response(getRobotsTxt(sitemapURL), {
+    headers: { "Content-Type": "text/plain; charset=utf-8" },
+  });
 };
