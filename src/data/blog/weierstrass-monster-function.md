@@ -1,5 +1,6 @@
 ---
 pubDatetime: 2026-03-24T00:00:00Z
+modDatetime: 2026-11-16T03:28:35Z
 title: "處處連續卻處處不可微——Weierstrass 怪物函數的故事"
 slug: weierstrass-monster-function
 draft: false
@@ -111,7 +112,11 @@ $$W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)$$
 
 秘訣在於：它是無窮多個餘弦波疊加出來的。每一層波的振幅越來越小（$a^n$ 在衰減），但頻率越來越高（$b^n$ 在爆炸）。頻率增長的速度遠超過振幅衰減的速度，所以不管你放大多少倍，新的鋸齒永遠在等著你。
 
-試試看：先把 Terms 設為 1，再慢慢增加，觀察每一層如何疊加出更細的鋸齒。然後 zoom in——它永遠不會變平滑。
+上面那條 $ab > 1 + \frac{3\pi}{2}$ 是 Weierstrass 當年證明時需要的條件，其實比實際需要的嚴格很多，主要是受限於他用的證明技巧。1916 年，英國數學家 [G. H. Hardy](https://en.wikipedia.org/wiki/G._H._Hardy) 在論文〈[Weierstrass's Non-Differentiable Function](https://www.ams.org/journals/tran/1916-017-03/S0002-9947-1916-1501044-1/)〉裡把條件放寬：只要 $0 < a < 1$、$ab \ge 1$，函數就處處不可微，$b$ 也不必是奇數，大於 1 的實數就行。
+
+反過來，如果 $ab < 1$，把每一層餘弦波逐項微分，得到的級數 $-\sum (ab)^n \pi \sin(b^n \pi x)$ 會一致收斂，函數反而處處可微。所以處處可微與處處不可微的分界，就落在 $ab = 1$。
+
+試試看：先把 Terms 設為 1，再慢慢增加，觀察每一層如何疊加出更細的鋸齒。然後 zoom in——它永遠不會變平滑。想看對照組的話，把 a 調到 0.30、b 調到 3（ab = 0.9），疊再多層，放大後都會是平滑的曲線。
 
 <div style="padding: 0.5rem 0;">
   <div style="display:flex;flex-wrap:wrap;gap:16px;align-items:center;margin-bottom:12px;">
@@ -145,7 +150,7 @@ $$W(x) = \sum_{n=0}^{\infty} a^n \cos(b^n \pi x)$$
     </div>
     <div style="background:var(--muted);border-radius:6px;padding:8px 14px;flex:1;min-width:140px;">
       <div style="font-size:12px;color:var(--foreground);opacity:0.7">Differentiable?</div>
-      <div id="diff-status" style="font-size:18px;font-weight:500;color:var(--foreground)">Might be</div>
+      <div id="diff-status" style="font-size:18px;font-weight:500;color:var(--foreground)">Nowhere!</div>
     </div>
     <div style="background:var(--muted);border-radius:6px;padding:8px 14px;flex:1;min-width:140px;">
       <div style="font-size:12px;color:var(--foreground);opacity:0.7">Zoom level</div>
@@ -190,12 +195,12 @@ function draw() {
   const ab = a * b;
   document.getElementById('ab-val').textContent = ab.toFixed(1);
 
-  const threshold = 1 + 1.5 * Math.PI;
-  if (ab > threshold) {
+  // Hardy (1916): 0 < a < 1 且 ab >= 1 時處處不可微；ab < 1 時逐項微分一致收斂，處處可微
+  if (ab >= 1) {
     document.getElementById('diff-status').textContent = 'Nowhere!';
     document.getElementById('diff-status').style.color = '#e24b4a';
   } else {
-    document.getElementById('diff-status').textContent = 'Might be';
+    document.getElementById('diff-status').textContent = 'Everywhere';
     document.getElementById('diff-status').style.color = 'var(--accent)';
   }
 
