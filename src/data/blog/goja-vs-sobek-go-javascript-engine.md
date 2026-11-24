@@ -11,7 +11,7 @@ tags:
 description: "goja 與 sobek 是同一顆 Go 版 JavaScript 引擎：sobek 是 Grafana 為 k6 維護的分支，差別在實驗性的 ESM。本文比較規範、效能、API 與維護，並給出選擇建議。"
 ---
 
-在 Go 裡嵌入 JavaScript 引擎，最常被提到的是 [goja](https://github.com/dop251/goja)。做負載測試、用過 [k6](https://github.com/grafana/k6) 的人，則多半聽過 [sobek](https://github.com/grafana/sobek)。很多人以為這是兩款競品，其實 sobek 是 goja 的 fork，到今天還由同一批人同步維護。
+在 Go 裡嵌入 JavaScript 引擎，最常被提到的是 [goja](https://github.com/dop251/goja)。做負載測試、用過 [k6](https://github.com/grafana/k6) 的人，則多半聽過 [sobek](https://github.com/grafana/sobek)。很多人以為這是兩款互相競爭的引擎，其實 sobek 是 goja 的 fork，到今天還由同一批人同步維護。
 
 這篇文章把兩者的關係、規範支援、效能、API 與遷移成本拆開來看，最後給出選擇建議。文中的 GitHub 數據都是 2026-11-24 當天查得。
 
@@ -36,7 +36,7 @@ sobek 晚得多。從 git 歷史看，Grafana 在 2024 年 6 月 6 日建立 `gr
 - 完整支援 ECMAScript 5.1，含 strict mode 與完整的正規表示式。
 - 支援大部分 ES6 功能，README 說這部分仍在進行中。
 - 已實作的功能，幾乎都通過 [test262](https://github.com/tc39/test262)。兩個儲存庫的 `.tc39_test262_checkout.sh` 目前指向同一個 test262 提交，測試基準相同。README 只寫「nearly all」，沒有可引用的通過率百分比。
-- 近年的新功能兩邊都有，例如 `Object.groupBy`、`Map.groupBy`、`ArrayBuffer.prototype.transfer`、`String.prototype.isWellFormed`、Iterator helpers、`Promise.try`、`Promise.withResolvers`、`RegExp.escape`，還有仍在提案階段的 `Float16Array`、`Math.sumPrecise`、`Map.prototype.getOrInsert`。各功能屬於哪一版規範，這裡不逐項標註，請以 TC39 的提案進度為準。
+- 近年的新功能兩邊都有，例如 `Object.groupBy`、`Map.groupBy`、`ArrayBuffer.prototype.transfer`、`String.prototype.isWellFormed`、Iterator helpers、`Promise.try`、`Promise.withResolvers`、`RegExp.escape`，還有剛達到 Stage 4 的 `Float16Array`、`Math.sumPrecise`、`Map.prototype.getOrInsert`（依 [TC39 finished-proposals](https://github.com/tc39/proposals/blob/main/finished-proposals.md)，Float16 在 2025 年、後兩者在 2026 年完成）。各功能屬於哪一版規範，這裡不逐項標註。
 
 語言層面真正的差異只有一個：**ESM 只在 sobek**。sobek 支援 `import`／`export`、動態 `import()`、`import.meta`，模組內也有 top-level await。goja 的 parser 不認得 import／export 語法，只能執行傳統 script。
 
@@ -52,7 +52,7 @@ sobek 的 ESM 是實驗性的。README 說它的 API 貼近規範術語（`Modul
 
 唯一可能有差的是 sobek 的 ESM 路徑，多了模組連結與求值的成本，但那是用不用模組的代價，不是引擎好壞。
 
-若硬要找差異，只剩版本落差。以 2026-11-22 的 goja HEAD 來看，sobek 約落後 2.5 週、34 個提交還沒合入（最後一次合併上游是 2026-11-05），其中有 TypedArray 的安全修復與 `parseInt` 精度重構。這會在下次合併時消失。
+若硬要找差異，只剩版本落差。以 2026-11-22 的 goja HEAD 來看，sobek 約落後 2.5 週、32 個提交還沒合入（最後一次合併上游是 2026-11-05），其中有 TypedArray 的安全修復與 `parseInt` 精度重構。這會在下次合併時消失。
 
 ## API 差異與遷移成本
 
@@ -87,7 +87,7 @@ sobek 的 ESM 是實驗性的。README 說它的 API 貼近規範術語（`Modul
 | 星數       | 約 7,200             | 約 370                                      |
 | fork 數    | 517                  | 24                                          |
 | 開放 issue | 42                   | 29                                          |
-| 最近推送   | 2026-11-22           | 2026-11-24                                  |
+| 最近推送   | 2026-11-22           | 2026-11-24（含 Renovate 等非引擎提交）      |
 | 主要推手   | Dmitry Panov（個人） | Grafana 組織（Dmitry Panov 同為最大提交者） |
 
 goja 是社群導向的上游，歷史長、周邊生態大（goja_nodejs 等），修復最先落地。sobek 則走 Grafana 的企業維護流程：用 Renovate 自動升級依賴（含安全修復）、CI 的 GitHub Actions 以 SHA 釘版、有 CODEOWNERS 與 Backstage 的 `catalog-info.yaml`，貢獻者名單也和 goja 高度重疊。
@@ -101,6 +101,6 @@ goja 是社群導向的上游，歷史長、周邊生態大（goja_nodejs 等）
 - **在意效能**：不必以此選擇，兩者可視為相同。
 - **已經在用 goja**：除非需要 ESM，否則沒有遷移的必要。真要遷移，script 用途只需改名。
 
-兩者共通的限制也要先知道：都不提供 event loop 與 timer（`setTimeout` 要自己接）；Runtime 不是 goroutine 安全的；物件不能跨 Runtime 傳遞；中斷執行要用 `Interrupt()`，不是 context 取消。
+兩者共通的限制也要先知道：都不提供 event loop 與 timer（`setTimeout` 要自己接）；Runtime 不是 goroutine 安全的；物件不能跨 Runtime 傳遞（編譯會過，執行時才 panic）；中斷執行要用 `Interrupt()`，不是 context 取消。
 
 簡單說，goja 是上游主幹，sobek 是 k6 陣營的長期分支，同一顆引擎，多了一個實驗性的模組系統。需要 ESM 就選 sobek，否則用 goja。
